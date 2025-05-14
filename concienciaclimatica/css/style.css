@@ -1,0 +1,343 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: whitesmoke;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+/* Estilos para el header */
+header {
+  background-color: #ffe5f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../assets/img/index/odsInd.jpg");
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  height: 40vh;
+}
+
+header .brand {
+  align-items: center;
+  position: relative;
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+header .brand .logo img {
+  margin-right: 1rem;
+  max-height: 200px;
+}
+
+header .brand img {
+  max-height: 130px;
+}
+
+header .brand .titulo {
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+
+header .brand .titulo h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+header .reloj {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+  margin: 0;
+  color: #989898;
+  font-size: large;
+  line-height: 2rem;
+}
+
+/* Estilos para la barra de navegacion */
+header .main-nav {
+  margin-top: 50px;
+  height: 3em;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 100px;
+  z-index: 1000;
+}
+header .main-nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin-top: 0;
+  transition: max-height 0.3s ease-in-out;
+}
+header .main-nav ul li {
+  flex: 1;
+  text-align: center;
+}
+
+header .main-nav ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0;
+  border: 0;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+}
+header .main-nav ul li a:hover {
+  background-color: white;
+  color: black;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 100px;
+  cursor: pointer;
+  margin-left: 1rem;
+  position:absolute;
+  right: 0;
+  top: 0;
+  color: white;
+}
+.menu-toggle:focus {
+  outline: none;
+}
+main {
+  margin: 15px;
+}
+main p {
+  font-size: large;
+  line-height: 2rem;
+}
+
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 1050px) {
+  .menu-toggle {
+    display: block !important;
+  }
+
+  .main-nav ul{
+    display: none  !important; 
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #34495e;
+    background-size: cover;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-nav.open ul {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .main-nav ul li {
+    margin: 0.5rem 0;
+  }
+
+  .main-nav ul li a {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .main-nav.open {
+    display: flex;
+  }
+}
+@media screen and (max-width: 650px){
+  .titulo{
+    display: none;
+  }
+  .menu-toggle{
+    font-size: 50px;
+  }
+}
+/* Estilos para el footer */
+
+footer {
+  background-color: #64777c;
+  padding: 4em;
+  border-top: 10px solid #ddd;
+  text-align: center;
+  margin-top: 15rem;
+}
+
+footer .footer-nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+}
+
+footer .footer-nav ul li {
+  flex: 1;
+}
+
+footer .footer-nav ul li a {
+  text-decoration: none;
+  color: #d6d8d9;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+footer .footer-nav ul li a:hover {
+  color: #555;
+}
+
+/*aviso legal*/
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Contenedor del contenido del modal */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Botón para cerrar el modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+}
+
+/* Efecto al pasar el mouse por el botón cerrar */
+.close:hover {
+  color: #bccef8;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 1em;
+  }
+
+  header .brand {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header .brand .logo {
+    margin: 0.5rem 0;
+  }
+
+  header .main-nav ul {
+    flex-direction: column;
+  }
+
+  header .main-nav ul li {
+    width: 100%;
+    min-width: auto;
+  }
+
+  header .main-nav ul li a {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .footer-nav ul {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 0.5em;
+  }
+
+  header .brand h1 {
+    font-size: 1.2rem;
+  }
+
+  header .brand img {
+    max-height: 40px;
+  }
+
+  header .main-nav ul li a {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+  .footer-nav ul {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #4c9aa2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+}
+.scroll-to-top:hover {
+  background: #3a6ea5;
+}

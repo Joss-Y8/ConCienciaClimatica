@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+h2 {
+  background-color: #95d2b3;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  animation: fade-in 1s ease-in;
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+}
+h3 {
+  font-size: 1.5rem;
+  padding: 1.5rem;
+}
+
+.info-general {
+  padding: 2rem;
+}
+/* Carrusel */
+section.noticias {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que las imágenes pasen a la siguiente fila si es necesario */
+  justify-content: center; /* Centrar el contenido */
+  gap: 10px; /* Espaciado entre elementos */
+  padding: 10px;
+  max-width: 100%; /* Limitar el ancho total */
+  margin: 0 auto; /* Centrar la sección en la página */
+  border-radius: 10px;
+}
+
+.noticias img {
+  width: 100%; /* Asegurarse de que las imágenes no se salgan de su contenedor */
+  max-width: 800px; /* Tamaño máximo para las imágenes */
+  height: auto; /* Mantener la proporción de las imágenes */
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.noticias img:hover {
+  transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+.noticias a {
+  display: inline-block; /* Mantener el comportamiento de caja de los enlaces */
+}
+
+/* ODS */
+aside.ODS {
+  background-color: #f5ffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 2%;
+  overflow-y: auto;
+}
+
+.ODS a img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-top: 50px;
+}
+
+.ODS a:hover img {
+  transform: scale(1.1); /* Ampliar ligeramente el icono al pasar el mouse */
+}
