@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso</title>
+    <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
+    <script src="https://kit.fontawesome.com/55078876e9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/sesion.css">
+</head>
+<body>
+    <div class="main-container" id="main-container">
+
+        <!--Panel izquierdo de imagen-->
+        <div class="left-panel" id="left-panel">
+            <div class="overlay-content" id="overlay-content">
+                 <a href="../index.html"><img src="../assets/img/logos/concienciaclimática_sin_fondo.png" alt="Logo" class="logo"></a>
+                <h1>ConCienciaClimática</h1>
+                <p id="mensaje">Un planeta más verde, comienza con una mente informada.</p>
+            </div>
+        </div>
+
+        <!--Panel izquierdo de formularios-->
+        <div class="right-panel">
+            <!--LOGIN-->
+            <div class="form-container" id="login-form">
+                <h2>Bienvenido</h2>
+                <p>Inicia sesión para continuar</p>
+                <form action="../backend/login.php" method="POST">
+                <input type="email" name="correo" placeholder="Correo electrónico" required />
+                <input type="password" name="password" placeholder="Contraseña" required />
+                <button type="submit">Iniciar sesión</button>
+                </form>
+                <p class="opcional">O continúa con</p>
+                <div class="social-buttons">
+                    <button class="google"><i class="fab fa-google"></i></button>
+                    <button class="github"><i class="fab fa-github"></i></button>
+                    <button class="facebook"><i class="fab fa-facebook-f"></i></button>
+                </div>
+                <p>¿No tienes cuenta? <a href="#" onclick="mostrarRegistro()">Regístrate</a></p>
+            </div>
+            <!--REGISTRO-->
+             <div class="form-container hidden" id="register-form">
+                <h2>Registro</h2>
+                <p>Completa tu información</p>
+                <form action="../backend/signup.php" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre completo" required />
+                <input type="email" name="correo" placeholder="Correo electrónico" required />
+                <input type="password" name="password" placeholder="Contraseña" required />
+                <input type="number" name="edad" placeholder="Edad">
+                <input type="text" name="zona" placeholder="Municipio">
+                <button type="submit">Registrarse</button>
+                </form>
+
+                <p class="opcional">O regístrate con</p>
+                <div class="social-buttons">
+                <button class="google"><i class="fab fa-google"></i></button>
+                <button class="github"><i class="fab fa-github"></i></button>
+                <button class="facebook"><i class="fab fa-facebook-f"></i></button>
+                </div>
+
+                <p>¿Ya tienes cuenta? <a href="#" onclick="mostrarLogin()">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/sesion.js"></script>
+
+</body>
+</html>
