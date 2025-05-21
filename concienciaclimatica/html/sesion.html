@@ -47,9 +47,23 @@
                 <input type="text" name="nombre" placeholder="Nombre completo" required />
                 <input type="email" name="correo" placeholder="Correo electrónico" required />
                 <input type="password" name="password" placeholder="Contraseña" required />
+                <input type="passwordc" name="passwordc" placeholder="Confirma contraseña" required />
                 <input type="number" name="edad" placeholder="Edad">
-                <input type="text" name="zona" placeholder="Municipio">
-                <button type="submit">Registrarse</button>
+                <label for="city"></label>
+                    <select name="city" id="city" required>
+                        <option selected disabled>Selecciona tu municipio</option>
+                        <option>Puebla</option>
+                        <option>Teziutlán</option>
+                        <option>Tehuacán</option>
+                        <option>Atlixco</option>
+                        <option>Ciudad de Zacatlán</option>
+                        <option>Huauchinango</option>
+                        <option>Chignahuapan</option>
+                        <option>San Pedro Cholula</option>
+                        <option>Izúcar de Matamoros</option>
+                        <option>Otro</option>
+                    </select>
+                    <button type="submit">Registrarse</button>
                 </form>
 
                 <p class="opcional">O regístrate con</p>
