@@ -1,3 +1,7 @@
+/* ===== Reset y base ===== */
+* {
+  box-sizing: border-box;
+}
 html, body {
   height: 100%;
   margin: 0;
@@ -5,252 +9,175 @@ html, body {
   background-color: #b8e0ce;
   font-family: 'Fredoka', sans-serif;
   color: #4c9aa2;
-
 }
 
-/* ENCABEZADO Y MENÚ */
+/* ===== ENCABEZADO ===== */
 header {
   background-color: #e3f7f2;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
 }
-
 .header-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap; /* por si es responsive */
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
 }
-
 .logo-cc img {
-  height: 100px;
+  height: 80px;
+  width: auto;
 }
-
-.header-text {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .header-text h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
-
 .header-text p {
   margin: 0;
   font-size: 1rem;
+  opacity: 0.8;
 }
-
 .menu-toggle {
   font-size: 2rem;
   cursor: pointer;
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  z-index: 10;
 }
-
-
 .nav {
   display: none;
   background-color: #4c9aa2;
   position: absolute;
-  top: 4rem;
+  top: 4.5rem;
   right: 1rem;
-  width: 200px;
+  width: 220px;
   border-radius: 8px;
   overflow: hidden;
   z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
-
-.nav.open {
-  display: block;
-  top: 5.5rem;
-}
-
+.nav.open { display: block; }
 .nav ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
-
-.nav ul li {
-  border-top: 1px solid #ffffff50;
+.nav ul li + li {
+  border-top: 1px solid rgba(255,255,255,0.3);
 }
-
-.nav ul li:first-child {
-  border-top: none;
-}
-
 .nav ul li a {
   display: block;
-  color: white;
+  color: #fff;
   text-decoration: none;
-  padding: 1rem;
-  transition: background 0.3s;
+  padding: 0.8rem 1rem;
+  transition: background 0.2s;
 }
-
 .nav ul li a:hover {
   background-color: #3a6e6e;
 }
 
-/* CONTENIDO */
+/* ===== CONTENEDOR PRINCIPAL ===== */
 .contenedor {
   background-color: #ffffff;
-  padding: 5rem;
-  border: 10px solid #b8e0ce; /* borde verdecito */
-  border-radius: 10px;
-  max-width: 1100px;
-  margin: 0 auto; /* Esto centra todo el bloque */
+  padding: 3rem 4rem;
+  border: 8px solid #b8e0ce;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-.limon-container {
-  padding-right: 2rem; /* Empuja la imagen a la izquierda */
+/* ===== FORMULARIO ===== */
+form > div,
+form fieldset {
+  margin-bottom: 1.8rem;
+}
+form label,
+form legend {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+  color: #4c9aa2;
+}
+fieldset {
+  border: 1px solid #b8e0ce;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  background: #f0faf7;
+}
+fieldset legend {
+  padding: 0 0.5rem;
+  background: #ffffff;
+  border-radius: 4px;
 }
 
-.izquierda {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+/* Inputs y selects */
+input[type="checkbox"] {
+  transform: scale(1.1);
+  margin-right: 0.5rem;
+  accent-color: #4c9aa2;
+}
+select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #b8e0ce;
+  border-radius: 6px;
+  background: #fdfdfd;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+select:focus {
+  outline: none;
+  border-color: #4c9aa2;
+  box-shadow: 0 0 5px rgba(76,154,162,0.4);
 }
 
-.texto-objetivo p {
-  max-width: 600px;
-  line-height: 1.6;
+/* Botón de envío */
+button[type="submit"] {
+  background-color: #4c9aa2;
+  color: #ffffff;
   font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.2s, transform 0.1s;
+}
+button[type="submit"]:hover {
+  background-color: #3a6e6e;
+  transform: translateY(-2px);
+}
+button[type="submit"]:active {
+  transform: translateY(0);
 }
 
-/* IMAGEN */
-
-.limon-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.limon {
-  height: 300px;
-}
-
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer {
   background-color: #64777c;
-  padding: 1em;
-  border-top: 10px solid #ddd;
+  padding: 1.2rem 0;
+  border-top: 8px solid #ddd;
   text-align: center;
   margin-top: 3rem;
+  color: #ddd;
 }
-
 footer .footer-nav ul {
   display: flex;
   justify-content: center;
-  list-style: none;
   gap: 2rem;
+  list-style: none;
   padding: 0;
+  margin: 0 0 0.8rem;
 }
-
 footer .footer-nav ul li a {
   text-decoration: none;
   color: #d6d8d9;
   font-weight: bold;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.2s;
 }
-
 footer .footer-nav ul li a:hover {
-  color: #555;
-}
-
-/* Perfil */
-.perfil-usuario {
-  max-width: 1700px;
-  font-family: 'Fredoka', sans-serif;
-}
-
-.perfil-header {
-  display: flex;           /* Hace que los hijos estén en fila */
-  align-items: center;     /* Alinea verticalmente centrado */
-  gap: 1rem;               /* Espacio entre la foto y el nombre */
-  margin-bottom: 1.5rem;
-  text-align: left;        /* Por si acaso */
-}
-
-.foto-perfil {
-  font-size: 150px;
-  color: #2c3e50;
-  flex-shrink: 0;          /* Evita que la foto se reduzca */
-}
-
-#nombre-usuario {
-  margin: 0;               /* Quitar margen por defecto en h2 */
-  font-size: 2rem;         /* Tamaño adecuado para el nombre */
-  color: #2c3e50;          /* Opcional: color */
-}
-
-
-.tabs {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 1rem;
-}
-
-.tab-link {
-  background-color: #d0e8d0;
-  border: none;
-  padding: 0.8rem 1.2rem;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 0.5rem;
-}
-
-.tab-link.active {
-  background-color: #a4d4a4;
-}
-
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-form label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-form input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 0.4rem;
-}
-
-form button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 0.4rem;
-  cursor: pointer;
-}
-
-.grid-insignias {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  text-align: center;
-}
-
-.insignia img {
-  width: 80px;
-  height: 80px;
-}
-
-.insignia p {
-  margin-top: 0.5rem;
-  font-weight: bold;
+  color: #fff;
 }
