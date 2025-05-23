@@ -64,6 +64,7 @@ header {
 
 .nav.open {
   display: block;
+  top: 5.5rem;
 }
 
 .nav ul {
@@ -157,4 +158,103 @@ footer .footer-nav ul li a {
 
 footer .footer-nav ul li a:hover {
   color: #555;
+}
+
+/* Perfil */
+.perfil-usuario {
+  max-width: 1700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-family: 'Fredoka', sans-serif;
+}
+
+.perfil-header {
+  display: flex;           /* Hace que los hijos estén en fila */
+  align-items: center;     /* Alinea verticalmente centrado */
+  gap: 1rem;               /* Espacio entre la foto y el nombre */
+  margin-bottom: 1.5rem;
+  text-align: left;        /* Por si acaso */
+}
+
+.foto-perfil {
+  font-size: 150px;
+  color: #2c3e50;
+  flex-shrink: 0;          /* Evita que la foto se reduzca */
+}
+
+#nombre-usuario {
+  margin: 0;               /* Quitar margen por defecto en h2 */
+  font-size: 2rem;         /* Tamaño adecuado para el nombre */
+  color: #2c3e50;          /* Opcional: color */
+}
+
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.tab-link {
+  background-color: #d0e8d0;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+
+.tab-link.active {
+  background-color: #a4d4a4;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+}
+
+form button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.grid-insignias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.insignia img {
+  width: 80px;
+  height: 80px;
+}
+
+.insignia p {
+  margin-top: 0.5rem;
+  font-weight: bold;
 }
