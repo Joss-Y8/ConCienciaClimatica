@@ -163,10 +163,6 @@ footer .footer-nav ul li a:hover {
 /* Perfil */
 .perfil-usuario {
   max-width: 1700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   font-family: 'Fredoka', sans-serif;
 }
 
