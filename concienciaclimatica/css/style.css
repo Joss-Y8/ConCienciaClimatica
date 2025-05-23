@@ -147,8 +147,8 @@ main p {
 
 /* Estilos personalizados para el botón de login */
 .login-button {
-  font-size: 2rem; /* Más grande */
-  color: white; /* Icono blanco */
+  font-size: 2rem;
+  color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -159,7 +159,7 @@ main p {
 
 .login-button:hover {
   background-color: white;
-  color: black; /* Cambia el icono a negro */
+  color: black; 
 }
 
 
