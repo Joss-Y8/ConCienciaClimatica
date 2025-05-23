@@ -1,0 +1,31 @@
+figure {
+    background: rgba(230, 74, 121, 0.05);
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 100;
+    text-align: center;
+}
+
+canvas{
+    width: 100%;
+}
+
+.row{
+    opacity: 0;
+    transition: opacity .3;
+}
+
+.running .row{
+    opacity: 1;
+}
+
+.cargando{
+    position: absolute;
+    border: none;
+}
+
+.running .cargando{
+    display: none;
+}

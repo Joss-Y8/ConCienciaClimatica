@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio-App</title>
+    <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
+    <link rel="stylesheet" href="../css/formstyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+
+    <script
+      src="https://kit.fontawesome.com/55078876e9.js"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <div class="wrap">
+    <header>
+        <div class="header-content">
+            <div class="logo-cc" id="ciencia">
+              <a href="../index.html"><img src="../assets/img/logos/concienciaclimática_sin_fondo.png" alt="concienciaclimática" class="logo-cc"></a>
+            </div>
+            <div class="header-text">
+            <h1>    ConCienciaClimática</h1>
+            <p> Un planeta más verde, comienza con una mente informada</p>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        </div>
+
+        <nav class="nav" id="nav">
+            <ul>
+            <li><a href="./hpage_login.html">Inicio</a></li>
+            <li><a href="#">Perfil</a></li> 
+            <li><a href="#">Huella de carbono</a></li>
+            <li><a href="#">Propuestas</a></li>
+            <li><a href="#">Encuestas</a></li>
+            <li><a href="./actividades.html">Actividades</a></li>
+            <li><a href="#">Análisis</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="contenedor">    
+        <div class="izquierda">   
+            <div class="texto-objetivo">
+                <p><strong>Conciencia Climática creemos que el cambio comienza con la información y la acción.</strong> 
+                Nuestro objetivo es educar, motivar y conectar a las personas para que tomen decisiones más sostenibles en su día a día.
+                Aquí podrás conocer tu huella de carbono, participar en propuestas ecológicas, responder encuestas ambientales y formar parte de una comunidad comprometida con el futuro del planeta.</p>
+            </div>
+
+            <div class="limon-container">
+            <img src="../assets/img/insignias/bienvenido.png" alt="Limón feliz" class="limon">
+            </div>
+        </div>
+    </div>
+        
+      <footer>
+        <nav class="footer-nav">
+            <ul class="footer-links">
+                <li><a href="#inicio">Arriba</a></li>
+                <li><a href="">Avisos Legales</a></li>
+                <li><a href="" style="font-variant: small-caps;" >&copy; ChurrumaiSS</a></li>
+                <li><a href="mailto:ruiz.santiago.mariafernanda.cb107@gmail.com">Contactanos</a></li>
+                <li><a href="https://www.facebook.com/profile.php?id=61569423481737&mibextid=ZbWKwL" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="https://www.instagram.com/c_ss.hw?igsh=MTVidmM1MXZndmE0ZQ==" target="_blank" rel="noopener"><i class="fa-brands fa-square-instagram"></i></a></li>
+            </ul>
+        </nav>
+    </footer>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+  });
+</script>
+
+
+</body>
+</html>

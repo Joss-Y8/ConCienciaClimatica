@@ -1,0 +1,164 @@
+/* Reset y base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  body, html {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+}
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Panel izquierdo: Imagen + Logo + Texto */
+.left-panel {
+  width: 50%;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('../assets/img/index/odsInd.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.left-panel .logo {
+  max-width: 150px;
+  margin-bottom: 1.5rem;
+}
+
+.left-panel h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.left-panel p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+/* Panel derecho: formularios */
+.right-panel {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #ffffff;
+  padding: 2rem;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.form-container h2 {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.form-container p {
+  margin-bottom: 1.5rem;
+  color: #7f8c8d;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4c9aa2;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  margin-top: 1rem;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #3a6ea5;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 1rem 0;
+}
+
+.social-buttons button {
+  border: none;
+  border-radius: 50%;
+  padding: 0.7rem;
+  width: 45px;
+  height: 45px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  transition: transform 0.2s;
+}
+
+.social-buttons button:hover {
+  transform: scale(1.1);
+}
+
+/* Estados de visibilidad */
+.hidden {
+  display: none;
+}
+
+.form-container select {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  appearance: none;
+  background-color: white;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='5' viewBox='0 0 10 5'%3E%3Cpath fill='%237f8c8d' d='M0 0l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 10px 5px;
+}
+
+/* Responsivo */
+@media screen and (max-width: 900px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .left-panel, .right-panel {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .form-container {
+    max-width: 90%;
+  }
+}

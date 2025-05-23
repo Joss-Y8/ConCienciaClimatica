@@ -1,0 +1,342 @@
+main {
+  display: grid;
+  grid-template-areas: "aside section";
+  grid-template-columns: 1fr 20%;
+  gap: 20px;
+  background-color: whitesmoke;
+  margin-top: 15px;
+}
+
+aside.right {
+  background-color: #f5ffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  margin-top: 20%;
+  max-height: 60%;
+  overflow-y: auto;
+}
+
+aside h2 {
+  color: #133e87;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+aside img {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+aside h3 {
+  color: #4884de;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+aside p {
+  color: #608bc1;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+aside .fact {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+aside .fact:hover {
+  transform: scale(1.05);
+}
+
+aside .fact p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+aside .highlight {
+  background-color: #eaf5ea;
+  border-left: 5px solid #55ad9b;
+  padding-left: 15px;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+aside .button {
+  display: inline-block;
+  background-color: #55ad9b;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 25px;
+  transition: background-color 0.3s;
+}
+
+aside .button:hover  {
+  background-color: #2f774a;
+}
+
+section {
+  background-color: rgba(241, 248, 232, 0.8);
+  color: #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-image: url("../assets/img/empresas/ojoBlanco.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center 1000px;
+}
+
+h2,
+h3,
+h4 {
+  color: #55ad9b;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 40px;
+}
+
+h3 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+h4 {
+  font-size: 1.4rem;
+  color: #607d47;
+}
+
+main p {
+  font-size: large;
+  line-height: 2rem;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.title-main {
+  background-color: #95d2b3;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.intro {
+  text-align: justify;
+  background-position: right;
+}
+
+.highlight {
+  background-color: #f7f7f7;
+  border-left: 5px solid #95d2b3;
+  padding: 1rem;
+  margin: 20px 0;
+  font-size: 1.1rem;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.highlight p {
+  font-size: medium;
+  line-height: 1.25rem;
+}
+
+.img-content {
+  width: 25%;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-position: top;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+thead th {
+  background-color: #95d2b3;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+a {
+  color: #95d2b3;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+a:hover {
+  color: #608bc1;
+  border-color: #608bc1;
+}
+
+.environment {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  background-color: #f0f8f5;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.environment .card {
+  flex: 1;
+  max-width: 300px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.environment h3 {
+  font-size: 1.8rem;
+  color: #2f774a;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.environment .card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.environment .card a {
+  display: inline-block;
+  color: #2f774a;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #eaf5ea;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.environment .card a:hover {
+  background-color: #2f774a;
+  color: white;
+}
+
+.card {
+  margin: 15px auto;
+  max-width: 600px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.text-image {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.text-image img {
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-image .intro {
+  flex: 1;
+  text-align: justify;
+}
+
+.strategies {
+  background-color: #f0f8f5;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+.strategies ul {
+  padding-left: 20px;
+  margin-top: 15px;
+}
+
+.strategies ul li {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.strategies a {
+  color: #95d2b3;
+  text-decoration: underline;
+}
+
+.strategies a:hover {
+  color: #608bc1;
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-areas: "aside" "section";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  aside.right {
+    height: auto;
+  }
+  .text-image {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .text-image img {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
