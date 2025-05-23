@@ -132,46 +132,24 @@ header {
   height: 300px;
 }
 
-/* FOOTER */
-footer {
-  background-color: #64777c;
-  padding: 1em;
-  border-top: 10px solid #ddd;
-  text-align: center;
-  margin-top: 3rem;
+/* ================== PERFIL ================== */
+.perfil-contenedor {
+  flex-grow: 1;
+  padding: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-footer .footer-nav ul {
+.perfil-encabezado {
   display: flex;
-  justify-content: center;
-  list-style: none;
-  gap: 2rem;
-  padding: 0;
-}
-
-footer .footer-nav ul li a {
-  text-decoration: none;
-  color: #d6d8d9;
-  font-weight: bold;
-  transition: color 0.3s ease-in-out;
-}
-
-footer .footer-nav ul li a:hover {
-  color: #555;
-}
-
-/* Perfil */
-.perfil-usuario {
-  max-width: 1700px;
-  font-family: 'Fredoka', sans-serif;
-}
-
-.perfil-header {
-  display: flex;           /* Hace que los hijos estén en fila */
-  align-items: center;     /* Alinea verticalmente centrado */
-  gap: 1rem;               /* Espacio entre la foto y el nombre */
-  margin-bottom: 1.5rem;
-  text-align: left;        /* Por si acaso */
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .foto-perfil {
@@ -180,30 +158,65 @@ footer .footer-nav ul li a:hover {
   flex-shrink: 0;          /* Evita que la foto se reduzca */
 }
 
-#nombre-usuario {
-  margin: 0;               /* Quitar margen por defecto en h2 */
-  font-size: 2rem;         /* Tamaño adecuado para el nombre */
-  color: #2c3e50;          /* Opcional: color */
+.perfil-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
+.perfil-info .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #005f73;
+}
 
+.perfil-info h2 {
+  margin: 0;
+}
+
+.perfil-info .rol {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.estadisticas {
+  display: flex;
+  gap: 2rem;
+}
+
+.estadisticas div {
+  text-align: center;
+}
+
+.estadisticas .valor {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block;
+  color: #005f73;
+}
+
+/* ================== TABS ================== */
 .tabs {
   display: flex;
-  justify-content: space-around;
+  gap: 1rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .tab-link {
-  background-color: #d0e8d0;
+  padding: 0.5rem 1rem;
+  background-color: #e0e0e0;
   border: none;
-  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 0.5rem;
 }
 
 .tab-link.active {
-  background-color: #a4d4a4;
+  background-color: #005f73;
+  color: white;
 }
 
 .tab-content {
@@ -214,43 +227,87 @@ footer .footer-nav ul li a:hover {
   display: block;
 }
 
-form label {
-  display: block;
-  margin-top: 1rem;
+/* ================== FORMULARIOS ================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
   font-weight: bold;
 }
 
-form input {
-  width: 100%;
+input[type="text"],
+input[type="email"],
+input[type="password"] {
   padding: 0.5rem;
-  margin-top: 0.3rem;
   border: 1px solid #ccc;
-  border-radius: 0.4rem;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
-form button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  background-color: #4caf50;
+button {
+  padding: 0.7rem 1.2rem;
+  background-color: #005f73;
   color: white;
   border: none;
-  border-radius: 0.4rem;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
 }
 
+button:hover {
+  background-color: #0a9396;
+}
+
+/* ================== INSIGNIAS ================== */
 .grid-insignias {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.insignia {
   text-align: center;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 .insignia img {
-  width: 80px;
-  height: 80px;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
 }
 
-.insignia p {
-  margin-top: 0.5rem;
-  font-weight: bold;
+/* ================== FOOTER ================== */
+footer {
+  background-color: #738184;
+  padding: 1rem 0;
+  color: white;
+}
+
+.footer-nav {
+  text-align: center;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
 }
