@@ -39,19 +39,64 @@
         </nav>
     </header>
 
-    <div class="contenedor">    
-        <div class="izquierda">   
-            <div class="texto-objetivo">
-                <p><strong>Conciencia Climática creemos que el cambio comienza con la información y la acción.</strong> 
-                Nuestro objetivo es educar, motivar y conectar a las personas para que tomen decisiones más sostenibles en su día a día.
-                Aquí podrás conocer tu huella de carbono, participar en propuestas ecológicas, responder encuestas ambientales y formar parte de una comunidad comprometida con el futuro del planeta.</p>
-            </div>
+      <div class="contenedor perfil-contenedor">
+        <section class="perfil-usuario">
+      <div class="perfil-header">
+        <i class="fas fa-user-circle foto-perfil"></i>
+        <h2 id="nombre-usuario">Fernanda Ruiz</h2>
+      </div>
 
-            <div class="limon-container">
-            <img src="../assets/img/insignias/bienvenido.png" alt="Limón feliz" class="limon">
-            </div>
-        </div>
+  <div class="tabs">
+  <button class="tab-link active" data-tab="info">Información personal</button>
+  <button class="tab-link" data-tab="insignias">Insignias</button>
+  <button class="tab-link" data-tab="contrasena">Cambiar contraseña</button>
+  </div>
+
+  <div id="info" class="tab-content active">
+    <form id="form-info">
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id= "nombre" name="nombre" value="Fernanda Ruiz" required>
+
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id= "correo" name="correo" value="fernanda@example.com" required>
+
+      <label for="ubi">Ubicación:</label>
+      <input type="text" id="ubi"  name="ubicacion" value="México">
+
+      <button type="submit">Guardar cambios</button>
+    </form>
+  </div>
+
+  <div id="insignias" class="tab-content">
+    <div class="grid-insignias">
+      <div class="insignia">
+        <img src="../assets/img/insignias/bienvenido.png" alt="Insignia Bienvenida">
+        <p>Bienvenido</p>
+      </div>
+      <!-- Puedes duplicar este bloque para más insignias -->
     </div>
+  </div>
+
+  <div id="contrasena" class="tab-content">
+    <form id="form-pass">
+      <label for="pass">Contraseña actual:</label>
+      <input type="password" id="pass" name="actual" required>
+
+      <label for="nwpass">Nueva contraseña:</label>
+      <input type="password" id="nwpass" name="nueva" required>
+
+      <label for="conpass">Confirmar nueva contraseña:</label>
+      <input type="password" id="conpass" name="confirmar" required>
+
+      <button type="submit">Actualizar contraseña</button>
+    </form>
+  </div>
+</section>
+
+      </div>
+
+    </div>
+
         
       <footer>
         <nav class="footer-nav">
@@ -66,18 +111,40 @@
         </nav>
     </footer>
 </div>
-<script src="formscrip.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('nav');
+  // Menú desplegable responsive
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("nav");
 
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
-    });
-  });
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    })
+  }
+
+  // Controlador de pestañas
+  const tabLinks = document.querySelectorAll(".tab-link");
+  tabLinks.forEach(btn => {
+    btn.addEventListener("click", (event) => {
+      const tabName = btn.getAttribute("data-tab"); // usamos atributo personalizado
+      openTab(event, tabName);
+    })
+  })
+});
+
+function openTab(evt, tabName) {
+  const tabContent = document.querySelectorAll(".tab-content");
+  const tabLinks = document.querySelectorAll(".tab-link");
+
+  tabContent.forEach(content => content.classList.remove("active"));
+  tabLinks.forEach(link => link.classList.remove("active"));
+
+  const selectedTab = document.getElementById(tabName);
+  if (selectedTab) selectedTab.classList.add("active");
+  if (evt.currentTarget) evt.currentTarget.classList.add("active");
+}
+
 </script>
-
-
 </body>
 </html>
