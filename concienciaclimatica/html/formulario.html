@@ -1,1 +1,158 @@
-<!--Vale aqui haz tu html de formulario de empresas-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-empresas</title>
+    <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
+    <script src="https://kit.fontawesome.com/55078876e9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/sesion.css">
+</head>
+<body>
+     <!-- HEADER -->
+  <header>
+    <div class="header-content">
+      <div class="logo-cc">
+        <img src="logo.png" alt="Logo">
+      </div>
+      <div class="header-text">
+        <h1>Encuesta Ambiental</h1>
+        <p>Iniciativas de Volkswagen y Audi en Puebla</p>
+      </div>
+      <div class="menu-toggle">☰</div>
+      <nav class="nav">
+        <ul>
+          <li><a href="#formulario">Formulario</a></li>
+          <li><a href="#info">Info</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <section class="contenedor" id="formulario">
+    <form action="#" method="post">
+      <!-- P1 -->
+      <div>
+        <label for="q1">1. ¿Ha escuchado hablar de alguna iniciativa o programa de Volkswagen relacionado con el cambio climático en Puebla?</label>
+        <select id="q1" name="q1">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <!-- P2 -->
+      <div>
+        <label for="q2">2. ¿Ha escuchado hablar de alguna iniciativa o programa de Audi relacionado con el cambio climático en Puebla?</label>
+        <select id="q2" name="q2">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <!-- P3 -->
+      <fieldset>
+        <legend>3. De las siguientes propuestas de Volkswagen en Puebla, ¿cuáles conoce?</legend>
+        <label><input type="checkbox" name="q3[]" value="paneles_solares"> Instalación de paneles solares en la planta</label><br>
+        <label><input type="checkbox" name="q3[]" value="energias_limpias"> Uso de energías limpias en la línea de producción</label><br>
+        <label><input type="checkbox" name="q3[]" value="reduccion_co2"> Programas de reducción de emisiones de CO₂</label><br>
+        <label><input type="checkbox" name="q3[]" value="reciclaje"> Iniciativas de reciclaje de materiales</label><br>
+        <label><input type="checkbox" name="q3[]" value="ninguna"> No conozco ninguna</label>
+      </fieldset>
+
+      <!-- P4 -->
+      <fieldset>
+        <legend>4. De las siguientes propuestas de Audi en Puebla, ¿cuáles conoce?</legend>
+        <label><input type="checkbox" name="q4[]" value="compensacion_huella"> Compensación de huella de carbono</label><br>
+        <label><input type="checkbox" name="q4[]" value="movilidad_electrica"> Programa de movilidad eléctrica para empleados</label><br>
+        <label><input type="checkbox" name="q4[]" value="agua_reciclada"> Uso de agua recirculada en procesos industriales</label><br>
+        <label><input type="checkbox" name="q4[]" value="plantacion_arboles"> Plantación de árboles en zonas aledañas</label><br>
+        <label><input type="checkbox" name="q4[]" value="ninguna"> No conozco ninguna</label>
+      </fieldset>
+
+      <!-- P5 -->
+      <div>
+        <label for="q5">5. En una escala del 1 al 5, ¿cómo califica su nivel de información sobre las acciones ambientales de Volkswagen en Puebla?</label>
+        <select id="q5" name="q5">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="1">1 – Nada informado</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 – Muy bien informado</option>
+        </select>
+      </div>
+
+      <!-- P6 -->
+      <div>
+        <label for="q6">6. En una escala del 1 al 5, ¿cómo califica su nivel de información sobre las acciones ambientales de Audi en Puebla?</label>
+        <select id="q6" name="q6">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="1">1 – Nada informado</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 – Muy bien informado</option>
+        </select>
+      </div>
+
+      <!-- P7 -->
+      <fieldset>
+        <legend>7. ¿A través de qué medios se ha enterado de estas iniciativas?</legend>
+        <label><input type="checkbox" name="q7[]" value="redes_sociales"> Redes sociales</label><br>
+        <label><input type="checkbox" name="q7[]" value="medios_comunicacion"> Medios de comunicación (prensa, radio, TV)</label><br>
+        <label><input type="checkbox" name="q7[]" value="web_empresa"> Sitio web oficial de la empresa</label><br>
+        <label><input type="checkbox" name="q7[]" value="eventos"> Charlas o eventos locales</label><br>
+        <label><input type="checkbox" name="q7[]" value="personas"> Amigos o familiares</label><br>
+        <label><input type="checkbox" name="q7[]" value="ninguno"> No me he enterado</label>
+      </fieldset>
+
+      <!-- P8 -->
+      <div>
+        <label for="q8">8. ¿Considera que las iniciativas de Volkswagen y Audi en Puebla son suficientes para combatir el cambio climático?</label>
+        <select id="q8" name="q8">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="suficientes">Sí, cumplen con lo necesario</option>
+          <option value="parciales">Parcialmente, deberían hacer más</option>
+          <option value="insuficientes">No, son insuficientes</option>
+          <option value="sin_opinion">No tengo opinión</option>
+        </select>
+      </div>
+
+      <!-- P9 -->
+      <div>
+        <label for="q9">9. ¿Cuál de las siguientes propuestas le parece más relevante para reducir el impacto ambiental en Puebla?</label>
+        <select id="q9" name="q9">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="paneles_solares_vw">Instalación de paneles solares (VW)</option>
+          <option value="energias_limpias_vw">Uso de energías limpias (VW)</option>
+          <option value="reduccion_co2_vw">Reducción de emisiones de CO₂ (VW)</option>
+          <option value="compensacion_audi">Compensación huella (Audi)</option>
+          <option value="movilidad_electrica_audi">Movilidad eléctrica (Audi)</option>
+          <option value="agua_reciclada_audi">Agua recirculada (Audi)</option>
+          <option value="plantacion_arboles_audi">Plantación de árboles (Audi)</option>
+        </select>
+      </div>
+
+      <!-- P10 -->
+      <fieldset>
+        <legend>10. ¿Qué mejora consideraría más efectiva para las iniciativas ambientales de Volkswagen y Audi en Puebla?</legend>
+        <label><input type="checkbox" name="q10[]" value="ampliar_solar"> Ampliar la capacidad solar en la planta</label><br>
+        <label><input type="checkbox" name="q10[]" value="uso_100_limpias"> Energías limpias al 100 %</label><br>
+        <label><input type="checkbox" name="q10[]" value="movilidad_clientes"> Movilidad eléctrica para clientes</label><br>
+        <label><input type="checkbox" name="q10[]" value="fortalecer_reciclaje"> Fortalecer reciclaje interno</label><br>
+        <label><input type="checkbox" name="q10[]" value="compensacion_forestal"> Compensación forestal</label><br>
+        <label><input type="checkbox" name="q10[]" value="mejorar_comunicacion"> Mejorar comunicación de iniciativas</label><br>
+        <label><input type="checkbox" name="q10[]" value="alianzas_ambientales"> Alianzas con ONG ambientales</label>
+      </fieldset>
+
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <button type="submit">Enviar encuesta</button>
+      </div>
+    </form>
+  </section>
+</body>
+</html>
