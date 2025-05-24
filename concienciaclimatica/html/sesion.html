@@ -43,8 +43,11 @@
              <div class="form-container hidden" id="register-form">
                 <h2>Registro</h2>
                 <p>Completa tu información</p>
-                <form id="formSignup">
-                <input type="text" name="nombre" placeholder="Nombre" required /><input type="text" name="apellido" placeholder="Apellido paterno" required />
+                <form action="../backend/signup.php" method="POST">
+                <div class="nombre-apellido col-4">
+                    <input type="text" name="nombre" placeholder="Nombre" required/>
+                    <input type="text" name="apellido" placeholder="Apellido" required>
+                </div>
                 <input type="email" name="correo" placeholder="Correo electrónico" required />
                 <input type="password" name="password" placeholder="Contraseña" required />
                 <input type="password" name="passwordc" placeholder="Confirma contraseña" required />
