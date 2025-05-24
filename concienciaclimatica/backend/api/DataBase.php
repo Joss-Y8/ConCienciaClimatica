@@ -1,7 +1,7 @@
 <?php
 namespace CLIMATICA\API;
 
-abstract class Database {
+abstract class DataBase {
     protected $conexion;
 
     public function __construct($db, $user, $pass) {
