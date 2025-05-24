@@ -26,7 +26,7 @@
             <div class="form-container" id="login-form">
                 <h2>Bienvenido</h2>
                 <p>Inicia sesión para continuar</p>
-                <form action="../backend/login.php" method="POST">
+                <form id="formLogin">
                 <input type="email" name="correo" placeholder="Correo electrónico" required />
                 <input type="password" name="password" placeholder="Contraseña" required />
                 <button type="submit">Iniciar sesión</button>
@@ -43,11 +43,11 @@
              <div class="form-container hidden" id="register-form">
                 <h2>Registro</h2>
                 <p>Completa tu información</p>
-                <form action="../backend/signup.php" method="POST">
-                <input type="text" name="nombre" placeholder="Nombre completo" required />
+                <form id="formSignup">
+                <input type="text" name="nombre" placeholder="Nombre" required /><input type="text" name="apellido" placeholder="Apellido paterno" required />
                 <input type="email" name="correo" placeholder="Correo electrónico" required />
                 <input type="password" name="password" placeholder="Contraseña" required />
-                <input type="passwordc" name="passwordc" placeholder="Confirma contraseña" required />
+                <input type="password" name="passwordc" placeholder="Confirma contraseña" required />
                 <input type="number" name="edad" placeholder="Edad">
                 <label for="city"></label>
                     <select name="city" id="city" required>
@@ -79,6 +79,8 @@
     </div>
 
     <script src="../js/sesion.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/app.js"></script>
 
 </body>
 </html>
