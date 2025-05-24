@@ -49,74 +49,105 @@
                     <div class="tarjeta-mision" data-meta="7">
                         <h2>🚌 Eco Viajero</h2>
                         <p>Usa transporte público durante 7 días.</p>
-                        <input type="number" min="0" max="7" placeholder="¿Cuántos días llevas?" />
                         <div class="barra-container">
                           <div class="barra-progreso"> 
                             <div class="progreso" id="id"></div> 
-                            <div class="circle active">1</div>
+                            <div class="circle active">0</div>
+                            <div class="circle">1</div>
                             <div class="circle">2</div>
                             <div class="circle">3</div>
-                            <div class="circle">4</div>
-                            <div class="circle">5</div>
                           </div>
-                          <br>
-                          <button class="btn" id="cumplido"> Cumplido</button>
-
                         </div>
+                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
 
                     <div class="tarjeta-mision" data-meta="3">
                         <h2>🤝 Compartido es mejor</h2>
                         <p>Comparte tu auto al menos 3 veces.</p>
-                        <input type="number" min="0" max="3" placeholder="¿Cuántas veces lo compartiste?" />
-                        <button onclick="actualizarProgreso(this)">Actualizar</button>
-                        <div class="barra-container"><div class="barra-progreso"></div></div>
+                        <div class="barra-container">
+                          <div class="barra-progreso"> 
+                            <div class="progreso" id="id"></div> 
+                            <div class="circle active">0</div>
+                            <div class="circle">1</div>
+                            <div class="circle">2</div>
+                            <div class="circle">3</div>
+                          </div>
+                        </div>
+                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
 
                     <div class="tarjeta-mision" data-meta="1">
                         <h2>📏 Cálculo inicial</h2>
                         <p>Calcula tu huella de carbono automotriz.</p>
-                        <input type="number" min="0" max="1" placeholder="¿Ya la calculaste? (1 si sí)" />
-                        <button onclick="actualizarProgreso(this)">Actualizar</button>
-                        <div class="barra-container"><div class="barra-progreso"></div></div>
+                        <div class="barra-container">
+                          <div class="barra-progreso"> 
+                            <div class="progreso" id="id"></div> 
+                            <div class="circle active">0</div>
+                            <div class="circle">1</div>
+                          </div>
+                        </div>
+                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
 
                     <div class="tarjeta-mision" data-meta="2">
                         <h2>🚶‍♂️ Movimiento limpio</h2>
                         <p>Evita el auto 2 días seguidos.</p>
-                        <input type="number" min="0" max="2" placeholder="¿Cuántos días lo evitaste?" />
-                        <button onclick="actualizarProgreso(this)">Actualizar</button>
-                        <div class="barra-container"><div class="barra-progreso"></div></div>
+                        <div class="barra-container">
+                          <div class="barra-progreso"> 
+                            <div class="progreso" id="id"></div> 
+                            <div class="circle active">0</div>
+                            <div class="circle">1</div>
+                            <div class="circle">2</div>
+                          </div>
+                        </div>
+                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
 
                     <div class="tarjeta-mision" data-meta="1">
                         <h2>🛠️ Motor consciente</h2>
                         <p>Haz mantenimiento ecológico a tu vehículo.</p>
-                        <input type="number" min="0" max="1" placeholder="¿Ya lo hiciste? (1 si sí)" />
-                        <button onclick="actualizarProgreso(this)">Actualizar</button>
-                        <div class="barra-container"><div class="barra-progreso"></div></div>
+                        <div class="barra-container">
+                          <div class="barra-progreso"> 
+                            <div class="progreso" id="id"></div> 
+                            <div class="circle active">0</div>
+                            <div class="circle">1</div>
+                          </div>
+                        </div>
+                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
 
                     <div class="tarjeta-mision" data-meta="1">
                         <h2>💡 Agente del cambio</h2>
                         <p>Propón una nueva acción desde el formulario.</p>
-                        <input type="number" min="0" max="1" placeholder="¿Ya propusiste? (1 si sí)" />
-                        <button onclick="actualizarProgreso(this)">Actualizar</button>
-                        <div class="barra-container"><div class="barra-progreso"></div></div>
+                        <div class="barra-container">
+                          <div class="barra-progreso"> 
+                            <div class="progreso" id="id"></div> 
+                            <div class="circle active">0</div>
+                            <div class="circle">1</div>
+                          </div>
+                        </div>
+                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
 
                     <div class="tarjeta-mision" data-meta="15">
                         <h2>👟 Kilómetros verdes</h2>
                         <p>Camina 5 km por 3 días (15 km en total).</p>
-                        <input type="number" min="0" max="15" placeholder="¿Cuántos km llevas?" />
-                        <button onclick="actualizarProgreso(this)">Actualizar</button>
-                        <div class="barra-container"><div class="barra-progreso"></div></div>
+                        <div class="barra-container">
+                          <div class="barra-progreso"> 
+                            <div class="progreso" id="id"></div> 
+                            <div class="circle active">0</div>
+                            <div class="circle">1</div>
+                            <div class="circle">2</div>
+                            <div class="circle">3</div>
+                          </div>
+                        </div>
+                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
                 </section>
