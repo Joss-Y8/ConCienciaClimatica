@@ -110,6 +110,18 @@ body, html {
   margin: 1rem 0;
 }
 
+.nombre-apellido {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+  .col-4{
+    flex: 1;
+  }
+}
+
+
+
 .social-buttons button {
   border: none;
   border-radius: 50%;
