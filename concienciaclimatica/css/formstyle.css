@@ -142,20 +142,15 @@ header {
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 .perfil-encabezado {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-}
-
-.foto-perfil {
-  font-size: 150px;
-  color: #2c3e50;
-  flex-shrink: 0;          /* Evita que la foto se reduzca */
+  background-color: #e9f5f1;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .perfil-info {
@@ -164,21 +159,35 @@ header {
   gap: 1rem;
 }
 
-.perfil-info .avatar {
+.avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #005f73;
 }
 
-.perfil-info h2 {
-  margin: 0;
-}
-
-.perfil-info .rol {
-  font-size: 0.95rem;
+.rol {
+  font-size: 0.9rem;
   color: #555;
+}
+
+.estadisticas {
+  display: flex;
+  gap: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.valor {
+  font-size: 1.5rem;
+  display: block;
+  color: #2c7a7b;
+}
+
+
+.foto-perfil {
+  font-size: 150px;
+  color: #2c3e50;
+  flex-shrink: 0; 
 }
 
 .estadisticas {
