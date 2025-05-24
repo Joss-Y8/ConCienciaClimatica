@@ -1,0 +1,176 @@
+:root{
+--linea--borde-relleno: #bd82dc;
+--linea--borde-vacio: #e0e0e0;
+}
+
+.contenedor-insignias {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.misiones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjeta de misión */
+.tarjeta-mision {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem 1.5rem 3.5rem;  /* MUY IMPORTANTE: espacio abajo */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  min-height: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /* Distribuye bien el espacio */
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta-mision:hover {
+  transform: translateY(-5px);
+}
+
+.tarjeta-mision h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.tarjeta-mision p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Inputs y botones */
+.tarjeta-mision input[type="number"] {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.tarjeta-mision .btn {
+  margin-top: 2rem;
+  align-self: center;
+  position: relative; 
+}
+
+.tarjeta-mision button:hover {
+  background-color: #3a7b84;
+}
+
+/* Barra de progreso */
+*{
+ box-sizing: border-box;
+}
+.barra-container {
+  position: relative;
+  background-color: var(--linea--borde-vacio);
+  border-radius: 20px;
+  height: 10px;
+  width: 100%;
+  margin: 1.2rem auto 2rem auto;
+  margin-bottom: 1rem;
+  overflow: visible;
+}
+
+.barra-progreso {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: var(--linea--borde-vacio);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.progreso {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 10px;
+  background-color: var(--linea--borde-relleno);
+  border-radius: 20px;
+  z-index: 1;
+  
+  transition: width 0.4s ease;
+}
+
+.circle {
+  position: relative;
+  z-index: 2;
+  background-color: white;
+  color: #ccc;
+  border-radius: 50%;
+  height: 22px;
+  width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--linea--borde-vacio);
+  transition: border-color 0.4s ease;
+  font-size: 0.8rem;
+}
+
+.circle.active {
+  border-color: var(--linea--borde-relleno);
+  color: var(--linea--borde-relleno);
+}
+
+
+.btn{
+  background-color: var(--linea--borde-relleno);
+  color:#fff;
+  border:0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 30px;
+  margin: 3px;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+}
+
+.btn:active{
+  transform: scale(0.98);
+}
+
+.btn:focus{
+  outline:0;
+}
+
+.btn:disabled{
+  background-color: var(--linea--borde-vacio);
+  cursor: not-allowed;
+}
+
+
+
+/* Insignia desbloqueada */
+.insignia {
+  display: inline-block;
+  background-color: #eafbea;
+  color: #2e7d32;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.oculto {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+    
+  }
+}
