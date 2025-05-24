@@ -1,119 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Huella Carbono</title>
+  <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
+  <script src="https://kit.fontawesome.com/55078876e9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../css/encuestas.css">
+</head>
 <body>
-    <center>
-    <div class="container">  
-            <h1>Calcula tu huella de Carbono</h1>
-            <p>La huella de carbono es un indicador que mide el impacto ambiental de una persona, 
-                organización, evento o producto en términos de la cantidad total de gases de efecto
-                invernadero (GEI) emitidos directa o indirectamente.</p> <br>
-            <p>Descubra como su estilo de vida impacta en el medio ambiente.</p>
-    <section id="formulario">
-        <form id="carbonoForm">
-            <div>
-                <h3>Datos Básicos</h3>
-                <div class="form-group">
-                    <label>¿Cuántas personas viven en su domicilio?</label>
-                    <input type="number" required>
-                </div>
-                <h3>Consumo Energético</h3>
-                <div class="form-group">
-                    <label>¿Qué tipo de gas utiliza en su hogar?</label>
-                    <select name="gas" required>
-                        <option value="">Seleccione una opción</option>
-                        <option value="natural">Gas natural</option>
-                        <option value="lp">Gas LP</option>
-                        <option value="null">No uso gas</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>¿Qué tipo de focos utiliza principalmente?</label>
-                    <select name="focos" required>
-                        <option value="">Seleccione una opción</option>
-                        <option value="led">LED</option>
-                        <option value="ahorradores">Ahorradores</option>
-                        <option value="incandescentes">Incandescentes</option>
-                    </select>
-                </div>
-                <h3>Transporte y Movilidad</h3>
-                    <div class="form-group">
-                        <label>¿Qué tipo de vehículo utiliza principalmente? (Marca como Audi, BMW, etc.)</label>
-                        <input type="text" name="car_brand" placeholder="Ej. Audi A4, Toyota Prius, etc.">
-                    </div>
-                    <div class="form-group">
-                        <label>¿Con qué frecuencia conduce su automóvil?</label>
-                        <select name="usoAuto" required>
-                            <option value="">Seleccione una opción</option>
-                            <option value="daily">Diariamente</option>
-                            <option value="weekly">Varias veces por semana</option>
-                            <option value="occasionally">Ocasionalmente</option>
-                            <option value="never">No tengo auto</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>¿Cómo se transporta regularmente?</label>
-                        <select name="transporte" required>
-                            <option value="">Seleccione una opción</option>
-                            <option value="auto">Automóvil</option>
-                            <option value="autobus">Autobús</option>
-                            <option value="bicicleta">Bicicleta</option>
-                            <option value="metro">Metro/Tren</option>
-                            <option value="motocicleta">Motocicleta</option>
-                            <option value="walking">Caminando</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>¿Cuánto tiempo dura su recorrido diario promedio (minutos)?</label>
-                        <input type="number">
-                    </div>
-                    <div class="form-group">
-                        <label>¿Con qué frecuencia vuela en avión?</label>
-                            <select name="vueloAvion" required>
-                                <option value="">Seleccione una opción</option>
-                                <option value="nunca">Nunca</option>
-                                <option value="anio">1-2 veces al año</option>
-                                <option value="vezanio">Varias veces al año</option>
-                                <option value="mes">Mensualmente o más</option>
-                            </select>
-                    </div>
-                <h3>Hábitos de Consumo</h3>
-                    <div class="form-group">
-                        <label>¿Con qué frecuencia consume carne (de cualquier tipo)?</label>
-                        <select name="consumoCarne" required>
-                            <option value="">Seleccione una opción</option>
-                            <option value="daily">Diariamente</option>
-                            <option value="weekly">Varias veces por semana</option>
-                            <option value="monthly">Ocasionalmente</option>
-                            <option value="never">Nunca</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>¿Con qué frecuencia consume comida 100% vegetariana?</label>
-                        <select name="comidaVegetariana" required>
-                            <option value="">Seleccione una opción</option>
-                            <option value="never">Nunca</option>
-                            <option value="rarely">Raramente</option>
-                            <option value="weekly">1-2 veces por semana</option>
-                            <option value="daily">Diariamente</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>En una semana, ¿con qué regularidad utiliza plástico no reutilizable?</label>
-                        <select name="plastic_usage" required>
-                            <option value="">Seleccione una opción</option>
-                            <option value="always">Siempre</option>
-                            <option value="often">Frecuentemente</option>
-                            <option value="sometimes">A veces</option>
-                            <option value="never">Nunca</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-                    
 
-   
-        </form>       
-    </section>
-    </center>
+  <!-- HEADER -->
+  <header>
+    <div class="header-content">
+      <div class="logo-cc">
+        <img src="../assets/img/logos/concienciaclimática_sin_fondo.png" alt="Logo">
+      </div>
+      <div class="header-text">
+        <h1>Huella de Carbono</h1>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <nav class="nav" id="nav">
+        <ul>
+          <li><a href="./hpage_login.html">Inicio</a></li>
+          <li><a href="./perfil.html">Perfil</a></li>
+          <li><a href="./huella_carbono.html">Huella de carbono</a></li>
+          <li><a href="#">Propuestas</a></li>
+          <li><a href="./actividades.html">Actividades</a></li>
+          <li><a href="#">Análisis</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <section class="container" id="formulario">
+    <form action="#" method="post">
+        <div class="info-box">
+          <h2>Calcule su Huella de Carbono</h2>
+            <p>
+            La huella de carbono es un indicador que mide el impacto ambiental de una persona, organización, 
+            evento o producto en términos de la cantidad total de gases de efecto invernadero (GEI) emitidos 
+            directa o indirectamente.
+            </p>
+            <p>
+            Descubra cómo su estilo de vida impacta en el medio ambiente.
+            </p>
+        </div>
+        
+      <div>
+        <label for="q1">1. ¿Cuántas personas viven en su domicilio?</label>
+        <input type="number" id="q1" name="q1" required>
+      </div>
+
+      <div>
+        <label for="q2">2. ¿Qué tipo de gas utiliza en su hogar?</label>
+        <select id="q2" name="gas" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="natural">Gas natural</option>
+          <option value="lp">Gas LP</option>
+          <option value="null">No uso gas</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="q3">3. ¿Qué tipo de focos utiliza principalmente?</label>
+        <select id="q3" name="focos" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="led">LED</option>
+          <option value="ahorradores">Ahorradores</option>
+          <option value="incandescentes">Incandescentes</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="q4">4. ¿Qué tipo de vehículo utiliza principalmente? (Ej. Audi A4, Toyota Prius…)</label>
+        <input type="text" id="q4" name="car_brand" placeholder="Ej. Audi A4, Toyota Prius, etc.">
+      </div>
+
+      <div>
+        <label for="q5">5. ¿Con qué frecuencia conduce su automóvil?</label>
+        <select id="q5" name="usoAuto" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="daily">Diariamente</option>
+          <option value="weekly">Varias veces por semana</option>
+          <option value="occasionally">Ocasionalmente</option>
+          <option value="never">No tengo auto</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="q6">6. ¿Cómo se transporta regularmente?</label>
+        <select id="q6" name="transporte" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="auto">Automóvil</option>
+          <option value="autobus">Autobús</option>
+          <option value="bicicleta">Bicicleta</option>
+          <option value="metro">Metro/Tren</option>
+          <option value="motocicleta">Motocicleta</option>
+          <option value="walking">Caminando</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="q7">7. ¿Cuánto tiempo dura su recorrido diario promedio (minutos)?</label>
+        <input type="number" id="q7" name="recorrido" >
+      </div>
+
+      <div>
+        <label for="q8">8. ¿Con qué frecuencia vuela en avión?</label>
+        <select id="q8" name="vueloAvion" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="nunca">Nunca</option>
+          <option value="anio">1-2 veces al año</option>
+          <option value="vezanio">Varias veces al año</option>
+          <option value="mes">Mensualmente o más</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="q9">9. ¿Con qué frecuencia consume carne (de cualquier tipo)?</label>
+        <select id="q9" name="consumoCarne" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="daily">Diariamente</option>
+          <option value="weekly">Varias veces por semana</option>
+          <option value="monthly">Ocasionalmente</option>
+          <option value="never">Nunca</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="q10">10. ¿Con qué frecuencia consume comida 100% vegetariana?</label>
+        <select id="q10" name="comidaVegetariana" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="never">Nunca</option>
+          <option value="rarely">Raramente</option>
+          <option value="weekly">1-2 veces por semana</option>
+          <option value="daily">Diariamente</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="q11">11. En una semana, ¿con qué regularidad utiliza plástico no reutilizable?</label>
+        <select id="q11" name="plastic_usage" required>
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="always">Siempre</option>
+          <option value="often">Frecuentemente</option>
+          <option value="sometimes">A veces</option>
+          <option value="never">Nunca</option>
+        </select>
+      </div>
+
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <button type="submit">Enviar encuesta</button>
+      </div>
+
+    </form>
+  </section>
+  <footer>
+    <nav class="footer-nav">
+        <ul class="footer-links">
+            <li><a href="#inicio">Arriba</a></li>
+            <li><a href="">Avisos Legales</a></li>
+            <li><a href="" style="font-variant: small-caps;" >&copy; ChurrumaiSS</a></li>
+            <li><a href="mailto:ruiz.santiago.mariafernanda.cb107@gmail.com">Contactanos</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61569423481737&mibextid=ZbWKwL" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/c_ss.hw?igsh=MTVidmM1MXZndmE0ZQ==" target="_blank" rel="noopener"><i class="fa-brands fa-square-instagram"></i></a></li>
+        </ul>
+    </nav>
+    </footer>
+
+  <script src="../js/hamburguesa.js"></script>
 </body>
 </html>
