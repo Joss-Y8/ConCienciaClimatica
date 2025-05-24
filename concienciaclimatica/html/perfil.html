@@ -31,10 +31,10 @@
         <nav class="nav" id="nav">
             <ul>
             <li><a href="./hpage_login.html">Inicio</a></li>
-            <li><a href="#">Perfil</a></li> 
+            <li><a href="./perfil.html">Perfil</a></li> 
             <li><a href="#">Huella de carbono</a></li>
             <li><a href="#">Propuestas</a></li>
-            <li><a href="#">Encuestas</a></li>
+            <li><a href="./formulario.html">Encuestas</a></li>
             </ul>
         </nav>
     </header>
@@ -111,40 +111,6 @@
         </nav>
     </footer>
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-  // Menú desplegable responsive
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.getElementById("nav");
-
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => {
-      nav.classList.toggle("open");
-    })
-  }
-
-  // Controlador de pestañas
-  const tabLinks = document.querySelectorAll(".tab-link");
-  tabLinks.forEach(btn => {
-    btn.addEventListener("click", (event) => {
-      const tabName = btn.getAttribute("data-tab"); // usamos atributo personalizado
-      openTab(event, tabName);
-    })
-  })
-});
-
-function openTab(evt, tabName) {
-  const tabContent = document.querySelectorAll(".tab-content");
-  const tabLinks = document.querySelectorAll(".tab-link");
-
-  tabContent.forEach(content => content.classList.remove("active"));
-  tabLinks.forEach(link => link.classList.remove("active"));
-
-  const selectedTab = document.getElementById(tabName);
-  if (selectedTab) selectedTab.classList.add("active");
-  if (evt.currentTarget) evt.currentTarget.classList.add("active");
-}
-
-</script>
+<script src="../js/hamburguesa.js"></script>
 </body>
 </html>
