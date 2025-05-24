@@ -6,110 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio-App</title>
     <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
+    <link rel="stylesheet" href="../css/actividades.css">
     <link rel="stylesheet" href="../css/formstyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
-    <style>
-        .contenedor-insignias {
-  max-width: 1100px;
-  margin: auto;
-}
-
-.misiones {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Tarjeta de misión */
-.tarjeta-mision {
-  background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-}
-
-.tarjeta-mision:hover {
-  transform: translateY(-5px);
-}
-
-.tarjeta-mision h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.3rem;
-}
-
-.tarjeta-mision p {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-}
-
-/* Inputs y botones */
-.tarjeta-mision input[type="number"] {
-  width: 100%;
-  padding: 0.6rem;
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-
-.tarjeta-mision button {
-  background-color: #4c9aa2;
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  font-weight: bold;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  width: 100%;
-  margin-bottom: 0.8rem;
-}
-
-.tarjeta-mision button:hover {
-  background-color: #3a7b84;
-}
-
-/* Barra de progreso */
-.barra-container {
-  background-color: #eee;
-  border-radius: 20px;
-  height: 20px;
-  width: 100%;
-  overflow: hidden;
-  margin-bottom: 0.6rem;
-}
-
-.barra-progreso {
-  height: 100%;
-  background-color: #27ae60;
-  width: 0%;
-  transition: width 0.4s ease;
-  border-radius: 20px;
-}
-
-/* Insignia desbloqueada */
-.insignia {
-  display: inline-block;
-  background-color: #eafbea;
-  color: #2e7d32;
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-.oculto {
-  display: none;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  body {
-    padding: 1rem;
-  }
-}
-    </style>
     <script
       src="https://kit.fontawesome.com/55078876e9.js"
       crossorigin="anonymous"
@@ -151,8 +50,19 @@
                         <h2>🚌 Eco Viajero</h2>
                         <p>Usa transporte público durante 7 días.</p>
                         <input type="number" min="0" max="7" placeholder="¿Cuántos días llevas?" />
-                        <button onclick="actualizarProgreso(this)">Actualizar</button>
-                        <div class="barra-container"><div class="barra-progreso"></div></div>
+                        <div class="barra-container">
+                          <div class="barra-progreso"> 
+                            <div class="progreso" id="id"></div> 
+                            <div class="circle active">1</div>
+                            <div class="circle">2</div>
+                            <div class="circle">3</div>
+                            <div class="circle">4</div>
+                            <div class="circle">5</div>
+                          </div>
+                          <br>
+                          <button class="btn" id="cumplido"> Cumplido</button>
+
+                        </div>
                         <span class="insignia oculto">🏅 Insignia desbloqueada</span>
                     </div>
 
@@ -235,27 +145,7 @@
             });
         });
 
-        function actualizarProgreso(boton) {
-  const tarjeta = boton.closest(".tarjeta-mision");
-  const input = tarjeta.querySelector("input[type='number']");
-  const barra = tarjeta.querySelector(".barra-progreso");
-  const insignia = tarjeta.querySelector(".insignia");
-
-  const valor = parseFloat(input.value);
-  const meta = parseFloat(tarjeta.dataset.meta);
-
-  // Validación básica
-  if (isNaN(valor) || valor < 0) return;
-
-  let porcentaje = Math.min((valor / meta) * 100, 100); // Nunca más del 100%
-  barra.style.width = porcentaje + "%";
-
-  if (porcentaje >= 100) {
-    insignia.classList.remove("oculto");
-    boton.disabled = true;
-    input.disabled = true;
-  }
-}
+        
 
     </script>
 </body>
