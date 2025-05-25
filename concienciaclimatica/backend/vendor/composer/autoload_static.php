@@ -36,6 +36,10 @@ class ComposerStaticInit4f2e021da92920571fa9e45e882038f7
             'Fig\\Http\\Message\\' => 17,
             'FastRoute\\' => 10,
         ),
+        'C' => 
+        array (
+            'CLIMATICA\\API\\' => 14,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -84,6 +88,10 @@ class ComposerStaticInit4f2e021da92920571fa9e45e882038f7
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'CLIMATICA\\API\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/api',
         ),
     );
 
