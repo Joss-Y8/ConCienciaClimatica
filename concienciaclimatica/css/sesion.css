@@ -159,6 +159,17 @@ body, html {
   background-size: 10px 5px;
 }
 
+.mensaje-error{
+  color:red; 
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center; 
+}
+
+.mensaje-exito{
+  color: green; 
+}
+
 /* Responsivo */
 @media screen and (max-width: 900px) {
   .main-container {
