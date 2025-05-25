@@ -125,8 +125,7 @@ class Actividad extends DataBase{
 }
 
 
-    // Subir al siguiente nivel
-   public function pasarAlSiguienteNivel($idUsuario, $idActividad) {
+public function pasarAlSiguienteNivel($idUsuario, $idActividad) {
     $sql = "SELECT * FROM usuarios_actividades WHERE id_usuario = ? AND id_actividad = ?";
     $stmt = $this->conexion->prepare($sql);
     $stmt->bind_param("ii", $idUsuario, $idActividad);
@@ -169,17 +168,18 @@ class Actividad extends DataBase{
                 $stmt = $this->conexion->prepare($update);
                 $stmt->bind_param("ii", $idUsuario, $idActividad);
                 if ($stmt->execute()) {
-                    //Insertar insignia correspondiente a la actividad 
+                    // Insertar insignia correspondiente a la actividad 
                     $insigniaSql = "SELECT id FROM insignias WHERE id_actividad = ?";
                     $stmtIns = $this->conexion->prepare($insigniaSql);
                     $stmtIns->bind_param("i", $idActividad);
                     $stmtIns->execute();
                     $resIns = $stmtIns->get_result();
 
-                    if($resIns->num_rows === 1){
+                    if ($resIns->num_rows === 1) {
                         $idInsignia = $resIns->fetch_assoc()['id'];
+                        error_log("Insignia encontrada: $idInsignia");
 
-                        // Verificar si ya tiene esa insignia
+                        // Verificar si el usuario ya tiene esta insignia
                         $checkSql = "SELECT 1 FROM usuarios_insignias WHERE id_usuario = ? AND id_insignia = ?";
                         $stmtCheck = $this->conexion->prepare($checkSql);
                         $stmtCheck->bind_param("ii", $idUsuario, $idInsignia);
@@ -190,11 +190,19 @@ class Actividad extends DataBase{
                             $insertSql = "INSERT INTO usuarios_insignias (id_usuario, id_insignia, fecha_logro) VALUES (?, ?, NOW())";
                             $stmtInsert = $this->conexion->prepare($insertSql);
                             $stmtInsert->bind_param("ii", $idUsuario, $idInsignia);
-                            $stmtInsert->execute();
+                            if (!$stmtInsert->execute()) {
+                                error_log("Error insertando insignia: " . $stmtInsert->error);
+                                return ['status' => 'error', 'message' => 'Error al insertar insignia: ' . $stmtInsert->error];
+                            } else {
+                                error_log("Insignia insertada correctamente para usuario $idUsuario e insignia $idInsignia");
+                            }
+                        } else {
+                            error_log("El usuario $idUsuario ya tiene la insignia $idInsignia");
                         }
+                    } else {
+                        error_log("No se encontró insignia para la actividad $idActividad");
                     }
 
-                    // ✅ Return movido hasta aquí
                     return ['status' => 'success', 'estado' => 'completado', 'message' => '¡Actividad completada!'];
                 }
             }
@@ -206,5 +214,8 @@ class Actividad extends DataBase{
     return ['status' => 'error', 'message' => 'No se encontró el progreso del usuario'];
 }
 
-}
+    }
+
+    return ['status' => 'error', 'message' => 'No se encontró el progreso del usuario'];
+
 ?>
