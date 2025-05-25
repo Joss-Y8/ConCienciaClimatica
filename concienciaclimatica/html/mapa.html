@@ -13,9 +13,23 @@
     <!-- Dale estilo al div#map para que tenga altura -->
     <style>
       #map {
-        width: 100%;
-        height: 600px;
-      }
+          width: 100%;
+          height: 600px;
+          border: 3px solid #2E8B57;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+          margin-bottom: 1rem;
+        }
+        /* Popup custom */
+        .leaflet-popup-content-wrapper {
+          background: #f0f9f0;
+          border-radius: 6px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .leaflet-popup-tip {
+          background: #f0f9f0;
+        }
+
     </style>
   </head>
   <body>
