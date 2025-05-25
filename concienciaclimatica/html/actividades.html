@@ -25,7 +25,12 @@
                 <h1>    ConCienciaClimática</h1>
                 <p> Un planeta más verde, comienza con una mente informada</p>
                 </div>
-                <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+                <div class="acciones-header">
+            <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+            <button id="btnLogout" class="logout-btn" title="Cerrar sesión">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
             </div>
 
             <nav class="nav" id="nav">
@@ -46,110 +51,7 @@
                 <p>Completa actividades para reducir tu huella automotriz y gana insignias. ¡Se parte del cambio!</p>
 
                 <section class="misiones">
-                    <div class="tarjeta-mision" data-meta="7">
-                        <h2>🚌 Eco Viajero</h2>
-                        <p>Usa transporte público durante 7 días.</p>
-                        <div class="barra-container">
-                          <div class="barra-progreso"> 
-                            <div class="progreso" id="id"></div> 
-                            <div class="circle active">0</div>
-                            <div class="circle">1</div>
-                            <div class="circle">2</div>
-                            <div class="circle">3</div>
-                          </div>
-                        </div>
-                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
-                        <span class="insignia oculto">🏅 Insignia desbloqueada</span>
-                    </div>
-
-                    <div class="tarjeta-mision" data-meta="3">
-                        <h2>🤝 Compartido es mejor</h2>
-                        <p>Comparte tu auto al menos 3 veces.</p>
-                        <div class="barra-container">
-                          <div class="barra-progreso"> 
-                            <div class="progreso" id="id"></div> 
-                            <div class="circle active">0</div>
-                            <div class="circle">1</div>
-                            <div class="circle">2</div>
-                            <div class="circle">3</div>
-                          </div>
-                        </div>
-                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
-                        <span class="insignia oculto">🏅 Insignia desbloqueada</span>
-                    </div>
-
-                    <div class="tarjeta-mision" data-meta="1">
-                        <h2>📏 Cálculo inicial</h2>
-                        <p>Calcula tu huella de carbono automotriz.</p>
-                        <div class="barra-container">
-                          <div class="barra-progreso"> 
-                            <div class="progreso" id="id"></div> 
-                            <div class="circle active">0</div>
-                            <div class="circle">1</div>
-                          </div>
-                        </div>
-                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
-                        <span class="insignia oculto">🏅 Insignia desbloqueada</span>
-                    </div>
-
-                    <div class="tarjeta-mision" data-meta="2">
-                        <h2>🚶‍♂️ Movimiento limpio</h2>
-                        <p>Evita el auto 2 días seguidos.</p>
-                        <div class="barra-container">
-                          <div class="barra-progreso"> 
-                            <div class="progreso" id="id"></div> 
-                            <div class="circle active">0</div>
-                            <div class="circle">1</div>
-                            <div class="circle">2</div>
-                          </div>
-                        </div>
-                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
-                        <span class="insignia oculto">🏅 Insignia desbloqueada</span>
-                    </div>
-
-                    <div class="tarjeta-mision" data-meta="1">
-                        <h2>🛠️ Motor consciente</h2>
-                        <p>Haz mantenimiento ecológico a tu vehículo.</p>
-                        <div class="barra-container">
-                          <div class="barra-progreso"> 
-                            <div class="progreso" id="id"></div> 
-                            <div class="circle active">0</div>
-                            <div class="circle">1</div>
-                          </div>
-                        </div>
-                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
-                        <span class="insignia oculto">🏅 Insignia desbloqueada</span>
-                    </div>
-
-                    <div class="tarjeta-mision" data-meta="1">
-                        <h2>💡 Agente del cambio</h2>
-                        <p>Propón una nueva acción desde el formulario.</p>
-                        <div class="barra-container">
-                          <div class="barra-progreso"> 
-                            <div class="progreso" id="id"></div> 
-                            <div class="circle active">0</div>
-                            <div class="circle">1</div>
-                          </div>
-                        </div>
-                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
-                        <span class="insignia oculto">🏅 Insignia desbloqueada</span>
-                    </div>
-
-                    <div class="tarjeta-mision" data-meta="15">
-                        <h2>👟 Kilómetros verdes</h2>
-                        <p>Camina 5 km por 3 días (15 km en total).</p>
-                        <div class="barra-container">
-                          <div class="barra-progreso"> 
-                            <div class="progreso" id="id"></div> 
-                            <div class="circle active">0</div>
-                            <div class="circle">1</div>
-                            <div class="circle">2</div>
-                            <div class="circle">3</div>
-                          </div>
-                        </div>
-                        <button class="btn" id="sig_nivel"> Siguiente Nivel</button>
-                        <span class="insignia oculto">🏅 Insignia desbloqueada</span>
-                    </div>
+                    <!--Aquí se genera dinámicamente la tarjeta de actividad-->
                 </section>
             </main>
         </div>
@@ -174,10 +76,12 @@
             toggle.addEventListener('click', () => {
             nav.classList.toggle('open');
             });
-        });
-
-        
-
+        }); 
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/app.js"></script>
+
+    <div id="toast" class="toast"></div>
 </body>
 </html>
