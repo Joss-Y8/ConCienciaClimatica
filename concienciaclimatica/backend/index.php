@@ -123,6 +123,7 @@ $app->post('/logout', function (Request $request, Response $response) {
     $response->getBody()->write(json_encode($resultado));
     return $response->withHeader('Content-Type', 'application/json');
 });*/
+
 //Encuesta
 $app->post('/encuesta', function($request, $response, $args){
     if (!isset($_SESSION['id_usuario'])) {
