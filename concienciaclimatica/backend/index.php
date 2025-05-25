@@ -234,5 +234,57 @@ $app->get('/propuestas', function (Request $request, Response $response) use ($B
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get('/propuesta/{id}', function (Request $request, Response $response, $args) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $id = $args['id'];
+    $propuesta = new \CLIMATICA\API\PROPUESTA\Propuesta($BD_NAME, $BD_USER, $BD_PASS);
+    $resultado = $propuesta->obtenerPorId($id);
+    $response->getBody()->write(json_encode($resultado));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+//el usuario se une a la propuesta
+$app->post('/propuesta/unirse', function($request, $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $usuarioId = $_SESSION['id_usuario'] ?? null;
+    $datos = json_decode($request->getBody());
+
+    $propuesta = new Propuesta($BD_NAME, $BD_USER, $BD_PASS);
+    $res = $propuesta->unirse($usuarioId, $datos->id_propuesta);
+    
+    $response->getBody()->write(json_encode($res));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+//el usuario completa la propuesta:
+$app->put('/propuesta/completar', function($request, $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $usuarioId = $_SESSION['id_usuario'] ?? null;
+    $datos = json_decode($request->getBody());
+
+    $propuesta = new Propuesta($BD_NAME, $BD_USER, $BD_PASS);
+    $res = $propuesta->completar($usuarioId, $datos->id_propuesta);
+
+    $response->getBody()->write(json_encode($res));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+//se obtiene la propuesta con estado para el usuario local
+$app->get('/propuestas/usuario', function ($request, $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $usuarioId = $_SESSION['id_usuario'] ?? null;
+
+    if (!$usuarioId) {
+       $response->getBody()->write(json_encode([
+            'success' => false,
+            'message' => 'No autenticado'
+        ]));
+        return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
+
+    }
+
+    $propuesta = new Propuesta($BD_NAME, $BD_USER, $BD_PASS);
+    $propuestas = $propuesta->obtenerPropuestas($usuarioId);
+
+    $response->getBody()->write(json_encode($propuestas));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->run();
 ?>
