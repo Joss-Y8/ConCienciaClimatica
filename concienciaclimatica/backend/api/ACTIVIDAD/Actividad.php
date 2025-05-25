@@ -126,59 +126,85 @@ class Actividad extends DataBase{
 
 
     // Subir al siguiente nivel
-    public function pasarAlSiguienteNivel($idUsuario, $idActividad) {
-        $sql = "SELECT * FROM usuarios_actividades WHERE id_usuario = ? AND id_actividad = ?";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("ii", $idUsuario, $idActividad);
+   public function pasarAlSiguienteNivel($idUsuario, $idActividad) {
+    $sql = "SELECT * FROM usuarios_actividades WHERE id_usuario = ? AND id_actividad = ?";
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bind_param("ii", $idUsuario, $idActividad);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    if ($res->num_rows === 1) {
+        $datos = $res->fetch_assoc();
+        $nivel = $datos['nivel_actual'];
+        $progreso = $datos['progreso_actual'];
+
+        // Obtener la meta actual
+        $sqlMeta = "SELECT meta FROM actividad_niveles WHERE id_actividad = ? AND nivel = ?";
+        $stmt = $this->conexion->prepare($sqlMeta);
+        $stmt->bind_param("ii", $idActividad, $nivel);
         $stmt->execute();
-        $res = $stmt->get_result();
+        $resMeta = $stmt->get_result();
 
-        if ($res->num_rows === 1) {
-            $datos = $res->fetch_assoc();
-            $nivel = $datos['nivel_actual'];
-            $progreso = $datos['progreso_actual'];
+        if ($resMeta->num_rows === 1 && $progreso >= $resMeta->fetch_assoc()['meta']) {
+            $nivelSiguiente = $nivel + 1;
 
-            // Obtener la meta actual
-            $sqlMeta = "SELECT meta FROM actividad_niveles WHERE id_actividad = ? AND nivel = ?";
-            $stmt = $this->conexion->prepare($sqlMeta);
-            $stmt->bind_param("ii", $idActividad, $nivel);
+            // ¿Existe siguiente nivel?
+            $sqlSig = "SELECT 1 FROM actividad_niveles WHERE id_actividad = ? AND nivel = ?";
+            $stmt = $this->conexion->prepare($sqlSig);
+            $stmt->bind_param("ii", $idActividad, $nivelSiguiente);
             $stmt->execute();
-            $resMeta = $stmt->get_result();
+            $resSig = $stmt->get_result();
 
-            if ($resMeta->num_rows === 1 && $progreso >= $resMeta->fetch_assoc()['meta']) {
-                $nivelSiguiente = $nivel + 1;
-
-                // ¿Existe siguiente nivel?
-                $sqlSig = "SELECT 1 FROM actividad_niveles WHERE id_actividad = ? AND nivel = ?";
-                $stmt = $this->conexion->prepare($sqlSig);
-                $stmt->bind_param("ii", $idActividad, $nivelSiguiente);
-                $stmt->execute();
-                $resSig = $stmt->get_result();
-
-                if ($resSig->num_rows > 0) {
-                    // Sube de nivel
-                    $update = "UPDATE usuarios_actividades SET nivel_actual = ?, progreso_actual = 0 WHERE id_usuario = ? AND id_actividad = ?";
-                    $stmt = $this->conexion->prepare($update);
-                    $stmt->bind_param("iii", $nivelSiguiente, $idUsuario, $idActividad);
-                    if ($stmt->execute()) {
-                        return ['status' => 'success', 'estado' => 'nivel_subido', 'message' => 'Avanzaste al siguiente nivel'];
-                    }
-                } else {
-                    // No hay más niveles → actividad completada
-                    $update = "UPDATE usuarios_actividades SET completada = 1, fecha_fin = NOW() WHERE id_usuario = ? AND id_actividad = ?";
-                    $stmt = $this->conexion->prepare($update);
-                    $stmt->bind_param("ii", $idUsuario, $idActividad);
-                    if ($stmt->execute()) {
-                        return ['status' => 'success', 'estado' => 'completado', 'message' => '¡Actividad completada!'];
-                    }
+            if ($resSig->num_rows > 0) {
+                // Sube de nivel
+                $update = "UPDATE usuarios_actividades SET nivel_actual = ?, progreso_actual = 0 WHERE id_usuario = ? AND id_actividad = ?";
+                $stmt = $this->conexion->prepare($update);
+                $stmt->bind_param("iii", $nivelSiguiente, $idUsuario, $idActividad);
+                if ($stmt->execute()) {
+                    return ['status' => 'success', 'estado' => 'nivel_subido', 'message' => 'Avanzaste al siguiente nivel'];
                 }
             } else {
-                return ['status' => 'error', 'message' => 'Aún no cumples la meta actual'];
-            }
-        }
+                // No hay más niveles → actividad completada
+                $update = "UPDATE usuarios_actividades SET completada = 1, fecha_fin = NOW() WHERE id_usuario = ? AND id_actividad = ?";
+                $stmt = $this->conexion->prepare($update);
+                $stmt->bind_param("ii", $idUsuario, $idActividad);
+                if ($stmt->execute()) {
+                    //Insertar insignia correspondiente a la actividad 
+                    $insigniaSql = "SELECT id FROM insignias WHERE id_actividad = ?";
+                    $stmtIns = $this->conexion->prepare($insigniaSql);
+                    $stmtIns->bind_param("i", $idActividad);
+                    $stmtIns->execute();
+                    $resIns = $stmtIns->get_result();
 
-        return ['status' => 'error', 'message' => 'No se encontró el progreso del usuario'];
+                    if($resIns->num_rows === 1){
+                        $idInsignia = $resIns->fetch_assoc()['id'];
+
+                        // Verificar si ya tiene esa insignia
+                        $checkSql = "SELECT 1 FROM usuarios_insignias WHERE id_usuario = ? AND id_insignia = ?";
+                        $stmtCheck = $this->conexion->prepare($checkSql);
+                        $stmtCheck->bind_param("ii", $idUsuario, $idInsignia);
+                        $stmtCheck->execute();
+                        $checkRes = $stmtCheck->get_result();
+
+                        if ($checkRes->num_rows === 0) {
+                            $insertSql = "INSERT INTO usuarios_insignias (id_usuario, id_insignia, fecha_logro) VALUES (?, ?, NOW())";
+                            $stmtInsert = $this->conexion->prepare($insertSql);
+                            $stmtInsert->bind_param("ii", $idUsuario, $idInsignia);
+                            $stmtInsert->execute();
+                        }
+                    }
+
+                    // ✅ Return movido hasta aquí
+                    return ['status' => 'success', 'estado' => 'completado', 'message' => '¡Actividad completada!'];
+                }
+            }
+        } else {
+            return ['status' => 'error', 'message' => 'Aún no cumples la meta actual'];
+        }
     }
+
+    return ['status' => 'error', 'message' => 'No se encontró el progreso del usuario'];
+}
 
 }
 ?>
