@@ -150,5 +150,38 @@ class Usuario extends DataBase {
     return $insignias;
 }
 
+
+public function cambiarPassword($idUsuario, $datos) {
+    $actual = $datos->actual ?? '';
+    $nueva  = $datos->nueva ?? '';
+    $confirmar = $datos->confirmar ?? '';
+
+    if ($nueva !== $confirmar) {
+        return ['success' => false, 'message' => 'Las contraseñas no coinciden'];
+    }
+
+    // Obtener la contraseña actual
+    $stmt = $this->conexion->prepare("SELECT password FROM usuarios WHERE id = ?");
+    $stmt->bind_param("i", $idUsuario);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $usuario = $res->fetch_assoc();
+
+    if (!$usuario || !password_verify($actual, $usuario['password'])) {
+        return ['success' => false, 'message' => 'Contraseña actual incorrecta'];
+    }
+
+    // Actualizar con la nueva contraseña
+    $nuevaHash = password_hash($nueva, PASSWORD_DEFAULT);
+    $update = $this->conexion->prepare("UPDATE usuarios SET password = ? WHERE id = ?");
+    $update->bind_param("si", $nuevaHash, $idUsuario);
+
+    if ($update->execute()) {
+        return ['success' => true, 'message' => 'Contraseña actualizada con éxito'];
+    } else {
+        return ['success' => false, 'message' => 'Error al actualizar contraseña'];
+    }
+}
+
 }
 ?>
