@@ -89,6 +89,24 @@ $(document).ready(function () {
           $(".estadisticas .valor").eq(0).text(data.insignias || "0");
           $(".estadisticas .valor").eq(1).text(data.propuestas || "0");
 
+          //se insertan dinámicamente las insignias 
+          const grid = document.querySelector(".grid-insignias");
+          grid.innerHTML = ""; // Limpiar antes de agregar
+
+          if (data.insignias_ganadas && data.insignias_ganadas.length > 0) {
+            data.insignias_ganadas.forEach(ins => {
+              const item = document.createElement("div");
+              item.className = "insignia";
+              item.innerHTML = `
+                <img src="${ins.imagen}" alt="${ins.nombre}">
+                <p>${ins.nombre}</p>
+              `;
+              grid.appendChild(item);
+            });
+          }else{
+              grid.innerHTML = "<h2 class='sin-insignias'>Aún no has ganado insignias. Realiza nuestras actividades y forma parte de la comunidad ¡Suerte!</h2>";
+          }
+
           $("#form-info input").prop("disabled", true); //los campos de información están deshabilitados
           $("#editarPerfilBtn").text("Modificar");
           editando = false;
@@ -375,6 +393,102 @@ $(document).ready(function () {
   if (window.location.pathname.includes("actividades.html")) {
       cargarActividades();
     }
+
+    /*$('#form-propuesta').on('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        $.ajax({
+            url: API_URL + "/propuesta",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhrFields: { withCredentials: true },
+            success: function(response) {
+                console.log("Respuesta del servidor:", response);
+                if (response.success) {
+                    alert("Propuesta registrada");
+                    location.reload();
+                } else {
+                    alert("Error: " + (response.message || "Algo salió mal"));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error AJAX:", error);
+                alert("Error en la petición");
+            }
+        });
+    });*/
+
+    $.get(API_URL + "/propuestas", function (propuestas) {
+        propuestas.forEach(function (p) {
+            const tarjeta = `
+                <div class="tarjeta-mision">
+                    <h2>🌿 ${p.nombre}</h2>
+                    <img src="../${p.imagen}" alt="${p.nombre}" style="width:100%; border-radius: 8px; margin-bottom: 8px;">
+                    <p>${p.descripcion}</p>
+                    <button class="btn">Unirme</button>
+                </div>
+            `;
+            $('.misiones').append(tarjeta);
+        });
+    });
+
+    // 📤 Enviar nueva propuesta
+    $('#form-propuesta').on('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        $.ajax({
+            url: API_URL + "/propuesta",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhrFields: { withCredentials: true },
+            success: function (response) {
+                try {
+                    const data = typeof response === 'string' ? JSON.parse(response) : response;
+                    console.log("Respuesta del servidor:", data);
+
+                    if (data.success) {
+                        alert("Exito " + data.message);
+
+                        // Agregar visualmente la tarjeta
+                        const nombre = formData.get("nombre");
+                        const descripcion = formData.get("descripcion");
+                        const imagenFile = $('#form-propuesta input[name="imagen"]')[0].files[0];
+                        const imagenURL = URL.createObjectURL(imagenFile); // vista temporal
+
+                        const nuevaTarjeta = `
+                            <div class="tarjeta-mision">
+                                <h2> ${nombre}</h2>
+                                <img src="${imagenURL}" alt="${nombre}" style="width:100%; border-radius: 8px; margin-bottom: 8px;">
+                                <p>${descripcion}</p>
+                                <button class="btn">Unirme</button>
+                            </div>
+                        `;
+
+                        $('.misiones').prepend(nuevaTarjeta);
+                        $('#form-propuesta')[0].reset();
+                    } else {
+                        alert("Error: " + (data.message || "Algo salió mal"));
+                    }
+                } catch (e) {
+                    console.error("Error al interpretar respuesta:", e);
+                    alert("Respuesta inesperada del servidor");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error AJAX:", error);
+                alert("Error en la petición");
+            }
+        });
+    });
+
 });
 
 function pintarBarra(tarjeta, nivel, progreso, meta) {
