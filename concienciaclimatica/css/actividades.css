@@ -176,6 +176,33 @@
   display: none;
 }
 
+actividades css
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50; 
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+.toast.error {
+  background-color: #e74c3c; 
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   body {
