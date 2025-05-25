@@ -5,6 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use CLIMATICA\API\USUARIO\Usuario;
 use CLIMATICA\API\ENCUESTA\Encuesta;
 use CLIMATICA\API\ACTIVIDAD\Actividad; 
+use CLIMATICA\API\PROPUESTA\Propuesta; 
 
 // Autoload de Composer
 require_once __DIR__ . '/vendor/autoload.php';
@@ -202,20 +203,34 @@ $app->put('/actividad/progreso', function (Request $request, Response $response)
 // Pasar al siguiente nivel
 $app->put('/actividad/nivel', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
     if (!isset($_SESSION['id_usuario'])) {
-        return $response->withStatus(401)->withHeader('Content-Type', 'application/json')
-                        ->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+        $response->getBody()->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(401);
     }
 
     $datos = json_decode($request->getBody());
     if (!isset($datos->id_actividad)) {
-        return $response->withStatus(400)->withHeader('Content-Type', 'application/json')
-                        ->write(json_encode(['status' => 'error', 'message' => 'Falta ID de actividad']));
+        $response->getBody()->write(json_encode(['status' => 'error', 'message' => 'Falta ID de actividad']));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
     }
 
     $actividad = new Actividad($BD_NAME, $BD_USER, $BD_PASS);
     $result = $actividad->pasarAlSiguienteNivel($_SESSION['id_usuario'], $datos->id_actividad);
 
     $response->getBody()->write(json_encode($result));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->post('/propuesta', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $propuesta = new Propuesta($BD_NAME, $BD_USER, $BD_PASS);
+    $propuesta->registrar(); // ← no le pasa nadaaaaa
+    $response->getBody()->write($propuesta->getData());
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/propuestas', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $propuesta = new \CLIMATICA\API\PROPUESTA\Propuesta($BD_NAME, $BD_USER, $BD_PASS);
+    $resultado = $propuesta->obtenerTodas();
+    $response->getBody()->write(json_encode($resultado));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
