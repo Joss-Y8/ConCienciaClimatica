@@ -40,7 +40,7 @@ $app->addRoutingMiddleware();
 // VARIABLES DE CONEXIÓN
 $BD_NAME = 'concienciaclimatica'; 
 $BD_USER = 'root'; 
-$BD_PASS = 'jojoyrl8'; 
+$BD_PASS = 'Fernanda465'; 
 
 // RUTAS
 
@@ -286,5 +286,23 @@ $app->get('/propuestas/usuario', function ($request, $response) use ($BD_NAME, $
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+// Huella de Carbono
+$app->post('/huella', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    if (!isset($_SESSION['id_usuario'])) {
+        $response->getBody()->write(json_encode([
+            'status' => 'error', 
+            'message' => 'No autenticado'
+        ]));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    $datos = json_decode($request->getBody()->getContents());
+    $datos->id_usuario = $_SESSION['id_usuario'];
+    $encuesta = new Encuesta('concienciaclimatica');
+    $resultado = $encuesta->addHuellaCarbono($datos);
+
+    $response->getBody()->write(json_encode($resultado));
+    return $response->withHeader('Content-Type', 'application/json');
+});
 $app->run();
 ?>

@@ -6,7 +6,7 @@ use CLIMATICA\API\Database as DataBase;
 class Encuesta extends DataBase {
     private $data;
 
-    public function __construct($db, $user = 'root', $pass = '') {
+    public function __construct($db, $user = 'root', $pass = 'Fernanda465') {
         $this->data = array();
         parent::__construct($db, $user, $pass);
     }
@@ -97,5 +97,35 @@ class Encuesta extends DataBase {
 
         $this->conexion->close();
         return $this->data;
+    }
+//Huella de Carbono
+    public function addHuellaCarbono($jsonOBJ){
+        $this->data = array(
+            'status' => 'error',
+            'message' => 'No se pudo registrar la huella de carbono'
+        );
+        $this->conexion->set_charset("utf8");
+
+        $contadorResp = 0;
+        foreach($jsonOBJ->respuestas as $respuesta){
+
+        $sql = "INSERT INTO huella_usuario_respuestas (id_usuario, numero_pregunta, puntaje) VALUES (
+        {$jsonOBJ->id_usuario},
+        {$respuesta-> numero_pregunta},
+        {$respuesta->puntaje}
+        )"; 
+
+        if($this->conexion->query($sql)){
+            $contadorResp++;
+        } 
+        }
+        
+        if ($contadorResp > 0) {
+        $this->data['status'] = 'success';
+        $this->data['message'] = "Se guardaron {$contadorResp} respuestas correctamente";
+        $this->data['respuestas_guardadas'] = $contadorResp;
+        } 
+
+        return $this->data; 
     }
 }

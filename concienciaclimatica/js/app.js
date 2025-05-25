@@ -591,7 +591,34 @@ $(document).on('click', '.completar-btn', function () {
         }
     });
 });
+//Huella de Carbono
+$('#formHuella').submit(function(e){
+    e.preventDefault();
 
+    const respuestas = [];
+
+    $("select[name^='respuesta_']").each(function(index) {
+      const selectedOption = $(this).find(":selected");
+      respuestas.push({
+        numero_pregunta: index + 1,
+        puntaje: parseInt(selectedOption.attr('puntaje')) || 0
+      });
+    });
+
+    $.ajax({
+      url: `${API_URL}/huella`,
+      type: "POST",
+      data: JSON.stringify({ respuestas: respuestas }), 
+      contentType: "application/json",
+      success: function(response) {
+        if(response.status === "success") {
+          alert("¡Tu huella de carbono ha sido registrada!");
+        } else {
+          alert("Error: " + response.message);
+        }
+      }
+    });
+  });
 
 });
 
