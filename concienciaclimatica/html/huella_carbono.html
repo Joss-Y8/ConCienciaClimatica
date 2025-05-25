@@ -47,155 +47,104 @@
         </div>
         
       <div>
-        <label for="q1">1. ¿Cuántas personas viven en su domicilio?</label>
-        <input type="number" id="q1" name="q1" required>
-      </div>
-
-      <div>
-        <label for="q2">2. ¿Qué tipo de gas utiliza en su hogar?</label>
-        <select id="q2" name="gas" required>
+        <label for="q1">1. ¿Qué tipo de vehículo utilizas principalmente?</label>
+        <select id="q1" name="respuesta_1" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="natural">Gas natural</option>
-          <option value="lp">Gas LP</option>
-          <option value="null">No uso gas</option>
+          <option value="autoGasolina" puntaje="15">Auto de Gasolina</option>
+          <option value="hibrido" puntaje="10">Híbrido</option>
+          <option value="bicicleta" puntaje="5">Bicicleta</option>
         </select>
       </div>
 
       <div>
-        <label for="q3">3. ¿Qué tipo de focos utiliza principalmente?</label>
-        <select id="q3" name="focos" required>
+        <label for="q2">2. ¿Con qué frecuencia usas tu auto?</label>
+        <select id="q2" name="respuesta_2" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="led">LED</option>
-          <option value="ahorradores">Ahorradores</option>
-          <option value="incandescentes">Incandescentes</option>
+          <option value="diariamente" puntaje="15">Diariamente</option>
+          <option value="3o4vecesSemana" puntaje="10">3-4 veces por semana</option>
+          <option value="fin_Semana" puntaje="5">Solo fines de semana</option>
         </select>
       </div>
 
       <div>
-        <label for="q4">4. ¿Qué tipo de vehículo utiliza principalmente? (Ej. Audi A4, Toyota Prius…)</label>
-        <input type="text" id="q4" name="car_brand" placeholder="Ej. Audi A4, Toyota Prius, etc.">
-      </div>
-
-      <div>
-        <label for="q5">5. ¿Con qué frecuencia conduce su automóvil?</label>
-        <select id="q5" name="usoAuto" required>
+        <label for="q3">3. ¿Cuántos kilómetros recorres al año en tu auto?</label>
+        <select id="q3" name="respuesta_3" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="daily">Diariamente</option>
-          <option value="weekly">Varias veces por semana</option>
-          <option value="occasionally">Ocasionalmente</option>
-          <option value="never">No tengo auto</option>
+          <option value="mas_15000km" puntaje="15">Más de 15,000 km</option>
+          <option value="5a10km" puntaje="10">5,000-15,000 km</option>
+          <option value="menos_5000km" puntaje="5">Menos de 5,000 km</option>
         </select>
       </div>
 
       <div>
-        <label for="q6">6. ¿Cómo se transporta regularmente?</label>
-        <select id="q6" name="transporte" required>
+        <label for="q4">4. ¿Cúal es el consumo aproximado de combustible en tu auto?</label>
+        <select id="q4" name="respuesta_4" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="auto">Automóvil</option>
-          <option value="autobus">Autobús</option>
-          <option value="bicicleta">Bicicleta</option>
-          <option value="metro">Metro/Tren</option>
-          <option value="motocicleta">Motocicleta</option>
-          <option value="walking">Caminando</option>
+          <option value="menos_10km" puntaje="15">Menos de 10km/litro</option>
+          <option value="10a15km" puntaje="10">10 a 15 km/litro</option>
+          <option value="mas_15km" puntaje="5">Mas de 15 km/litro</option>
         </select>
       </div>
 
       <div>
-        <label for="q7">7. ¿Cuánto tiempo dura su recorrido diario promedio (minutos)?</label>
-        <input type="number" id="q7" name="recorrido" >
-      </div>
-
-      <div>
-        <label for="q8">8. ¿Con qué frecuencia vuela en avión?</label>
-        <select id="q8" name="vueloAvion" required>
+        <label for="q5">5. ¿Con qué frecuencia realizas mantenimiento a tu auto (cambio de aceite, filtros, neumáticos)?</label>
+        <select id="q5" name="respuesta_5" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="nunca">Nunca</option>
-          <option value="anio">1-2 veces al año</option>
-          <option value="vezanio">Varias veces al año</option>
-          <option value="mes">Mensualmente o más</option>
+          <option value="mas_de_un_año" puntaje="15">Más de un año</option>
+          <option value="una_cada_año" puntaje="10">Una vez al año</option>
+          <option value="6_meses" puntaje="5" >Cada 6 meses</option>
         </select>
       </div>
 
       <div>
-        <label for="q9">9. ¿Con qué frecuencia consume carne (de cualquier tipo)?</label>
-        <select id="q9" name="consumoCarne" required>
+        <label for="q6">6. ¿Realizas viajes largos en carretera?</label>
+        <select id="q6" name="respuesta_6" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="daily">Diariamente</option>
-          <option value="weekly">Varias veces por semana</option>
-          <option value="monthly">Ocasionalmente</option>
-          <option value="never">Nunca</option>
+          <option value="mas_3_anio" puntaje="15">Mas de 3 veces al año</option>
+          <option value="3_anio" puntaje="10">A lo mucho 3 veces al año</option>
+          <option value="no" puntaje="0">No</option>
         </select>
       </div>
 
       <div>
-        <label for="q10">10. ¿Con qué frecuencia consume comida 100% vegetariana?</label>
-        <select id="q10" name="comidaVegetariana" required>
+        <label for="q7">7. ¿Utilizas aire acondicionado frecuentemente?</label>
+        <select id="q7" name="respuesta_7" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="never">Nunca</option>
-          <option value="rarely">Raramente</option>
-          <option value="weekly">1-2 veces por semana</option>
-          <option value="daily">Diariamente</option>
-        </select>
+          <option value="Si" puntaje="10">Si</option>
+          <option value="No" puntaje="5">No</option>
+         </select>
       </div>
 
       <div>
-        <label for="q11">11. En una semana, ¿con qué regularidad utiliza plástico no reutilizable?</label>
-        <select id="q11" name="plastic_usage" required>
+        <label for="q8">8.¿Tu auto tiene sistema de start-stop automático?</label>
+        <select id="q8" name="respuesta_8" required>
           <option value="" disabled selected>Seleccione...</option>
-          <option value="always">Siempre</option>
-          <option value="often">Frecuentemente</option>
-          <option value="sometimes">A veces</option>
-          <option value="never">Nunca</option>
+          <option value="Si" puntaje="-5">Si</option>
+          <option value="No" puntaje ="0">No</option>
         </select>
       </div>
-       <div class="form-group">
-            <label>¿Con qué frecuencia va de compras (ropa, electrónicos, etc.)?</label>
-            <select name="frecuencia_compras" required>
+
+      <div class="form-group">
+            <label for="q9">9. ¿Sobrecargas tu vehículo (peso extra mal distribuido)?</label>
+            <select id ="q9"name="respuesta_9" required>
                 <option value="">Selecciona una opción</option>
-                <option value="semana">Semanalmente</option>
-                <option value="mes">Mensualmente</option>
-                <option value="anio">Anualmente o menos</option>
-            </select>
-        </div>
-    <h3>Sostenibilidad</h3>
-        <div class="form-group">
-            <label>¿Qué hace cuando ya no utiliza algo?</label>
-            <select name="disponibilidad" required>
-                <option value="">Selecciona una opción</option>
-                <option value="vender">Lo vendo</option>
-                <option value="donar">Lo regalo/dono</option>
-                <option value="guardar">Lo guardo</option>
-                <option value="tirar">Lo tiro</option>
+                <option value="Si" puntaje ="15">Si</option>
+                <option value="Aveces" puntaje ="10">Aveces</option>
+                <option value="No" puntaje ="0">No</option>
             </select>
         </div>
         <div class="form-group">
-            <label>¿Cada cuánto tiempo cambia sus dispositivos electrónicos (celular, computadora, etc.)?</label>
-            <select name="electronicos" required>
+            <label for="q10">10. ¿Qué tipo de rutas manejas con más frecuencia?</label>
+            <select id="q10" name="respuesta_10" required>
                 <option value="">Selecciona una opción</option>
-                <option value="1">Cada año o menos</option>
-                <option value="2">Cada 2 años</option>
-                <option value="3">Cada 3 años</option>
-                <option value="4">Cada 4 años o más</option>
+                <option value="ciudad_trafico" puntaje ="15">Ciudad con tráfico </option>
+                <option value="mixta" puntaje ="10">Mixta</option>
+                <option value="carretera" puntaje ="5">Carretera</option>
             </select>
         </div>
-        <div class="form-group">
-            <label>¿Recicla regularmente?</label>
-            <select name="reciclaje" required>
-                <option value="">Selecciona una opción</option>
-                <option value="always">Siempre</option>
-                <option value="often">Frecuentemente</option>
-                <option value="sometimes">A veces</option>
-                <option value="rarely">Raramente</option>
-                <option value="never">Nunca</option>
-            </select>
-        </div>
+        
+    
       <div style="margin-top: 1.5rem; text-align: center;">
-<<<<<<< HEAD
-    <button type="submit">Calcular mi Huella de Carbono</button>
-</div>
-</form>
-</section>
-=======
         <button type="submit">Enviar encuesta</button>
       </div>
 
@@ -213,8 +162,6 @@
         </ul>
     </nav>
     </footer>
->>>>>>> dev
-
   <script src="../js/hamburguesa.js"></script>
 </body>
 </html>
