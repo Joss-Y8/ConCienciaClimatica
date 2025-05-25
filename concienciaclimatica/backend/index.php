@@ -40,7 +40,7 @@ $app->addRoutingMiddleware();
 // VARIABLES DE CONEXIÓN
 $BD_NAME = 'concienciaclimatica'; 
 $BD_USER = 'root'; 
-$BD_PASS = 'Fernanda465'; 
+$BD_PASS = 'jojoyrl8'; 
 
 // RUTAS
 
@@ -302,6 +302,24 @@ $app->post('/huella', function (Request $request, Response $response) use ($BD_N
     $resultado = $encuesta->addHuellaCarbono($datos);
 
     $response->getBody()->write(json_encode($resultado));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+//Cambiar contraseña
+$app->put('/cambiar-password', function($request, $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $usuarioId = $_SESSION['id_usuario'] ?? null;
+    $datos = json_decode($request->getBody());
+
+    if (!$usuarioId) {
+        $payload = json_encode(['success' => false, 'message' => 'No autenticado']);
+        $response->getBody()->write($payload);
+        return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
+    }
+
+    $usuario = new Usuario($BD_NAME, $BD_USER, $BD_PASS);
+    $res = $usuario->cambiarPassword($usuarioId, $datos);  //Aquí va el objeto entero
+
+    $response->getBody()->write(json_encode($res));
     return $response->withHeader('Content-Type', 'application/json');
 });
 $app->run();
