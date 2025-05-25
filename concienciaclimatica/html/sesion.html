@@ -27,8 +27,10 @@
                 <h2>Bienvenido</h2>
                 <p>Inicia sesión para continuar</p>
                 <form id="formLogin">
-                <input type="email" name="correo" placeholder="Correo electrónico" required />
-                <input type="password" name="password" placeholder="Contraseña" required />
+                <input type="email" name="correo" placeholder="Correo electrónico"/>
+                <input type="password" name="password" placeholder="Contraseña"/>
+
+                <div id="login-message" class="mensaje-error"></div>
                 <button type="submit">Iniciar sesión</button>
                 </form>
                 <p class="opcional">O continúa con</p>
@@ -45,13 +47,14 @@
                 <p>Completa tu información</p>
                 <form id="formSignup">
                 <div class="nombre-apellido col-4">
-                    <input type="text" name="nombre" placeholder="Nombre" required/>
-                    <input type="text" name="apellido" placeholder="Apellido" required>
+                    <input type="text" name="nombre" placeholder="Nombre"/>
+                    <input type="text" name="apellido" placeholder="Apellido"/>
                 </div>
-                <input type="email" name="correo" placeholder="Correo electrónico" required />
-                <input type="password" name="password" placeholder="Contraseña" required />
-                <input type="password" name="passwordc" placeholder="Confirma contraseña" required />
-                <input type="number" name="edad" placeholder="Edad">
+                <input type="email" name="correo" placeholder="Correo electrónico"/>
+                <input type="password" name="password" placeholder="Contraseña"/>
+                <input type="password" name="passwordc" placeholder="Confirma contraseña"/>
+                <div id="signup-message" class="mensaje-error"></div>
+                <input type="number" name="edad" placeholder="Edad"/>
                 <label for="city"></label>
                     <select name="city" id="city" required>
                         <option selected disabled>Selecciona tu municipio</option>
