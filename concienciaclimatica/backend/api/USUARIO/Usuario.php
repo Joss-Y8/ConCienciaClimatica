@@ -129,5 +129,26 @@ class Usuario extends DataBase {
         $stmt->close(); 
         return $this->data; 
     }
+
+    //CREO QUE ESTA FUNCIÓN TODAVÍA NO SIRVE 
+    public function obtenerInsignias($idUsuario){
+    $sql = "SELECT i.nombre, i.imagen 
+            FROM usuarios_insignias ui
+            JOIN insignias i ON ui.id_insignia = i.id
+            WHERE ui.id_usuario = ?";
+    
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bind_param("i", $idUsuario);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    $insignias = [];
+    while ($row = $res->fetch_assoc()) {
+        $insignias[] = $row;
+    }
+
+    return $insignias;
+}
+
 }
 ?>
