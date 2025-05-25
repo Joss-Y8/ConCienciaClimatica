@@ -46,48 +46,23 @@
     <p>Explora propuestas hechas por otros usuarios para actuar frente al cambio climático. ¡Súmate al cambio!</p>
 
     <section class="misiones">
-        <div class="tarjeta-mision">
-            <h2>🌍 Limpieza de parque local</h2>
-            <p>Únete este fin de semana para limpiar áreas verdes en tu comunidad.</p>
-            <button class="btn">Unirme</button>
-        </div>
-
-        <div class="tarjeta-mision">
-            <h2>🚲 Rodada ecológica</h2>
-            <p>Organizamos una rodada por el centro para promover la movilidad verde. ¿Te sumas?</p>
-            <button class="btn">Unirme</button>
-        </div>
-
-        <div class="tarjeta-mision">
-            <h2>♻️ Taller de reciclaje creativo</h2>
-            <p>Aprende a reutilizar materiales y comparte tus creaciones.</p>
-            <button class="btn">Unirme</button>
-        </div>
-
-        <div class="tarjeta-mision">
-            <h2>🌱 Huerto urbano colectivo</h2>
-            <p>Ayuda a plantar y mantener un huerto comunitario.</p>
-            <button class="btn">Unirme</button>
-        </div>
-
-        <div class="tarjeta-mision">
-            <h2>🔋 Día sin electricidad</h2>
-            <p>Reto colectivo: pasar 12 horas sin electricidad y compartir tu experiencia.</p>
-            <button class="btn">Unirme</button>
-        </div>
+        <!--AQUI SE PONEN LAS TARJETAS DE LAS PROPUESTA CREADAS-->
     </section>
     <section class="formulario-propuesta">
-    <h2>¿Tienes una propuesta nueva? 🌟</h2>
+    <h2>¿Tienes una propuesta nueva?</h2>
     <p>Comparte tu idea para generar un impacto positivo en el planeta.</p>
     <form id="form-propuesta" class="form-style" action="#" method="POST">
         <label for="nombre">Nombre de propuesta:</label>
         <input type="text" id="nombre" name="nombre" required>
 
         <label for="propuesta">Tu propuesta:</label>
-        <textarea id="propuesta" name="propuesta" rows="4" required></textarea>
+        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
 
         <label for="imagen">Añade una imagen representativa:</label>
-        <input type="file" id="imgen-pro" name="imagen-pro" required>
+        <input type="file" id="imgen" name="imagen" required>
+
+        <label for="niveles">Nivel de dificultad (1 a 3):</label>
+        <input type="number" id="niveles" name="niveles" min="1" max="3" required>
 
         <button type="submit" class="btn">Enviar propuesta</button>
     </form>
@@ -117,9 +92,9 @@
             nav.classList.toggle('open');
             });
         });
-
-        
-
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/app.js"></script>
 </body>
 </html>
