@@ -162,52 +162,247 @@ $(document).ready(function () {
     cargarPerfil();
   }
 
-    document.querySelector("#formEncuesta").addEventListener("submit", function(e) {
-      e.preventDefault();
+  //modifique la lógica porque no me dejaba utilizar mis funciones jaja :(, si ya no funciona me dices para que lo cambie. Atte: Joss
+    const formEncuesta = document.querySelector("#formEncuesta");
+    if (formEncuesta) {
+      formEncuesta.addEventListener("submit", function(e) {
+        e.preventDefault();
 
-      const form = e.target;
-      const formData = new FormData(form);
+        const formData = new FormData(formEncuesta);
 
-      //Checkbox
-      function getCheckboxValues(name) {
-        const checkboxes = form.querySelectorAll(`input[name="${name}[]"]:checked`);
-        const values = [];
-        checkboxes.forEach(function(checkbox) {
-          values.push(checkbox.value);
+        function getCheckboxValues(name) {
+          const checkboxes = formEncuesta.querySelectorAll(`input[name="${name}[]"]:checked`);
+          const values = [];
+          checkboxes.forEach(checkbox => values.push(checkbox.value));
+          return values;
+        }
+
+        const data = {
+          vw_iniciativa: formData.get("q1") === "si" ? 1 : 0,
+          audi_iniciativa: formData.get("q2") === "si" ? 1 : 0,
+          vw_conocidas: getCheckboxValues("q3"),
+          audi_conocidas: getCheckboxValues("q4"),
+          info_vw: parseInt(formData.get("q5")),
+          info_audi: parseInt(formData.get("q6")),
+          medios: getCheckboxValues("q7"),
+          suficiencia: formData.get("q8"),
+          relevancia: formData.get("q9"),
+          mejoras: getCheckboxValues("q10")
+        };
+
+        fetch(`${API_URL}/encuesta`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(respuesta => {
+          alert(respuesta.message);
+          console.log("Respuesta del servidor:", respuesta);
+        })
+        .catch(error => {
+          console.error("Error al enviar la encuesta:", error);
+          alert("Error al enviar la encuesta.");
         });
-        return values;
-      }
-
-      // Datos encuesta
-      const data = {
-        vw_iniciativa: formData.get("q1") === "si" ? 1 : 0,
-        audi_iniciativa: formData.get("q2") === "si" ? 1 : 0,
-        vw_conocidas: getCheckboxValues("q3"),
-        audi_conocidas: getCheckboxValues("q4"),
-        info_vw: parseInt(formData.get("q5")),
-        info_audi: parseInt(formData.get("q6")),
-        medios: getCheckboxValues("q7"),
-        suficiencia: formData.get("q8"),
-        relevancia: formData.get("q9"),
-        mejoras: getCheckboxValues("q10")
-      };
-
-      // url
-      fetch(`${API_URL}/encuesta`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.json())
-      .then(respuesta => {
-        alert(respuesta.message); 
-        console.log("Respuesta del servidor:", respuesta);
-      })
-      .catch(error => {
-        console.error("Error al enviar la encuesta:", error);
-        alert("Error al enviar la encuesta.");
       });
-    });
+    }
+
+
+  //cargamos actividades
+  function cargarActividades() {
+    fetch(`${API_URL}/actividades`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("Actividades recibidas: ", data);
+        const contenedor = document.querySelector(".misiones");
+        contenedor.innerHTML = "";
+
+        data.forEach(act => {
+          console.log(`Actividad ID ${act.id}:`, act);
+          const tarjeta = document.createElement("div");
+          tarjeta.className = "tarjeta-mision";
+          tarjeta.setAttribute("data-meta", act.meta || 0);
+
+          // Estado simulado
+          let estadoBoton = "Iniciar Actividad";
+          if (act.completada) {
+            estadoBoton = "Completado";
+          } else if (act.meta_alcanzada) {
+            estadoBoton = "Siguiente Nivel";
+          } else if (act.iniciada) {
+            estadoBoton = "Actualizar Progreso";
+          }
+
+          const inputHabilitado = act.iniciada && !act.completada ? "": "disabled"; 
+          const descripcionNivel = act.meta && act.unidad ? `Nivel actual: debes completar ${act.meta} ${act.unidad}` : ''; 
+          tarjeta.innerHTML = `
+            <h2>${act.nombre}</h2>
+            <img src="${act.imagen}" alt="${act.nombre}" class="img-actividad">
+            <p>${act.descripcion}</p>
+            <p class="descripcion-nivel">${descripcionNivel}</p>
+            <div class="barra-container">
+              <div class="barra-progreso">
+                <div class="progreso"></div>
+                <div class="circle active">1</div>
+                <div class="circle">2</div>
+                <div class="circle">3</div>
+              </div>
+            </div>
+            <div class="progreso-interaccion">
+              <input type = "number" min = "1" placeholder="Ingresa tu progreso" class = "input-progreso" data-id="${act.id}" ${inputHabilitado}/>
+              <button class="btn progreso-btn" data-id="${act.id}">${estadoBoton}</button>
+            </div>
+            <span class="insignia oculto">Insignia desbloqueada</span>
+          `;
+          
+          console.log("Datos para la barra: ", {id: act.id, nivel: act.nivel_actual, progreso: act.progreso_actual, meta: act.meta })
+          //progreso visual
+          pintarBarra(tarjeta, act.nivel_actual || 0, act.progreso_actual || 0, act.meta || 1);
+
+
+          contenedor.appendChild(tarjeta);
+        });
+
+        // Eventos para los botones
+        $(".progreso-btn").on("click", function () {
+          const idActividad = $(this).data("id");
+          const estado = $(this).text().trim();
+          console.log(`Botón clickeado - Actividad ID: ${idActividad}, Estado: ${estado}`);
+          const boton = $(this);
+
+          if (estado === "Iniciar Actividad") {
+            $.ajax({
+              url: `${API_URL}/actividad/iniciar`,
+              type: "POST",
+              data: JSON.stringify({ id_actividad: idActividad }),
+              contentType: "application/json",
+              success: function (res) {
+                if (res.status === "success") {
+                  showToast("Actividad iniciada");
+                  boton.text("Actualizar Progreso");
+                } else {
+                  showToast(res.message);
+                }
+              },
+              error: function () {
+                showToast("Error al iniciar actividad");
+              }
+            });
+
+          } else if (estado === "Actualizar Progreso") {
+            const tarjeta = $(this).closest(".tarjeta-mision")[0];
+            const input = tarjeta.querySelector(`.input-progreso[data-id='${idActividad}']`);
+            const cantidad =parseInt(input.value); 
+            const boton = $(this); 
+            console.log("Cantidad leída del input:", cantidad);
+            if (!cantidad || isNaN(cantidad)) {
+              showToast("Ingresa un número válido.");
+              return;
+            }
+            input.value = "";
+
+            $.ajax({
+              url: `${API_URL}/actividad/progreso`,
+              type: "PUT",
+              data: JSON.stringify({ id_actividad: idActividad, cantidad: cantidad }),
+              contentType: "application/json",
+              success: function (res) {
+                if (res.status === "success") {
+                  showToast(res.message);
+
+                  // Actualizar barra visual todavía no se actualiza al instante. 
+                  const barra = tarjeta.querySelector(".progreso");
+                  const meta = parseInt(tarjeta.getAttribute("data-meta"));
+                  const progreso = res.progreso_actual || cantidad;
+                  barra.setAttribute("data-actual", progreso); // valor de atributo
+
+                  const porcentaje = Math.min(100, (progreso / meta) * 100);
+                  barra.style.width = `${porcentaje}%`;
+
+                  // Círculos de nivel
+                  const nivelActual = res.nivel_actual || 1; 
+                  const circles = tarjeta.querySelectorAll(".circle");
+                  circles.forEach((circle, i) => {
+                    if (i <= nivelActual) {
+                      circle.classList.add("active");
+                    } else {
+                      circle.classList.remove("active");
+                    }
+                  });
+
+                  if (res.estado === "meta_alcanzada") {
+                    boton.text("Siguiente Nivel");
+                  }
+
+                } else {
+                  showToast(res.message, true);
+                }
+              },
+              error: function () {
+                showToast("Error al actualizar progreso", true);
+              }
+            });
+
+          } else if (estado === "Siguiente Nivel") {
+            $.ajax({
+              url: `${API_URL}/actividad/nivel`,
+              type: "PUT",
+              data: JSON.stringify({ id_actividad: idActividad }),
+              contentType: "application/json",
+              success: function (res) {
+                if (res.status === "success") {
+                  showToast(res.message);
+                  if (res.estado === "completado") {
+                    boton.text("Completado");
+                    boton.prop("disabled", true);
+                  } else {
+                    boton.text("Actualizar Progreso");
+                  }
+                } else {
+                  showToast(res.message);
+                }
+              },
+              error: function () {
+                showToast("Error al subir de nivel");
+              }
+            });
+          }
+        });
+      })
+      .catch(err => console.error("Error al cargar actividades:", err));
+  }
+
+  if (window.location.pathname.includes("actividades.html")) {
+      cargarActividades();
+    }
 });
+
+function pintarBarra(tarjeta, nivel, progreso, meta) {
+  const barra = tarjeta.querySelector(".progreso");
+  const circles = tarjeta.querySelectorAll(".circle");
+
+  // Activar círculos según el nivel actual
+  circles.forEach((circle, i) => {
+    if (i < nivel) {
+      circle.classList.add("active");
+    } else {
+      circle.classList.remove("active");
+    }
+  });
+
+  // Calcular el porcentaje de progreso
+  const porcentaje = meta && progreso !== undefined ? Math.min(100, (progreso / meta) * 100) : 0;
+  barra.style.width = `${porcentaje}%`;
+}
+
+function showToast(message, isError = false) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.className = "toast" + (isError ? " error" : "") + " show";
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
+
+
