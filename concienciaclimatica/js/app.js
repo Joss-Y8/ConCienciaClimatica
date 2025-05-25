@@ -620,6 +620,60 @@ $('#formHuella').submit(function(e){
     });
   });
 
+  //Cambio de contraseña
+  $("#form-pass").submit(function (e) {
+      e.preventDefault();
+
+      const actual = $("#pass").val();
+      const nueva = $("#nwpass").val();
+      const confirmar = $("#conpass").val();
+
+      const $mensaje = $("#pass-message");
+      $mensaje.text("").removeClass("success error");
+
+      $.ajax({
+          url: `${API_URL}/cambiar-password`,
+          type: "PUT",
+          contentType: "application/json",
+          data: JSON.stringify({ actual, nueva, confirmar }),
+          success: function (res) {
+              $mensaje.text(res.message);
+
+              if (res.success) {
+                  $mensaje.addClass("success");
+                  $("#form-pass")[0].reset();
+              } else {
+                  $mensaje.addClass("error");
+              }
+          },
+          error: function () {
+              $mensaje.text("Error al cambiar la contraseña.").addClass("error");
+          }
+      });
+  });
+
+  //mensajes de seguridad de contraseña 
+  $("#nwpass").on("input", function () {
+    const password = $(this).val();
+    const strengthMsg = $("#password-strength-msg");
+
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[\W_]/.test(password)) strength++;
+
+    if (!password) {
+      strengthMsg.text("").removeClass("weak medium strong");
+    } else if (strength <= 1) {
+      strengthMsg.text("Contraseña débil").removeClass("medium strong").addClass("weak");
+    } else if (strength === 2 || strength === 3) {
+      strengthMsg.text("Contraseña medianamente segura").removeClass("weak strong").addClass("medium");
+    } else {
+      strengthMsg.text("Contraseña segura").removeClass("weak medium").addClass("strong");
+    }
+  });
+  
 });
 
 function pintarBarra(tarjeta, nivel, progreso, meta) {
