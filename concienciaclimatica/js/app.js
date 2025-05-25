@@ -298,6 +298,7 @@ $(document).ready(function () {
                 if (res.status === "success") {
                   showToast("Actividad iniciada");
                   boton.text("Actualizar Progreso");
+                  cargarActividades();
                 } else {
                   showToast(res.message);
                 }
@@ -336,6 +337,8 @@ $(document).ready(function () {
 
                   const porcentaje = Math.min(100, (progreso / meta) * 100);
                   barra.style.width = `${porcentaje}%`;
+                  cargarActividades();
+
 
                   // Círculos de nivel
                   const nivelActual = res.nivel_actual || 1; 
@@ -372,9 +375,12 @@ $(document).ready(function () {
                   showToast(res.message);
                   if (res.estado === "completado") {
                     boton.text("Completado");
+                    cargarActividades();
                     boton.prop("disabled", true);
                   } else {
                     boton.text("Actualizar Progreso");
+                    cargarActividades();
+
                   }
                 } else {
                   showToast(res.message);
