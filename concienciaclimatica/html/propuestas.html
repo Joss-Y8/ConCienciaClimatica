@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio-App</title>
+    <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
+    <link rel="stylesheet" href="../css/actividades.css">
+    <link rel="stylesheet" href="../css/formstyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+    <script
+      src="https://kit.fontawesome.com/55078876e9.js"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="header-content">
+                <div class="logo-cc" id="ciencia">
+                <a href="../index.html"><img src="../assets/img/logos/concienciaclimática_sin_fondo.png" alt="concienciaclimática" class="logo-cc"></a>
+                </div>
+                <div class="header-text">
+                <h1>    ConCienciaClimática</h1>
+                <p> Un planeta más verde, comienza con una mente informada</p>
+                </div>
+                <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+            </div>
+
+            <nav class="nav" id="nav">
+                <ul>
+                <li><a href="./hpage_login.html">Inicio</a></li>
+                <li><a href="./perfil.html">Perfil</a></li> 
+                <li><a href="./huella_carbono.html">Huella de carbono</a></li>
+                <li><a href="./actividades.html">Actividades</a></li>
+                <li><a href="./formulario.html">Encuestas</a></li>
+                <li><a href="#">Análisis</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="contenedor">
+<main class="contenedor-insignias">
+    <h1 style="font-variant: small-caps;">Propuestas comunitarias 🌱</h1>
+    <h2>Iniciativas en las que puedes participar</h2>
+    <p>Explora propuestas hechas por otros usuarios para actuar frente al cambio climático. ¡Súmate al cambio!</p>
+
+    <section class="misiones">
+        <div class="tarjeta-mision">
+            <h2>🌍 Limpieza de parque local</h2>
+            <p>Únete este fin de semana para limpiar áreas verdes en tu comunidad.</p>
+            <button class="btn">Unirme</button>
+        </div>
+
+        <div class="tarjeta-mision">
+            <h2>🚲 Rodada ecológica</h2>
+            <p>Organizamos una rodada por el centro para promover la movilidad verde. ¿Te sumas?</p>
+            <button class="btn">Unirme</button>
+        </div>
+
+        <div class="tarjeta-mision">
+            <h2>♻️ Taller de reciclaje creativo</h2>
+            <p>Aprende a reutilizar materiales y comparte tus creaciones.</p>
+            <button class="btn">Unirme</button>
+        </div>
+
+        <div class="tarjeta-mision">
+            <h2>🌱 Huerto urbano colectivo</h2>
+            <p>Ayuda a plantar y mantener un huerto comunitario.</p>
+            <button class="btn">Unirme</button>
+        </div>
+
+        <div class="tarjeta-mision">
+            <h2>🔋 Día sin electricidad</h2>
+            <p>Reto colectivo: pasar 12 horas sin electricidad y compartir tu experiencia.</p>
+            <button class="btn">Unirme</button>
+        </div>
+    </section>
+    <section class="formulario-propuesta">
+    <h2>¿Tienes una propuesta nueva? 🌟</h2>
+    <p>Comparte tu idea para generar un impacto positivo en el planeta.</p>
+    <form id="form-propuesta" class="form-style" action="#" method="POST">
+        <label for="nombre">Nombre de usuario:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+
+        <label for="propuesta">Tu propuesta:</label>
+        <textarea id="propuesta" name="propuesta" rows="4" required></textarea>
+
+        <button type="submit" class="btn">Enviar propuesta</button>
+    </form>
+</section>
+</main>
+
+        </div>
+        <footer>
+            <nav class="footer-nav">
+                <ul class="footer-links">
+                    <li><a href="#inicio">Arriba</a></li>
+                    <li><a href="">Avisos Legales</a></li>
+                    <li><a href="" style="font-variant: small-caps;" >&copy; ChurrumaiSS</a></li>
+                    <li><a href="mailto:ruiz.santiago.mariafernanda.cb107@gmail.com">Contactanos</a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=61569423481737&mibextid=ZbWKwL" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="https://www.instagram.com/c_ss.hw?igsh=MTVidmM1MXZndmE0ZQ==" target="_blank" rel="noopener"><i class="fa-brands fa-square-instagram"></i></a></li>
+                </ul>
+            </nav>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggle = document.getElementById('menu-toggle');
+            const nav = document.getElementById('nav');
+
+            toggle.addEventListener('click', () => {
+            nav.classList.toggle('open');
+            });
+        });
+
+        
+
+    </script>
+</body>
+</html>
