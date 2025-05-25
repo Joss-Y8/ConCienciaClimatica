@@ -11,6 +11,54 @@ class Encuesta extends DataBase {
         parent::__construct($db, $user, $pass);
     }
 
+    /*public function addEncuesta($jsonOBJ) {
+    $this->data = [
+        'status' => 'error',
+        'message' => 'No se pudo registrar la encuesta'
+    ];
+
+    $this->conexion->set_charset("utf8");
+
+    // Validar que id_usuario no esté vacío
+    if (!isset($jsonOBJ->id_usuario)) {
+        $this->data['message'] = 'Falta id_usuario';
+        return $this->data;
+    }
+
+    // Convertir arreglos a JSON si están definidos
+    $vw_conocidas   = json_encode($jsonOBJ->vw_conocidas ?? []);
+    $audi_conocidas = json_encode($jsonOBJ->audi_conocidas ?? []);
+    $medios         = json_encode($jsonOBJ->medios ?? []);
+    $mejoras        = json_encode($jsonOBJ->mejoras ?? []);
+
+    $suficiencia = $this->conexion->real_escape_string($jsonOBJ->suficiencia ?? '');
+    $relevancia  = $this->conexion->real_escape_string($jsonOBJ->relevancia ?? '');
+
+    $sql = "INSERT INTO encuestas VALUES (
+        null,
+        {$jsonOBJ->id_usuario},
+        {$jsonOBJ->vw_iniciativa},
+        {$jsonOBJ->audi_iniciativa},
+        '$vw_conocidas',
+        '$audi_conocidas',
+        {$jsonOBJ->info_vw},
+        {$jsonOBJ->info_audi},
+        '$medios',
+        '$suficiencia',
+        '$relevancia',
+        '$mejoras'
+    )";
+
+    if ($this->conexion->query($sql)) {
+        $this->data['status'] = 'success';
+        $this->data['message'] = 'Encuesta agregada correctamente';
+    } else {
+        $this->data['message'] = 'ERROR SQL: ' . $this->conexion->error;
+    }
+
+    return $this->data;
+}*/
+
     public function addEncuesta($jsonOBJ) {
         $this->data = array(
             'status' => 'error',
@@ -48,9 +96,6 @@ class Encuesta extends DataBase {
         }
 
         $this->conexion->close();
-    }
-
-    public function getData() {
-        return json_encode($this->data, JSON_PRETTY_PRINT);
+        return $this->data;
     }
 }

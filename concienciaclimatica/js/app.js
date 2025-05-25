@@ -161,4 +161,53 @@ $(document).ready(function () {
   if (window.location.pathname.includes("perfil.html")) {
     cargarPerfil();
   }
+
+    document.querySelector("#formEncuesta").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      //Checkbox
+      function getCheckboxValues(name) {
+        const checkboxes = form.querySelectorAll(`input[name="${name}[]"]:checked`);
+        const values = [];
+        checkboxes.forEach(function(checkbox) {
+          values.push(checkbox.value);
+        });
+        return values;
+      }
+
+      // Datos encuesta
+      const data = {
+        vw_iniciativa: formData.get("q1") === "si" ? 1 : 0,
+        audi_iniciativa: formData.get("q2") === "si" ? 1 : 0,
+        vw_conocidas: getCheckboxValues("q3"),
+        audi_conocidas: getCheckboxValues("q4"),
+        info_vw: parseInt(formData.get("q5")),
+        info_audi: parseInt(formData.get("q6")),
+        medios: getCheckboxValues("q7"),
+        suficiencia: formData.get("q8"),
+        relevancia: formData.get("q9"),
+        mejoras: getCheckboxValues("q10")
+      };
+
+      // url
+      fetch(`${API_URL}/encuesta`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(respuesta => {
+        alert(respuesta.message); 
+        console.log("Respuesta del servidor:", respuesta);
+      })
+      .catch(error => {
+        console.error("Error al enviar la encuesta:", error);
+        alert("Error al enviar la encuesta.");
+      });
+    });
 });

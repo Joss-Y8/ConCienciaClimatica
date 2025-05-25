@@ -12,7 +12,6 @@ session_start();
 
 // Crear la app Slim
 $app = AppFactory::create();
-$app->addRoutingMiddleware();
 // Ruta base del proyecto
 $app->setBasePath("/ConCienciaClimatica/concienciaclimatica/backend");
 
@@ -34,10 +33,12 @@ $app->add(function (Request $request, $handler): Response {
     return $response;
 });
 
+$app->addRoutingMiddleware();
+
 // VARIABLES DE CONEXIÓN
 $BD_NAME = 'concienciaclimatica'; 
 $BD_USER = 'root'; 
-$BD_PASS = 'jojoyrl8'; 
+$BD_PASS = ''; 
 
 // RUTAS
 
@@ -106,12 +107,34 @@ $app->post('/logout', function (Request $request, Response $response) {
 });
 
 //Encuesta
-$app->post('/encuesta', function($request, $response, $args){
+/*$app->post('/encuesta', function($request, $response, $args){
+
+    if (!isset($_SESSION['id_usuario'])) {
+        $response->getBody()->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    $data = json_decode($request->getBody()->getContents());
+    $data->id_usuario = $_SESSION['id_usuario'];
+
     $encuesta = new Encuesta('concienciaclimatica');
-    $body = $request->getBody()->getContents();
-    $data = json_decode($body);
-    $encuesta->addEncuesta($data);
-    $response->getBody()->write($encuesta->getData());
+    $resultado = $encuesta->addEncuesta($data);
+
+    $response->getBody()->write(json_encode($resultado));
+    return $response->withHeader('Content-Type', 'application/json');
+});*/
+//Encuesta
+$app->post('/encuesta', function($request, $response, $args){
+    if (!isset($_SESSION['id_usuario'])) {
+        $response->getBody()->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    $encuesta = new Encuesta('concienciaclimatica');
+    $data = json_decode($request->getBody()->getContents());
+    $data->id_usuario = $_SESSION['id_usuario'];
+    $resultado = $encuesta->addEncuesta($data);
+    $response->getBody()->write(json_encode($resultado));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
