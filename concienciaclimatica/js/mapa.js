@@ -30,7 +30,22 @@ document.addEventListener("DOMContentLoaded", () => {
       descripcion:
         "Punto de encuentro: Parque Juárez. Fecha: 20 Jun 2025",
     },
-    // …más eventos…
+    
+   {
+    titulo: "Foro de Movilidad Sustentable",
+    latlng: [19.0510, -98.2230],
+    descripcion: "Plaza de la Victoria • 2025-06-25"
+  },
+  {
+    titulo: "Expo Tecnologías Limpias",
+    latlng: [19.0377, -98.2090],
+    descripcion: "Centro Expositor • 2025-06-30"
+  },
+  {
+    titulo: "Plantatón Comunitaria",
+    latlng: [19.0335, -98.2130],
+    descripcion: "Barrio de Xanenetla • 2025-07-05"
+  }
   ];
 
   // 4. Añadir un marcador para cada evento
