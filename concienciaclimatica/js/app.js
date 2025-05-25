@@ -399,50 +399,7 @@ $(document).ready(function () {
   if (window.location.pathname.includes("actividades.html")) {
       cargarActividades();
     }
-
-    /*$('#form-propuesta').on('submit', function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-
-        $.ajax({
-            url: API_URL + "/propuesta",
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            xhrFields: { withCredentials: true },
-            success: function(response) {
-                console.log("Respuesta del servidor:", response);
-                if (response.success) {
-                    alert("Propuesta registrada");
-                    location.reload();
-                } else {
-                    alert("Error: " + (response.message || "Algo salió mal"));
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error AJAX:", error);
-                alert("Error en la petición");
-            }
-        });
-    });*/
-
-    $.get(API_URL + "/propuestas", function (propuestas) {
-        propuestas.forEach(function (p) {
-            const tarjeta = `
-                <div class="tarjeta-mision">
-                    <h2>🌿 ${p.nombre}</h2>
-                    <img src="../${p.imagen}" alt="${p.nombre}" style="width:100%; border-radius: 8px; margin-bottom: 8px;">
-                    <p>${p.descripcion}</p>
-                    <button class="btn">Unirme</button>
-                </div>
-            `;
-            $('.misiones').append(tarjeta);
-        });
-    });
-
-    // 📤 Enviar nueva propuesta
+        
     $('#form-propuesta').on('submit', function (e) {
         e.preventDefault();
 
@@ -493,7 +450,148 @@ $(document).ready(function () {
                 alert("Error en la petición");
             }
         });
+    });  
+
+
+// 1. Obtener ID del usuario actual
+   if (window.location.pathname.includes("propuestas.html")) {
+  $.get(API_URL + "/perfil", function (perfil) {
+      usuarioActualId = perfil.id;
+      cargarPropuestas(); 
+  });
+}
+
+let usuarioActualId = null;
+
+function cargarPropuestas() {
+    $.get(API_URL + "/propuestas", function (propuestas) {
+        console.log("Respuesta de /propuestas: ", propuestas);
+        $('.misiones').empty();
+
+        propuestas.forEach(function (p) {
+            const esCreador = parseInt(p.id_usuario) === parseInt(usuarioActualId);
+            const yaUnido = parseInt(p.unido) === 1;
+            const completado = parseInt(p.completado) === 1;
+
+            console.log("Propuesta:", p);
+            console.log("id_usuario:", p.id_usuario, "usuarioActualId:", usuarioActualId, "¿Es creador?", esCreador);
+            console.log("¿Ya unido?", yaUnido, "¿Completado?", completado);
+
+            let boton = "";
+
+            if (esCreador) {
+                boton = `<button class="btn" disabled>Propia</button>`;
+            } else if (completado) {
+                boton = `<button class="btn" disabled>Completada</button>`;
+            } else if (yaUnido) {
+                boton = `<button class="btn completar-btn" data-id="${p.id}">Completar actividad</button>`;
+            } else {
+                boton = `<button class="btn unirme-btn"
+                            data-id="${p.id}" 
+                            data-nombre="${p.nombre}" 
+                            data-descripcion="${p.descripcion}" 
+                            data-imagen="${p.imagen}" 
+                            data-niveles="${p.niveles}">
+                            Unirme
+                         </button>`;
+            }
+
+            const tarjeta = `
+                <div class="tarjeta-mision">
+                    <h2>🌿 ${p.nombre}</h2>
+                    <img src="../${p.imagen}" alt="${p.nombre}" style="width:100%; border-radius: 8px; margin-bottom: 8px;">
+                    <p>${p.descripcion}</p>
+                    ${boton}
+                </div>
+            `;
+
+            $('.misiones').append(tarjeta);
+        });
     });
+}
+
+
+// Cuando el usuario hace clic en "Unirme"
+$(document).on('click', '.unirme-btn', function () {
+    const idPropuesta = $(this).data('id');
+
+    $.ajax({
+        url: API_URL + "/propuesta/unirse",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ id_propuesta: idPropuesta }),
+        success: function (res) {
+          console.log("Respuesta al unirse:", res);
+          if (res.success) {
+            alert("Ahora puedes completar esta propuesta");
+            $(`button[data-id='${idPropuesta}']`)
+              .text("Completar actividad")
+              .removeClass("unirme-btn")
+              .addClass("completar-btn");
+          } else {
+            alert("Error: " + (res.message || "Algo salió mal"));
+          }    
+        },
+        error: function () {
+            alert("Error al unirse");
+        }
+    });
+});
+
+
+// Cuando hace clic en "Completar actividad"
+/*$(document).on('click', '.completar-btn', function () {
+    const idPropuesta = $(this).data('id');
+
+    $.ajax({
+        url: API_URL + "/propuesta/completar",
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({ id_propuesta: idPropuesta }),
+        success: function (res) {
+          console.log("Respuesta al completra: ", res);
+            if (res.success) {
+                alert("¡Actividad completada!");
+                $(this).prop("disabled", true).text("Completada");
+            } else {
+                alert(res.message);
+            }
+        },
+        error: function () {
+            alert("Error al completar");
+        }
+    });
+});*/
+
+// Cuando hace clic en "Completar actividad"
+$(document).on('click', '.completar-btn', function () {
+    const idPropuesta = $(this).data('id');
+
+    $.ajax({
+        url: API_URL + "/propuesta/completar",
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({ id_propuesta: idPropuesta }),
+        success: function (res) {
+            console.log("Respuesta al completar:", res);
+
+            if (res.success) {
+                alert("¡Actividad completada!");
+                // Desactivar el botón actual
+                $(`button[data-id='${idPropuesta}']`)
+                  .prop("disabled", true)
+                  .text("Completada");
+            } else {
+                alert("Error: " + res.message);
+            }
+        },
+        error: function (xhr) {
+            console.error("Error al completar:", xhr.responseText);
+            alert("Error al completar actividad");
+        }
+    });
+});
+
 
 });
 
