@@ -3,6 +3,7 @@ use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use CLIMATICA\API\USUARIO\Usuario;
+use CLIMATICA\API\ENCUESTA\Encuesta;
 
 // Autoload de Composer
 require_once __DIR__ . '/vendor/autoload.php';
@@ -11,7 +12,7 @@ session_start();
 
 // Crear la app Slim
 $app = AppFactory::create();
-
+$app->addRoutingMiddleware();
 // Ruta base del proyecto
 $app->setBasePath("/ConCienciaClimatica/concienciaclimatica/backend");
 
@@ -101,6 +102,16 @@ $app->put('/perfil', function (Request $request, Response $response) use ($BD_NA
 $app->post('/logout', function (Request $request, Response $response) {
     session_destroy();
     $response->getBody()->write(json_encode(['status' => 'success', 'message' => 'Sesión cerrada']));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+//Encuesta
+$app->post('/encuesta', function($request, $response, $args){
+    $encuesta = new Encuesta('concienciaclimatica');
+    $body = $request->getBody()->getContents();
+    $data = json_decode($body);
+    $encuesta->addEncuesta($data);
+    $response->getBody()->write($encuesta->getData());
     return $response->withHeader('Content-Type', 'application/json');
 });
 
