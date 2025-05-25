@@ -8,7 +8,22 @@
     <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
     <link rel="stylesheet" href="../css/formstyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">      
-    
+    <style>
+      #password-strength-msg {
+        font-size: 0.9em;
+        margin-top: 4px;
+        display: block;
+      }
+      .weak {
+        color: red;
+      }
+      .medium {
+        color: orange;
+      }
+      .strong {
+        color: green;
+      }
+    </style>
     <script
       src="https://kit.fontawesome.com/55078876e9.js"
       crossorigin="anonymous"
@@ -114,9 +129,12 @@
 
       <label for="nwpass">Nueva contraseña:</label>
       <input type="password" id="nwpass" name="nueva" required>
+      <small id="password-strength-msg"></small>
 
       <label for="conpass">Confirmar nueva contraseña:</label>
       <input type="password" id="conpass" name="confirmar" required>
+
+      <div id="pass-message" class="mensaje-error"></div>
 
       <button type="submit">Actualizar contraseña</button>
     </form>
