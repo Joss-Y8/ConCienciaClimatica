@@ -4,6 +4,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use CLIMATICA\API\USUARIO\Usuario;
 use CLIMATICA\API\ENCUESTA\Encuesta;
+use CLIMATICA\API\ACTIVIDAD\Actividad; 
 
 // Autoload de Composer
 require_once __DIR__ . '/vendor/autoload.php';
@@ -38,7 +39,7 @@ $app->addRoutingMiddleware();
 // VARIABLES DE CONEXIÓN
 $BD_NAME = 'concienciaclimatica'; 
 $BD_USER = 'root'; 
-$BD_PASS = ''; 
+$BD_PASS = 'jojoyrl8'; 
 
 // RUTAS
 
@@ -80,6 +81,8 @@ $app->get('/perfil', function (Request $request, Response $response) use ($BD_NA
 
     $usuario = new Usuario($BD_NAME, $BD_USER, $BD_PASS);
     $result = $usuario->obtenerPerfil($_SESSION['id_usuario']);
+    $insignias = $usuario->obtenerInsignias($_SESSION['id_usuario']);
+    $result['insignias_ganadas'] = $insignias;
     $response->getBody()->write(json_encode($result));
     return $response->withHeader('Content-Type', 'application/json');
 });
@@ -136,6 +139,83 @@ $app->post('/encuesta', function($request, $response, $args){
     $data->id_usuario = $_SESSION['id_usuario'];
     $resultado = $encuesta->addEncuesta($data);
     $response->getBody()->write(json_encode($resultado));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+//Actividades
+$app->get('/actividades', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    if (!isset($_SESSION['id_usuario'])) {
+        return $response->withStatus(401)->withHeader('Content-Type', 'application/json')
+                        ->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+    }
+
+    $actividad = new Actividad($BD_NAME, $BD_USER, $BD_PASS);
+    $result = $actividad->obtenerActividades($_SESSION['id_usuario']);
+    $response->getBody()->write(json_encode($result));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+
+// Iniciar actividad
+$app->post('/actividad/iniciar', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    if (!isset($_SESSION['id_usuario'])) {
+        return $response->withStatus(401)->withHeader('Content-Type', 'application/json')
+                        ->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+    }
+
+    $datos = json_decode($request->getBody());
+    if (!isset($datos->id_actividad)) {
+        return $response->withStatus(400)->withHeader('Content-Type', 'application/json')
+                        ->write(json_encode(['status' => 'error', 'message' => 'Falta ID de actividad']));
+    }
+
+    $actividad = new Actividad($BD_NAME, $BD_USER, $BD_PASS);
+    $result = $actividad->iniciarActividad($_SESSION['id_usuario'], $datos->id_actividad);
+
+    $response->getBody()->write(json_encode($result));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+// Actualizar progreso
+$app->put('/actividad/progreso', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    if (!isset($_SESSION['id_usuario'])) {
+        $response->getBody()->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(401);
+    }
+
+    $datos = json_decode($request->getBody());
+    if (!isset($datos->id_actividad)) {
+        $response->getBody()->write(json_encode(['status' => 'error', 'message' => 'ID de actividad no recibido']));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
+    }
+
+    $cantidad = isset($datos->cantidad) ? intval($datos->cantidad) : 1;
+
+    $actividad = new \CLIMATICA\API\ACTIVIDAD\Actividad($BD_NAME, $BD_USER, $BD_PASS);
+    $result = $actividad->actualizarProgreso($_SESSION['id_usuario'], $datos->id_actividad, $cantidad);
+
+    $response->getBody()->write(json_encode($result));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+
+// Pasar al siguiente nivel
+$app->put('/actividad/nivel', function (Request $request, Response $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    if (!isset($_SESSION['id_usuario'])) {
+        return $response->withStatus(401)->withHeader('Content-Type', 'application/json')
+                        ->write(json_encode(['status' => 'error', 'message' => 'No autenticado']));
+    }
+
+    $datos = json_decode($request->getBody());
+    if (!isset($datos->id_actividad)) {
+        return $response->withStatus(400)->withHeader('Content-Type', 'application/json')
+                        ->write(json_encode(['status' => 'error', 'message' => 'Falta ID de actividad']));
+    }
+
+    $actividad = new Actividad($BD_NAME, $BD_USER, $BD_PASS);
+    $result = $actividad->pasarAlSiguienteNivel($_SESSION['id_usuario'], $datos->id_actividad);
+
+    $response->getBody()->write(json_encode($result));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
