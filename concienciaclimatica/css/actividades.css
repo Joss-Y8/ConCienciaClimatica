@@ -3,6 +3,15 @@
 --linea--borde-vacio: #e0e0e0;
 }
 
+.contenedor {
+  background-color: #ffffff;
+  padding: 3rem;
+  border: 10px solid #b8e0ce; /* borde verdecito */
+  border-radius: 10px;
+  max-width: 1100px;
+  margin: 0 auto; /* Esto centra todo el bloque */
+}
+
 .contenedor-insignias {
   max-width: 1200px;
   width: 100%;
@@ -173,4 +182,52 @@
     padding: 1rem;
     
   }
+}
+
+/*PROPUESTAS*/
+.formulario-propuesta {
+    margin-top: 3rem;
+    padding: 1rem;
+    background-color: #e7f5e6;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.formulario-propuesta h2 {
+    margin-bottom: 0.5rem;
+}
+
+.form-style {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-style label {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.form-style input,
+.form-style textarea {
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-style .btn {
+    margin-top: 1.5rem;
+    background-color: #47a64c;
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-style .btn:hover {
+    background-color: #398c3f;
 }
