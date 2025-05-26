@@ -5,7 +5,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use CLIMATICA\API\USUARIO\Usuario;
 use CLIMATICA\API\ENCUESTA\Encuesta;
 use CLIMATICA\API\ACTIVIDAD\Actividad; 
-use CLIMATICA\API\PROPUESTA\Propuesta; 
+use CLIMATICA\API\PROPUESTA\Propuesta;
+use CLIMATICA\API\MAPA\Mapa; 
 
 // Autoload de Composer
 require_once __DIR__ . '/vendor/autoload.php';
@@ -318,6 +319,24 @@ $app->put('/cambiar-password', function($request, $response) use ($BD_NAME, $BD_
 
     $usuario = new Usuario($BD_NAME, $BD_USER, $BD_PASS);
     $res = $usuario->cambiarPassword($usuarioId, $datos);  //Aquí va el objeto entero
+
+    $response->getBody()->write(json_encode($res));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+// Obtener eventos actuales
+$app->get('/eventos', function($request, $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $mapa = new Mapa($BD_NAME, $BD_USER, $BD_PASS);
+    $eventos = $mapa->obtenerEventos();
+
+    $response->getBody()->write(json_encode($eventos));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+// Eliminar eventos antiguos (opcional, puedes ejecutarlo manual o con CRON)
+$app->delete('/eventos/limpiar', function($request, $response) use ($BD_NAME, $BD_USER, $BD_PASS) {
+    $mapa = new Mapa($BD_NAME, $BD_USER, $BD_PASS);
+    $res = $mapa->eliminarEventosPasados();
 
     $response->getBody()->write(json_encode($res));
     return $response->withHeader('Content-Type', 'application/json');
