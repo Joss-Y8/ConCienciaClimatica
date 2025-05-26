@@ -98,17 +98,17 @@ class Encuesta extends DataBase {
         $this->conexion->close();
         return $this->data;
     }
-//Huella de Carbono
+
+    //Huella de Carbono
     public function addHuellaCarbono($jsonOBJ){
         $this->data = array(
             'status' => 'error',
             'message' => 'No se pudo registrar la huella de carbono'
         );
         $this->conexion->set_charset("utf8");
-
+        $puntajeTotal = 0;
         $contadorResp = 0;
         foreach($jsonOBJ->respuestas as $respuesta){
-
         $sql = "INSERT INTO huella_usuario_respuestas (id_usuario, numero_pregunta, puntaje) VALUES (
         {$jsonOBJ->id_usuario},
         {$respuesta-> numero_pregunta},
@@ -117,15 +117,56 @@ class Encuesta extends DataBase {
 
         if($this->conexion->query($sql)){
             $contadorResp++;
+            $puntajeTotal += $respuesta-> puntaje;
         } 
         }
         
         if ($contadorResp > 0) {
-        $this->data['status'] = 'success';
-        $this->data['message'] = "Se guardaron {$contadorResp} respuestas correctamente";
-        $this->data['respuestas_guardadas'] = $contadorResp;
-        } 
-
+            $puntajeTotal = array_sum(array_column($jsonOBJ->respuestas, 'puntaje'));
+            $categoria = $this->clasificarHuella($puntajeTotal);
+            $this->data = array (
+                'status' => 'success',
+                'message' =>'Encuesta Completada',
+                'resultado' => array(
+                    'puntaje_total' => $puntajeTotal,
+                    'categoria'=> $categoria['nombre'],
+                    'color' => $categoria['color'],
+                    'mensaje_positivo' => $this->getMensajePositivo($categoria['nombre']),
+                    'imagen' => $categoria['imagen']
+                )
+                );
+    }
         return $this->data; 
+    }
+
+    private function getMensajePositivo($categoria) {
+        $mensajes = [
+            'Muy baja' => '¡Eres un Amigo del Clima! Hay muchas cosas que estás haciendo bien, sigue asi, cuidemos el planeta.',
+            'Moderada' => '¡Buen trabajo! Estás en el camino correcto, sigue mejorarando tus hábitos, cuidemos el planeta.',
+            'Alta' => '¡Tu impacto es Alto pero tranquilo, tienes oportunidad de mejorar, cuidemos el planeta!'
+        ];
+        return $mensajes[$categoria] ?? '';
+    }
+    public function respuestaExistente($idUsuario) {
+        $this->conexion->set_charset("utf8");
+        
+        $sql = "SELECT COUNT(*) as total FROM huella_usuario_respuestas WHERE id_usuario = {$idUsuario}";
+        $resultado = $this->conexion->query($sql);
+        
+        if ($resultado && $fila = $resultado->fetch_assoc()) {
+            return $fila['total'] > 0;
+        }
+        
+        return false;
+    }
+
+    private function clasificarHuella($puntaje){
+        if ($puntaje <= 70) {
+            return ['nombre' => 'Muy baja', 'color' => '#2ecc71', 'imagen' => 'eco-hero.png'];
+        } elseif ($puntaje > 70 && $puntaje <= 100) {
+            return ['nombre' => 'Moderada', 'color' => '#f39c12', 'imagen' => 'eco-moderate.png'];
+            } else {
+            return ['nombre' => 'Alta', 'color' => '#e74c3c', 'imagen' => 'eco-high.png'];
+            }
     }
 }
