@@ -296,10 +296,18 @@ $app->post('/huella', function (Request $request, Response $response) use ($BD_N
         ]));
         return $response->withHeader('Content-Type', 'application/json');
     }
-
+    $idUsuario = $_SESSION['id_usuario'];
     $datos = json_decode($request->getBody()->getContents());
-    $datos->id_usuario = $_SESSION['id_usuario'];
+
     $encuesta = new Encuesta('concienciaclimatica');
+     if($encuesta->respuestaExistente($idUsuario)){
+        $response->getBody()->write(json_encode([
+            'status' => 'error',
+            'message' => 'Ya has completado esta encuesta anteriormente.'
+        ]));
+        return $response->withHeader('Content-Type', 'application/json');
+     }
+    $datos->id_usuario = $idUsuario;
     $resultado = $encuesta->addHuellaCarbono($datos);
 
     $response->getBody()->write(json_encode($resultado));
