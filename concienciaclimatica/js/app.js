@@ -591,55 +591,78 @@ $(document).on('click', '.completar-btn', function () {
         }
     });
 });
+
 //Huella de Carbono
-$('#formHuella').submit(function(e){
-    e.preventDefault();
+$('#formHuella').submit(function (e) {
+  e.preventDefault();
 
-    const $form = $(this);
-    const $btn = $form.find('button[type="submit"]');
-    const btnOriginalText = $btn.text();
-    $btn.prop('disabled', true).text('Calculando...');
+  const $form = $(this);
+  const $btn = $form.find('button[type="submit"]');
+  const btnOriginalText = $btn.text();
+  $btn.prop('disabled', true).text('Calculando...');
 
-    const respuestas = [];
-    $("select[name^='respuesta_']").each(function(index) {
-      const selectedOption = $(this).find(":selected");
-      respuestas.push({
-        numero_pregunta: index + 1,
-        puntaje: parseInt(selectedOption.attr('puntaje')) || 0
-      });
+  const respuestas = [];
+
+  $("select[name^='respuesta_']").each(function (index) {
+    const selectedOption = $(this).find(":selected");
+    respuestas.push({
+      numero_pregunta: index + 1,
+      puntaje: parseInt(selectedOption.attr('puntaje')) || 0
     });
+  });
 
-    $.ajax({
-      url: `${API_URL}/huella`,
-      type: "POST",
-      data: JSON.stringify({ respuestas: respuestas }), 
-      contentType: "application/json",
-      success: function(response) {
-        if(response.status === "success") {
-          mostrarResultadoPersonal(response.resultado);
-        } else {
-          alert("Error: " + response.message);
-        }
+  console.log("Respuestas a enviar:", respuestas); // ← Verifica antes de enviar
+
+  $.ajax({
+    url: `${API_URL}/huella`,
+    type: "POST",
+    data: JSON.stringify({ respuestas: respuestas }),
+    contentType: "application/json",
+    success: function (response) {
+      console.log("Respuesta del servidor:", response); // ← Verifica después de recibir respuesta
+
+      if (response.status === "success") {
+        mostrarResultadoPersonal(response.resultado);
+      } else {
+        alert("Error: " + response.message);
       }
-    });
+
+      $btn.prop('disabled', false).text(btnOriginalText);
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud:", status, error); // ← Captura errores de red
+      alert("Ocurrió un error al enviar la encuesta.");
+      $btn.prop('disabled', false).text(btnOriginalText);
+    }
   });
+});
+
+    function mostrarResultadoPersonal(resultado) {
+      console.log("Resultado recibido para mostrar:", resultado); // ← Verifica datos antes de mostrar
+
+      $('#formulario').hide();
+
+      $('#huella-categoria').text(resultado.categoria)
+        .css('color', resultado.color);
+
+      $('#huella-valor').text(resultado.puntaje_total)
+        .css('color', resultado.color);
+
+      $('#huella-mensaje').html(`
+        <p>${resultado.mensaje_positivo}</p>
+      `);
+
+      $('#resultado-huella').fadeIn(0, function () {
+        $(this).addClass('mostrar');
+      });
+
+      $('html, body').animate({
+        scrollTop: $('#resultado-huella').offset().top
+      }, 500);
+    }
 
   });
-  function mostrarResultadoPersonal(resultado) {
-    $('#formulario').hide();
-    // 3. Mostrar los datos
-    $('#huella-categoria').text(resultado.categoria)
-      .css('color', resultado.color);
-    $('#huella-valor').text(resultado.huella)
-      .css('color', resultado.color);
-    $('#huella-mensaje').html(`
-        <p>${resultado.mensaje_positivo}</p>
-    `);
-    $('#resultado-huella').fadeIn();
-    $('html, body').animate({
-        scrollTop: $('#resultado-huella').offset().top
-    }, 500);
-}
+  
 
   //Cambio de contraseña
   $("#form-pass").submit(function (e) {
