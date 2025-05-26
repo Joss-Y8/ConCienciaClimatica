@@ -61,77 +61,80 @@
         </nav>
     </header>
 
-      <div class="contenedor perfil-contenedor">
-        <section class="perfil-usuario">
-      <div class="perfil-encabezado">
-  <div class="perfil-info">
-    <i class="fas fa-user-circle foto-perfil"></i>
-    <!--img src="../assets/img/avatar.png" alt="Avatar" class="avatar"-->
-    <div>
-      <!--En este h2 se coloca el nombre del Usuario o sea usando nombre y apellido de la tabla usuarios-->
-      <h2></h2>
-      <p class="rol">Usuario • ConCienciaClimática</p>
-    </div>
-  </div>
-</div>
-
-  <div class="tabs">
-    <!--Aquí en cada uno de estos se deben pasar de la base de datos su info personal que se saca de la tabla usuarios, asi como las insignias que ha obtenido y si quiere cambiar su contraseña -->
-  <button class="tab-link active" data-tab="info">Información personal</button>
-  <button class="tab-link" data-tab="insignias">Insignias</button>
-  <button class="tab-link" data-tab="contrasena">Cambiar contraseña</button>
-  </div>
-
-  <div id="info" class="tab-content active">
-    <form id="form-info">
-      <label for="nombre">Nombre completo:</label>
-      <input type="text" id= "nombre" name="nombre" value="" required disabled>
-
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id= "correo" name="correo" value="" required disabled>
-
-      <label for="edad">Edad:</label>
-      <input type="number" id="edad" name="edad" value="" required disabled>
-
-      <label for="ubi">Ubicación:</label>
-      <input type="text" id="ubi"  name="ubicacion" value="" disabled>
-      <!--Este boton debería cambiar su texto y funcionalidad, cuando se abre el perfil debería decir Modificar y ya cuando le de click se debe cambiar ahora si a guardar cambios y ese es el que hace el cambio a la base de datos -->
-      <button type="button" id="editarPerfilBtn">Modificar datos</button>
-    </form>
-  </div>
-
-  <div id="insignias" class="tab-content">
-    <div class="grid-insignias">
-      <div class="insignia">
-        <img src="../assets/img/insignias/bienvenido.png" alt="Insignia Bienvenida">
-        <p>Bienvenido</p>
-      </div>
-      <!-- Puedes duplicar este bloque para más insignias -->
-    </div>
-  </div>
-
-  <div id="contrasena" class="tab-content">
-    <form id="form-pass">
-      <label for="pass">Contraseña actual:</label>
-      <input type="password" id="pass" name="actual" required>
-
-      <label for="nwpass">Nueva contraseña:</label>
-      <input type="password" id="nwpass" name="nueva" required>
-      <small id="password-strength-msg"></small>
-
-      <label for="conpass">Confirmar nueva contraseña:</label>
-      <input type="password" id="conpass" name="confirmar" required>
-
-      <div id="pass-message" class="mensaje-error"></div>
-
-      <button type="submit">Actualizar contraseña</button>
-    </form>
-  </div>
-</section>
-
+    <main>
+        <div class="contenedor perfil-contenedor">
+              <section class="perfil-usuario">
+            <div class="perfil-encabezado">
+        <div class="perfil-info">
+          <i class="fas fa-user-circle foto-perfil"></i>
+          <!--img src="../assets/img/avatar.png" alt="Avatar" class="avatar"-->
+          <div>
+            <!--En este h2 se coloca el nombre del Usuario o sea usando nombre y apellido de la tabla usuarios-->
+            <h2></h2>
+            <p class="rol">Usuario • ConCienciaClimática</p>
+          </div>
+        </div>
       </div>
 
+        <div class="tabs">
+          <!--Aquí en cada uno de estos se deben pasar de la base de datos su info personal que se saca de la tabla usuarios, asi como las insignias que ha obtenido y si quiere cambiar su contraseña -->
+        <button class="tab-link active" data-tab="info">Información personal</button>
+        <button class="tab-link" data-tab="insignias">Insignias</button>
+        <button class="tab-link" data-tab="contrasena">Cambiar contraseña</button>
+        </div>
+
+        <div id="info" class="tab-content active">
+          <form id="form-info">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id= "nombre" name="nombre" value="" required disabled>
+
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id= "correo" name="correo" value="" required disabled>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" value="" required disabled>
+
+            <label for="ubi">Ubicación:</label>
+            <input type="text" id="ubi"  name="ubicacion" value="" disabled>
+            <!--Este boton debería cambiar su texto y funcionalidad, cuando se abre el perfil debería decir Modificar y ya cuando le de click se debe cambiar ahora si a guardar cambios y ese es el que hace el cambio a la base de datos -->
+            <button type="button" id="editarPerfilBtn">Modificar datos</button>
+          </form>
+        </div>
+
+        <div id="insignias" class="tab-content">
+          <div class="grid-insignias">
+            <div class="insignia">
+              <img src="../assets/img/insignias/bienvenido.png" alt="Insignia Bienvenida">
+              <p>Bienvenido</p>
+            </div>
+            <!-- Puedes duplicar este bloque para más insignias -->
+          </div>
+        </div>
+
+        <div id="contrasena" class="tab-content">
+          <form id="form-pass">
+            <label for="pass">Contraseña actual:</label>
+            <input type="password" id="pass" name="actual" required>
+
+            <label for="nwpass">Nueva contraseña:</label>
+            <input type="password" id="nwpass" name="nueva" required>
+            <small id="password-strength-msg"></small>
+
+            <label for="conpass">Confirmar nueva contraseña:</label>
+            <input type="password" id="conpass" name="confirmar" required>
+
+            <div id="pass-message" class="mensaje-error"></div>
+
+            <button type="submit">Actualizar contraseña</button>
+          </form>
+        </div>
+      </section>
+
+      </div>
+
     </div>
+    </main>
+      
 
         
       <footer>

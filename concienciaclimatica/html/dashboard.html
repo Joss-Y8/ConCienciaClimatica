@@ -20,11 +20,26 @@
     }
     .contenedor-pge {
       background-color: #ffffff;
-      padding: 6rem; /* Puedes ajustar esto si se ve muy amplio por dentro */
-      border: 4px solid #b8e0ce; /* Más delgado el borde verde */
+      padding: 6rem; 
+      border: 4px solid #b8e0ce; 
       border-radius: 10px;
       max-width: 1300px; /* Más ancho para ocupar más espacio horizontal */
       margin: 0 auto;
+    }
+
+    .vista-selector button.active {
+      border: 2px solid #444;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+
+    p.small {
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
   </style>  
 </head>
@@ -45,58 +60,123 @@
 
         <nav class="nav" id="nav">
             <ul>
-            <li><a href="./perfil.html">Perfil</a></li> 
-            <li><a href="./huella_carbono.html">Huella de carbono</a></li>
-            <li><a href="./propuestas.html">Propuestas</a></li>
-            <li><a href="./formulario.html">Encuestas</a></li>
-            <li><a href="./actividades.html">Actividades</a></li>
-            <li><a href="./dashboard.html">Análisis</a></li>
-            <li><a href="./mapa.html">Eventos</a></li>
+              <li><a href="./hpage_login.html">Inicio</a></li>
+              <li><a href="./perfil.html">Perfil</a></li> 
+              <li><a href="./huella_carbono.html">Huella de carbono</a></li>
+              <li><a href="./propuestas.html">Propuestas</a></li>
+              <li><a href="./formulario.html">Encuestas</a></li>
+              <li><a href="./actividades.html">Actividades</a></li>
+              <li><a href="./mapa.html">Eventos</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="contenedor-pge"> 
-      <h2>Estadísticas ChurrumaiSS</h2>
-      <p>En este apartado encontrarás datos estadísticos que recopilan información de las encuestas realizadas por la comunidad ¡Gracias por participar y ser parte del cambio!</p>
+      <h1 class = "text-center mb-3">Estadísticas ChurrumaiSS</h2>
+      <p class = "text-center">En este apartado encontrarás datos estadísticos que recopilan información de las encuestas realizadas por la comunidad. <br>¡Gracias por participar y ser parte del cambio!</p>
       <div class="container">
         <div class="vista-selector text-center my-4">
-          <button class="btn btn-success m-1" onclick="mostrarVista('vista1')"></button>
-          <button class="btn btn-primary m-1" onclick="mostrarVista('vista2')"></button>
-          <button class="btn btn-warning m-1" onclick="mostrarVista('vista3')"></button>
+          <button class="btn btn-success m-1" onclick="mostrarVista('vista1')"><i class="fas fa-leaf"></i></button>
+          <button class="btn btn-primary m-1" onclick="mostrarVista('vista2')"><i class="fas fa-recycle"></i></button>
+          <button class="btn btn-warning m-1" onclick="mostrarVista('vista3')"><i class="fas fa-lightbulb"></i></button>
         </div>
 
         <div class="graficos">
-          
+          <!-- Vista 1 -->
           <div id="vista1" class="vista">
-            <h2></h2>
-            <div class="row">
-              <div class="col-md-4"><canvas id="chart1"></canvas></div>
-              <div class="col-md-4"><canvas id="chart2"></canvas></div>
-              <div class="col-md-4"><canvas id="chart3"></canvas></div>
+            <h2 class="text-center mb-4">Conocimiento sobre marcas y sus iniciativas</h2><br>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6">
+                <h5>¿Conoces la marca Volkswagen?</h5>
+                <p class="text-muted small">Este gráfico muestra cuántas personas conocen la marca Volkswagen y están al tanto de sus iniciativas ambientales.</p>
+              </div>
+              <div class="col-md-6"><canvas id="chart1"></canvas></div>
+            </div>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6"><canvas id="chart2"></canvas></div>
+              <div class="col-md-6">
+                <h5>¿Conoces la marca Audi?</h5>
+                <p class="text-muted small">Porcentaje de encuestados que han escuchado sobre Audi y su participación en acciones ecológicas.</p>
+              </div>
+              
+            </div>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6">
+                <h5>¿Qué iniciativas de VW reconoces?</h5>
+                <p class="text-muted small">Tipos de iniciativas de Volkswagen que los participantes dijeron reconocer o haber visto previamente.</p>
+              </div>
+              <div class="col-md-6"><canvas id="chart3"></canvas></div>
+            </div>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6"><canvas id="chart4"></canvas></div>
+              <div class="col-md-6">
+                <h5>¿Qué iniciativas de Audi reconoces?</h5>
+                <p class="text-muted small">Iniciativas de Audi que los usuarios identificaron como parte de su compromiso ambiental.</p>
+              </div>
             </div>
           </div>
 
-          
+
+          <!-- Vista 2 -->
           <div id="vista2" class="vista" style="display:none;">
-            <h2></h2>
-            <div class="row">
-              <div class="col-md-4"><canvas id="chart4"></canvas></div>
-              <div class="col-md-4"><canvas id="chart5"></canvas></div>
-              <div class="col-md-4"><canvas id="chart6"></canvas></div>
+            <h2 class="text-center mb-4">Medios informativos y percepción</h2><br>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6"><canvas id="chart5"></canvas></div>
+              <div class="col-md-6">
+                <h5>¿Dónde te informaste sobre VW?</h5>
+                <p class="text-muted small">Canales a través de los cuales los participantes se enteraron sobre las acciones ambientales de Volkswagen.</p>
+              </div>
             </div>
-            <div class="row ">
-              <div class="col-md-8"><canvas id="chart7"></canvas></div>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6">
+                <h5>¿Dónde te informaste sobre Audi?</h5>
+                <p class="text-muted small">Medios de información donde los encuestados obtuvieron noticias sobre las acciones de Audi.</p>
+              </div>
+              <div class="col-md-6"><canvas id="chart6"></canvas></div>
+            </div>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6"><canvas id="chart7"></canvas></div>
+              <div class="col-md-6">
+                <h5>¿La información fue suficiente?</h5>
+                <p class="text-muted small">Opinión de los participantes sobre si la información proporcionada fue suficiente para comprender el impacto ambiental de las marcas.</p>
+              </div>
             </div>
           </div>
 
-          
+
+          <!-- Vista 3 -->
           <div id="vista3" class="vista" style="display:none;">
-            <h2></h2>
-            <div class="row">
-              <div class="col-md-4"><canvas id="chart8"></canvas></div>
-              <div class="col-md-4"><canvas id="chart9"></canvas></div>
-              <div class="col-md-4"><canvas id="chart10"></canvas></div>
+            <h2 class="text-center mb-4">Opinión de los usuarios</h2><br>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6">
+                <h5>¿Qué tan suficiente fue la información?</h5>
+                <p class="text-muted small">Nivel de suficiencia de la información ambiental recibida, según la percepción de los encuestados.</p>
+              </div>
+              <div class="col-md-6"><canvas id="chart8"></canvas></div>
+            </div>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6"><canvas id="chart9"></canvas></div>
+              <div class="col-md-6">
+                <h5>¿Qué tan relevante es para ti el tema ambiental?</h5>
+                <p class="text-muted small">Valoración de la relevancia que tienen las acciones ambientales de las marcas para las personas.</p>
+              </div>
+            </div>
+
+            <div class="row align-items-center mb-5">
+              <div class="col-md-6">
+                <h5>¿Qué mejorarías en la comunicación ambiental?</h5>
+                <p class="text-muted small">Sugerencias o propuestas de los usuarios para mejorar la comunicación o el compromiso ambiental de las marcas.</p>
+              </div>
+              <div class="col-md-6"><canvas id="chart10"></canvas></div>
             </div>
           </div>
         </div>

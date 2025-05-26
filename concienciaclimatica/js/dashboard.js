@@ -40,10 +40,10 @@ function cargarGraficosVista1() {
   cargarGrafico("chart1", "p1", "¿Conoces VW?", 'bar');
   cargarGrafico("chart2", "p2", "¿Conoces Audi?", 'pie');
   cargarGrafico("chart3", "p3", "Iniciativas reconocidas", 'doughnut');
+  cargarGrafico("chart4", "p4", "Contribución ambiental VW", 'bar');
 }
 
 function cargarGraficosVista2() {
-  cargarGrafico("chart4", "p4", "Contribución ambiental VW", 'bar');
   cargarGrafico("chart5", "p5", "Contribución ambiental Audi", 'polarArea');
   cargarGrafico("chart6", "p6", "Medios informativos", 'bar');
   cargarGrafico("chart7", "p7", "Suficiencia de info", 'pie');

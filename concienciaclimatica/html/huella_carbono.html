@@ -7,6 +7,8 @@
   <link rel="icon" href="../assets/img/logos/churrumaiss_sin_fondo.png" type="image/png">
   <script src="https://kit.fontawesome.com/55078876e9.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../css/encuestas.css">
+  <link rel="stylesheet" href="../css/formstyle.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
 </head>
   <!-- HEADER -->
   <header>
@@ -15,15 +17,16 @@
         <img src="../assets/img/logos/concienciaclimática_sin_fondo.png" alt="Logo">
       </div>
       <div class="header-text">
-        <h1>Huella de Carbono</h1>
+        <h1>    ConCienciaClimática</h1>
+        <p> Un planeta más verde, comienza con una mente informada</p>
       </div>
       <div class="menu-toggle" id="menu-toggle">&#9776;</div>
       <nav class="nav" id="nav">
         <ul>
           <li><a href="./hpage_login.html">Inicio</a></li>
           <li><a href="./perfil.html">Perfil</a></li>
-          <li><a href="./huella_carbono.html">Huella de carbono</a></li>
           <li><a href="./propuestas.html">Propuestas</a></li>
+          <li><a href="./formulario.html">Encuestas</a></li>
           <li><a href="./actividades.html">Actividades</a></li>
           <li><a href="./dashboard.html">Análisis</a></li>
           <li><a href="./mapa.html">Eventos</a></li>
@@ -32,138 +35,144 @@
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <section class="container" id="formulario">
-    <form id="formHuella" action="#" method="post">
-        <div class="info-box">
-          <h2>Calcule su Huella de Carbono</h2>
-            <p>
-            La huella de carbono es un indicador que mide el impacto ambiental de una persona, organización, 
-            evento o producto en términos de la cantidad total de gases de efecto invernadero (GEI) emitidos 
-            directa o indirectamente.
-            </p>
-            <p>
-            Descubra cómo su estilo de vida impacta en el medio ambiente.
-            </p>
-        </div>
-        
-      <div>
-        <label for="q1">1. ¿Qué tipo de vehículo utilizas principalmente?</label>
-        <select id="q1" name="respuesta_1" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="autoGasolina" puntaje="15">Auto de Gasolina</option>
-          <option value="hibrido" puntaje="10">Híbrido</option>
-          <option value="bicicleta" puntaje="5">Bicicleta</option>
-        </select>
-      </div>
+  <main>
+    <div class="contenedor-pge"> 
+      <!-- CONTENIDO PRINCIPAL -->
+        <section class="container" id="formulario">
+          <form id="formHuella" action="#" method="post">
+              <div class="info-box">
+                <h2>Calcule su Huella de Carbono</h2>
+                  <p>
+                  La huella de carbono es un indicador que mide el impacto ambiental de una persona, organización, 
+                  evento o producto en términos de la cantidad total de gases de efecto invernadero (GEI) emitidos 
+                  directa o indirectamente.
+                  </p>
+                  <p>
+                  Descubra cómo su estilo de vida impacta en el medio ambiente.
+                  </p>
+              </div>
+              
+            <div>
+              <label for="q1">1. ¿Qué tipo de vehículo utilizas principalmente?</label>
+              <select id="q1" name="respuesta_1" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="autoGasolina" puntaje="15">Auto de Gasolina</option>
+                <option value="hibrido" puntaje="10">Híbrido</option>
+                <option value="bicicleta" puntaje="5">Bicicleta</option>
+              </select>
+            </div>
 
-      <div>
-        <label for="q2">2. ¿Con qué frecuencia usas tu auto?</label>
-        <select id="q2" name="respuesta_2" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="diariamente" puntaje="15">Diariamente</option>
-          <option value="3o4vecesSemana" puntaje="10">3-4 veces por semana</option>
-          <option value="fin_Semana" puntaje="5">Solo fines de semana</option>
-        </select>
-      </div>
+            <div>
+              <label for="q2">2. ¿Con qué frecuencia usas tu auto?</label>
+              <select id="q2" name="respuesta_2" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="diariamente" puntaje="15">Diariamente</option>
+                <option value="3o4vecesSemana" puntaje="10">3-4 veces por semana</option>
+                <option value="fin_Semana" puntaje="5">Solo fines de semana</option>
+              </select>
+            </div>
 
-      <div>
-        <label for="q3">3. ¿Cuántos kilómetros recorres al año en tu auto?</label>
-        <select id="q3" name="respuesta_3" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="mas_15000km" puntaje="15">Más de 15,000 km</option>
-          <option value="5a10km" puntaje="10">5,000-15,000 km</option>
-          <option value="menos_5000km" puntaje="5">Menos de 5,000 km</option>
-        </select>
-      </div>
+            <div>
+              <label for="q3">3. ¿Cuántos kilómetros recorres al año en tu auto?</label>
+              <select id="q3" name="respuesta_3" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="mas_15000km" puntaje="15">Más de 15,000 km</option>
+                <option value="5a10km" puntaje="10">5,000-15,000 km</option>
+                <option value="menos_5000km" puntaje="5">Menos de 5,000 km</option>
+              </select>
+            </div>
 
-      <div>
-        <label for="q4">4. ¿Cúal es el consumo aproximado de combustible en tu auto?</label>
-        <select id="q4" name="respuesta_4" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="menos_10km" puntaje="15">Menos de 10km/litro</option>
-          <option value="10a15km" puntaje="10">10 a 15 km/litro</option>
-          <option value="mas_15km" puntaje="5">Mas de 15 km/litro</option>
-        </select>
-      </div>
+            <div>
+              <label for="q4">4. ¿Cúal es el consumo aproximado de combustible en tu auto?</label>
+              <select id="q4" name="respuesta_4" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="menos_10km" puntaje="15">Menos de 10km/litro</option>
+                <option value="10a15km" puntaje="10">10 a 15 km/litro</option>
+                <option value="mas_15km" puntaje="5">Mas de 15 km/litro</option>
+              </select>
+            </div>
 
-      <div>
-        <label for="q5">5. ¿Con qué frecuencia realizas mantenimiento a tu auto (cambio de aceite, filtros, neumáticos)?</label>
-        <select id="q5" name="respuesta_5" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="mas_de_un_año" puntaje="15">Más de un año</option>
-          <option value="una_cada_año" puntaje="10">Una vez al año</option>
-          <option value="6_meses" puntaje="5" >Cada 6 meses</option>
-        </select>
-      </div>
+            <div>
+              <label for="q5">5. ¿Con qué frecuencia realizas mantenimiento a tu auto (cambio de aceite, filtros, neumáticos)?</label>
+              <select id="q5" name="respuesta_5" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="mas_de_un_año" puntaje="15">Más de un año</option>
+                <option value="una_cada_año" puntaje="10">Una vez al año</option>
+                <option value="6_meses" puntaje="5" >Cada 6 meses</option>
+              </select>
+            </div>
 
-      <div>
-        <label for="q6">6. ¿Realizas viajes largos en carretera?</label>
-        <select id="q6" name="respuesta_6" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="mas_3_anio" puntaje="15">Mas de 3 veces al año</option>
-          <option value="3_anio" puntaje="10">A lo mucho 3 veces al año</option>
-          <option value="no" puntaje="0">No</option>
-        </select>
-      </div>
+            <div>
+              <label for="q6">6. ¿Realizas viajes largos en carretera?</label>
+              <select id="q6" name="respuesta_6" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="mas_3_anio" puntaje="15">Mas de 3 veces al año</option>
+                <option value="3_anio" puntaje="10">A lo mucho 3 veces al año</option>
+                <option value="no" puntaje="0">No</option>
+              </select>
+            </div>
 
-      <div>
-        <label for="q7">7. ¿Utilizas aire acondicionado frecuentemente?</label>
-        <select id="q7" name="respuesta_7" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="Si" puntaje="10">Si</option>
-          <option value="No" puntaje="5">No</option>
-         </select>
-      </div>
+            <div>
+              <label for="q7">7. ¿Utilizas aire acondicionado frecuentemente?</label>
+              <select id="q7" name="respuesta_7" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Si" puntaje="10">Si</option>
+                <option value="No" puntaje="5">No</option>
+              </select>
+            </div>
 
-      <div>
-        <label for="q8">8.¿Tu auto tiene sistema de start-stop automático?</label>
-        <select id="q8" name="respuesta_8" required>
-          <option value="" disabled selected>Seleccione...</option>
-          <option value="Si" puntaje="-5">Si</option>
-          <option value="No" puntaje ="0">No</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-            <label for="q9">9. ¿Sobrecargas tu vehículo (peso extra mal distribuido)?</label>
-            <select id ="q9"name="respuesta_9" required>
-                <option value="">Selecciona una opción</option>
-                <option value="Si" puntaje ="15">Si</option>
-                <option value="Aveces" puntaje ="10">Aveces</option>
+            <div>
+              <label for="q8">8.¿Tu auto tiene sistema de start-stop automático?</label>
+              <select id="q8" name="respuesta_8" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Si" puntaje="-5">Si</option>
                 <option value="No" puntaje ="0">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="q10">10. ¿Qué tipo de rutas manejas con más frecuencia?</label>
-            <select id="q10" name="respuesta_10" required>
-                <option value="">Selecciona una opción</option>
-                <option value="ciudad_trafico" puntaje ="15">Ciudad con tráfico </option>
-                <option value="mixta" puntaje ="10">Mixta</option>
-                <option value="carretera" puntaje ="5">Carretera</option>
-            </select>
-        </div>
-        
-    
-      <div style="margin-top: 1.5rem; text-align: center;">
-        <button type="submit">Enviar encuesta</button>
+              </select>
+            </div>
+
+            <div class="form-group">
+                  <label for="q9">9. ¿Sobrecargas tu vehículo (peso extra mal distribuido)?</label>
+                  <select id ="q9"name="respuesta_9" required>
+                      <option value="">Selecciona una opción</option>
+                      <option value="Si" puntaje ="15">Si</option>
+                      <option value="Aveces" puntaje ="10">Aveces</option>
+                      <option value="No" puntaje ="0">No</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="q10">10. ¿Qué tipo de rutas manejas con más frecuencia?</label>
+                  <select id="q10" name="respuesta_10" required>
+                      <option value="">Selecciona una opción</option>
+                      <option value="ciudad_trafico" puntaje ="15">Ciudad con tráfico </option>
+                      <option value="mixta" puntaje ="10">Mixta</option>
+                      <option value="carretera" puntaje ="5">Carretera</option>
+                  </select>
+              </div>
+              
+          
+            <div style="margin-top: 1.5rem; text-align: center;">
+              <button type="submit">Enviar encuesta</button>
+            </div>
+
+            <!-- Resultados de Huella de Carbono (oculto inicialmente) -->
+
+          </form>
+        </section>
+        <div id="resultado-huella" style="display: none; padding: 20px; background: #f8f9fa; margin-top: 30px; border-radius: 10px;">
+          <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+              <h2 style="color: #2c3e50;">Tu Resultado de Huella de Carbono</h2>
+              
+              <h3 id="huella-categoria" style="margin: 15px 0;"></h3>
+              
+              <div id="huella-valor" style="font-size: 28px; font-weight: bold; margin-bottom: 15px;"></div>
+              
+              <div id="huella-mensaje" style="padding: 15px; margin: 20px 0; font-size: 18px;"></div>
+          </div>
       </div>
-
-      <!-- Resultados de Huella de Carbono (oculto inicialmente) -->
-
-    </form>
-  </section>
-  <div id="resultado-huella" style="display: none; padding: 20px; background: #f8f9fa; margin-top: 30px; border-radius: 10px;">
-    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-        <h2 style="color: #2c3e50;">Tu Resultado de Huella de Carbono</h2>
-        
-        <h3 id="huella-categoria" style="margin: 15px 0;"></h3>
-        
-        <div id="huella-valor" style="font-size: 28px; font-weight: bold; margin-bottom: 15px;"></div>
-        
-        <div id="huella-mensaje" style="padding: 15px; margin: 20px 0; font-size: 18px;"></div>
     </div>
-</div>
+  </main>
+
+  
   <footer>
     <nav class="footer-nav">
         <ul class="footer-links">

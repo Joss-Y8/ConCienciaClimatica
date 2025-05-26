@@ -6,7 +6,7 @@ use CLIMATICA\API\Database as DataBase;
 class Encuesta extends DataBase {
     private $data;
 
-    public function __construct($db, $user = 'root', $pass = '') {
+    public function __construct($db, $user = 'root', $pass = 'jojoyrl8') {
         $this->data = array();
         parent::__construct($db, $user, $pass);
     }

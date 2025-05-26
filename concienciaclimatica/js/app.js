@@ -397,8 +397,8 @@ $(document).ready(function () {
   }
 
   if (window.location.pathname.includes("actividades.html")) {
-      cargarActividades();
-    }
+    cargarActividades();
+  }
         
     $('#form-propuesta').on('submit', function (e) {
         e.preventDefault();
@@ -453,303 +453,304 @@ $(document).ready(function () {
     });  
 
 
-// 1. Obtener ID del usuario actual
-   if (window.location.pathname.includes("propuestas.html")) {
-  $.get(API_URL + "/perfil", function (perfil) {
-      usuarioActualId = perfil.id;
-      cargarPropuestas(); 
-  });
-}
-
-let usuarioActualId = null;
-
-function cargarPropuestas() {
-    $.get(API_URL + "/propuestas", function (propuestas) {
-        console.log("Respuesta de /propuestas: ", propuestas);
-        $('.misiones').empty();
-
-        propuestas.forEach(function (p) {
-            const esCreador = parseInt(p.id_usuario) === parseInt(usuarioActualId);
-            const yaUnido = parseInt(p.unido) === 1;
-            const completado = parseInt(p.completado) === 1;
-
-            console.log("Propuesta:", p);
-            console.log("id_usuario:", p.id_usuario, "usuarioActualId:", usuarioActualId, "¿Es creador?", esCreador);
-            console.log("¿Ya unido?", yaUnido, "¿Completado?", completado);
-
-            let boton = "";
-
-            if (esCreador) {
-                boton = `<button class="btn" disabled>Propia</button>`;
-            } else if (completado) {
-                boton = `<button class="btn" disabled>Completada</button>`;
-            } else if (yaUnido) {
-                boton = `<button class="btn completar-btn" data-id="${p.id}">Completar actividad</button>`;
-            } else {
-                boton = `<button class="btn unirme-btn"
-                            data-id="${p.id}" 
-                            data-nombre="${p.nombre}" 
-                            data-descripcion="${p.descripcion}" 
-                            data-imagen="${p.imagen}" 
-                            data-niveles="${p.niveles}">
-                            Unirme
-                         </button>`;
-            }
-
-            const tarjeta = `
-                <div class="tarjeta-mision">
-                    <h2>🌿 ${p.nombre}</h2>
-                    <img src="../${p.imagen}" alt="${p.nombre}" style="width:100%; border-radius: 8px; margin-bottom: 8px;">
-                    <p>${p.descripcion}</p>
-                    ${boton}
-                </div>
-            `;
-
-            $('.misiones').append(tarjeta);
-        });
+  // 1. Obtener ID del usuario actual
+    if (window.location.pathname.includes("propuestas.html")) {
+    $.get(API_URL + "/perfil", function (perfil) {
+        usuarioActualId = perfil.id;
+        cargarPropuestas(); 
     });
-}
+  }
 
+  let usuarioActualId = null;
 
-// Cuando el usuario hace clic en "Unirme"
-$(document).on('click', '.unirme-btn', function () {
-    const idPropuesta = $(this).data('id');
+  function cargarPropuestas() {
+      $.get(API_URL + "/propuestas", function (propuestas) {
+          console.log("Respuesta de /propuestas: ", propuestas);
+          $('.misiones').empty();
 
-    $.ajax({
-        url: API_URL + "/propuesta/unirse",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({ id_propuesta: idPropuesta }),
-        success: function (res) {
-          console.log("Respuesta al unirse:", res);
-          if (res.success) {
-            alert("Ahora puedes completar esta propuesta");
-            $(`button[data-id='${idPropuesta}']`)
-              .text("Completar actividad")
-              .removeClass("unirme-btn")
-              .addClass("completar-btn");
-          } else {
-            alert("Error: " + (res.message || "Algo salió mal"));
-          }    
-        },
-        error: function () {
-            alert("Error al unirse");
-        }
-    });
-});
+          propuestas.forEach(function (p) {
+              const esCreador = parseInt(p.id_usuario) === parseInt(usuarioActualId);
+              const yaUnido = parseInt(p.unido) === 1;
+              const completado = parseInt(p.completado) === 1;
 
+              console.log("Propuesta:", p);
+              console.log("id_usuario:", p.id_usuario, "usuarioActualId:", usuarioActualId, "¿Es creador?", esCreador);
+              console.log("¿Ya unido?", yaUnido, "¿Completado?", completado);
 
-// Cuando hace clic en "Completar actividad"
-/*$(document).on('click', '.completar-btn', function () {
-    const idPropuesta = $(this).data('id');
+              let boton = "";
 
-    $.ajax({
-        url: API_URL + "/propuesta/completar",
-        type: "PUT",
-        contentType: "application/json",
-        data: JSON.stringify({ id_propuesta: idPropuesta }),
-        success: function (res) {
-          console.log("Respuesta al completra: ", res);
-            if (res.success) {
-                alert("¡Actividad completada!");
-                $(this).prop("disabled", true).text("Completada");
-            } else {
-                alert(res.message);
-            }
-        },
-        error: function () {
-            alert("Error al completar");
-        }
-    });
-});*/
+              if (esCreador) {
+                  boton = `<button class="btn" disabled>Propia</button>`;
+              } else if (completado) {
+                  boton = `<button class="btn" disabled>Completada</button>`;
+              } else if (yaUnido) {
+                  boton = `<button class="btn completar-btn" data-id="${p.id}">Completar actividad</button>`;
+              } else {
+                  boton = `<button class="btn unirme-btn"
+                              data-id="${p.id}" 
+                              data-nombre="${p.nombre}" 
+                              data-descripcion="${p.descripcion}" 
+                              data-imagen="${p.imagen}" 
+                              data-niveles="${p.niveles}">
+                              Unirme
+                          </button>`;
+              }
 
-// Cuando hace clic en "Completar actividad"
-$(document).on('click', '.completar-btn', function () {
-    const idPropuesta = $(this).data('id');
+              const tarjeta = `
+                  <div class="tarjeta-mision">
+                      <h2>🌿 ${p.nombre}</h2>
+                      <img src="../${p.imagen}" alt="${p.nombre}" style="width:100%; border-radius: 8px; margin-bottom: 8px;">
+                      <p>${p.descripcion}</p>
+                      ${boton}
+                  </div>
+              `;
 
-    $.ajax({
-        url: API_URL + "/propuesta/completar",
-        type: "PUT",
-        contentType: "application/json",
-        data: JSON.stringify({ id_propuesta: idPropuesta }),
-        success: function (res) {
-            console.log("Respuesta al completar:", res);
-
-            if (res.success) {
-                alert("¡Actividad completada!");
-                // Desactivar el botón actual
-                $(`button[data-id='${idPropuesta}']`)
-                  .prop("disabled", true)
-                  .text("Completada");
-            } else {
-                alert("Error: " + res.message);
-            }
-        },
-        error: function (xhr) {
-            console.error("Error al completar:", xhr.responseText);
-            alert("Error al completar actividad");
-        }
-    });
-});
-
-//Huella de Carbono
-$('#formHuella').submit(function (e) {
-  e.preventDefault();
-
-  const $form = $(this);
-  const $btn = $form.find('button[type="submit"]');
-  const btnOriginalText = $btn.text();
-  $btn.prop('disabled', true).text('Calculando...');
-
-  const respuestas = [];
-
-  $("select[name^='respuesta_']").each(function (index) {
-    const selectedOption = $(this).find(":selected");
-    respuestas.push({
-      numero_pregunta: index + 1,
-      puntaje: parseInt(selectedOption.attr('puntaje')) || 0
-    });
-  });
-
-  console.log("Respuestas a enviar:", respuestas); // ← Verifica antes de enviar
-
-  $.ajax({
-    url: `${API_URL}/huella`,
-    type: "POST",
-    data: JSON.stringify({ respuestas: respuestas }),
-    contentType: "application/json",
-    success: function (response) {
-      console.log("Respuesta del servidor:", response); // ← Verifica después de recibir respuesta
-
-      if (response.status === "success") {
-        mostrarResultadoPersonal(response.resultado);
-      } else {
-        alert("Error: " + response.message);
-      }
-
-      $btn.prop('disabled', false).text(btnOriginalText);
-    },
-    error: function (xhr, status, error) {
-      console.error("Error en la solicitud:", status, error); // ← Captura errores de red
-      alert("Ocurrió un error al enviar la encuesta.");
-      $btn.prop('disabled', false).text(btnOriginalText);
-    }
-  });
-});
-
-    function mostrarResultadoPersonal(resultado) {
-      console.log("Resultado recibido para mostrar:", resultado); // ← Verifica datos antes de mostrar
-
-      $('#formulario').hide();
-
-      $('#huella-categoria').text(resultado.categoria)
-        .css('color', resultado.color);
-
-      $('#huella-valor').text(resultado.puntaje_total)
-        .css('color', resultado.color);
-
-      $('#huella-mensaje').html(`
-        <p>${resultado.mensaje_positivo}</p>
-      `);
-
-      $('#resultado-huella').fadeIn(0, function () {
-        $(this).addClass('mostrar');
+              $('.misiones').append(tarjeta);
+          });
       });
+  }
 
-      $('html, body').animate({
-        scrollTop: $('#resultado-huella').offset().top
-      }, 500);
-    }
 
-  });
-  
-
-  //Cambio de contraseña
-  $("#form-pass").submit(function (e) {
-      e.preventDefault();
-
-      const actual = $("#pass").val();
-      const nueva = $("#nwpass").val();
-      const confirmar = $("#conpass").val();
-
-      const $mensaje = $("#pass-message");
-      $mensaje.text("").removeClass("success error");
+  // Cuando el usuario hace clic en "Unirme"
+  $(document).on('click', '.unirme-btn', function () {
+      const idPropuesta = $(this).data('id');
 
       $.ajax({
-          url: `${API_URL}/cambiar-password`,
-          type: "PUT",
+          url: API_URL + "/propuesta/unirse",
+          type: "POST",
           contentType: "application/json",
-          data: JSON.stringify({ actual, nueva, confirmar }),
+          data: JSON.stringify({ id_propuesta: idPropuesta }),
           success: function (res) {
-              $mensaje.text(res.message);
-
-              if (res.success) {
-                  $mensaje.addClass("success");
-                  $("#form-pass")[0].reset();
-              } else {
-                  $mensaje.addClass("error");
-              }
+            console.log("Respuesta al unirse:", res);
+            if (res.success) {
+              alert("Ahora puedes completar esta propuesta");
+              $(`button[data-id='${idPropuesta}']`)
+                .text("Completar actividad")
+                .removeClass("unirme-btn")
+                .addClass("completar-btn");
+            } else {
+              alert("Error: " + (res.message || "Algo salió mal"));
+            }    
           },
           error: function () {
-              $mensaje.text("Error al cambiar la contraseña.").addClass("error");
+              alert("Error al unirse");
           }
       });
   });
 
-  //mensajes de seguridad de contraseña 
-  $("#nwpass").on("input", function () {
-    const password = $(this).val();
-    const strengthMsg = $("#password-strength-msg");
 
-    let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/[\W_]/.test(password)) strength++;
+  // Cuando hace clic en "Completar actividad"
+  /*$(document).on('click', '.completar-btn', function () {
+      const idPropuesta = $(this).data('id');
 
-    if (!password) {
-      strengthMsg.text("").removeClass("weak medium strong");
-    } else if (strength <= 1) {
-      strengthMsg.text("Contraseña débil").removeClass("medium strong").addClass("weak");
-    } else if (strength === 2 || strength === 3) {
-      strengthMsg.text("Contraseña medianamente segura").removeClass("weak strong").addClass("medium");
-    } else {
-      strengthMsg.text("Contraseña segura").removeClass("weak medium").addClass("strong");
-    }
+      $.ajax({
+          url: API_URL + "/propuesta/completar",
+          type: "PUT",
+          contentType: "application/json",
+          data: JSON.stringify({ id_propuesta: idPropuesta }),
+          success: function (res) {
+            console.log("Respuesta al completra: ", res);
+              if (res.success) {
+                  alert("¡Actividad completada!");
+                  $(this).prop("disabled", true).text("Completada");
+              } else {
+                  alert(res.message);
+              }
+          },
+          error: function () {
+              alert("Error al completar");
+          }
+      });
+  });*/
+
+  // Cuando hace clic en "Completar actividad"
+  $(document).on('click', '.completar-btn', function () {
+      const idPropuesta = $(this).data('id');
+
+      $.ajax({
+          url: API_URL + "/propuesta/completar",
+          type: "PUT",
+          contentType: "application/json",
+          data: JSON.stringify({ id_propuesta: idPropuesta }),
+          success: function (res) {
+              console.log("Respuesta al completar:", res);
+
+              if (res.success) {
+                  alert("¡Actividad completada!");
+                  // Desactivar el botón actual
+                  $(`button[data-id='${idPropuesta}']`)
+                    .prop("disabled", true)
+                    .text("Completada");
+              } else {
+                  alert("Error: " + res.message);
+              }
+          },
+          error: function (xhr) {
+              console.error("Error al completar:", xhr.responseText);
+              alert("Error al completar actividad");
+          }
+      });
   });
 
-  //cargar eventos en el mapa
-  if (window.location.pathname.includes("mapa.html")) {
-  const map = L.map("map", {
-  maxBounds: [
-    [17.7, -99.3],  // Latitud mínima, Longitud mínima
-    [20.4, -96.5]   // Latitud máxima, Longitud máxima
-  ],
-  maxBoundsViscosity: 1.0
-}).setView([19.0413, -98.2062], 8);
+  //Huella de Carbono
+  $('#formHuella').submit(function (e) {
+    e.preventDefault();
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
+    const $form = $(this);
+    const $btn = $form.find('button[type="submit"]');
+    const btnOriginalText = $btn.text();
+    $btn.prop('disabled', true).text('Calculando...');
 
-  // Llamada AJAX para cargar eventos
-  $.get(`${API_URL}/eventos`, function (eventos) {
-    eventos.forEach(function (evt) {
-      const popupContent = `
-        <strong>${evt.nombre}</strong><br>
-        ${evt.descripcion}<br>
-        <em>${evt.ubicacion}</em><br>
-        <small>${evt.fecha}</small>
-      `;
-      L.marker([evt.latitud, evt.longitud])
-        .addTo(map)
-        .bindPopup(popupContent);
+    const respuestas = [];
+
+    $("select[name^='respuesta_']").each(function (index) {
+      const selectedOption = $(this).find(":selected");
+      respuestas.push({
+        numero_pregunta: index + 1,
+        puntaje: parseInt(selectedOption.attr('puntaje')) || 0
+      });
     });
-  }).fail(function () {
-    console.error("No se pudieron cargar los eventos desde el servidor.");
+
+    console.log("Respuestas a enviar:", respuestas); // ← Verifica antes de enviar
+
+    $.ajax({
+      url: `${API_URL}/huella`,
+      type: "POST",
+      data: JSON.stringify({ respuestas: respuestas }),
+      contentType: "application/json",
+      success: function (response) {
+        console.log("Respuesta del servidor:", response); // ← Verifica después de recibir respuesta
+
+        if (response.status === "success") {
+          mostrarResultadoPersonal(response.resultado);
+        } else {
+          alert("Error: " + response.message);
+        }
+
+        $btn.prop('disabled', false).text(btnOriginalText);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error en la solicitud:", status, error); // ← Captura errores de red
+        alert("Ocurrió un error al enviar la encuesta.");
+        $btn.prop('disabled', false).text(btnOriginalText);
+      }
+    });
   });
-} 
+
+      function mostrarResultadoPersonal(resultado) {
+        console.log("Resultado recibido para mostrar:", resultado); // ← Verifica datos antes de mostrar
+
+        $('#formulario').hide();
+
+        $('#huella-categoria').text(resultado.categoria)
+          .css('color', resultado.color);
+
+        $('#huella-valor').text(resultado.puntaje_total)
+          .css('color', resultado.color);
+
+        $('#huella-mensaje').html(`
+          <p>${resultado.mensaje_positivo}</p>
+        `);
+
+        $('#resultado-huella').fadeIn(0, function () {
+          $(this).addClass('mostrar');
+        });
+
+        $('html, body').animate({
+          scrollTop: $('#resultado-huella').offset().top
+        }, 500);
+      }
+
+      //Cambio de contraseña
+    $("#form-pass").submit(function (e) {
+        e.preventDefault();
+
+        const actual = $("#pass").val();
+        const nueva = $("#nwpass").val();
+        const confirmar = $("#conpass").val();
+
+        const $mensaje = $("#pass-message");
+        $mensaje.text("").removeClass("success error");
+
+        $.ajax({
+            url: `${API_URL}/cambiar-password`,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ actual, nueva, confirmar }),
+            success: function (res) {
+                $mensaje.text(res.message);
+
+                if (res.success) {
+                    $mensaje.addClass("success");
+                    $("#form-pass")[0].reset();
+                } else {
+                    $mensaje.addClass("error");
+                }
+            },
+            error: function () {
+                $mensaje.text("Error al cambiar la contraseña.").addClass("error");
+            }
+        });
+    });
+
+    //mensajes de seguridad de contraseña 
+    $("#nwpass").on("input", function () {
+      const password = $(this).val();
+      const strengthMsg = $("#password-strength-msg");
+
+      let strength = 0;
+      if (password.length >= 8) strength++;
+      if (/[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[\W_]/.test(password)) strength++;
+
+      if (!password) {
+        strengthMsg.text("").removeClass("weak medium strong");
+      } else if (strength <= 1) {
+        strengthMsg.text("Contraseña débil").removeClass("medium strong").addClass("weak");
+      } else if (strength === 2 || strength === 3) {
+        strengthMsg.text("Contraseña medianamente segura").removeClass("weak strong").addClass("medium");
+      } else {
+        strengthMsg.text("Contraseña segura").removeClass("weak medium").addClass("strong");
+      }
+      
+    });
+
+    //cargar eventos en el mapa
+    if (window.location.pathname.includes("mapa.html")) {
+        const map = L.map("map", {
+        maxBounds: [
+          [17.7, -99.3],  // Latitud mínima, Longitud mínima
+          [20.4, -96.5]   // Latitud máxima, Longitud máxima
+        ],
+        maxBoundsViscosity: 1.0
+      }).setView([19.0413, -98.2062], 8);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
+
+        // Llamada AJAX para cargar eventos
+        $.get(`${API_URL}/eventos`, function (eventos) {
+          eventos.forEach(function (evt) {
+            const popupContent = `
+              <strong>${evt.nombre}</strong><br>
+              ${evt.descripcion}<br>
+              <em>${evt.ubicacion}</em><br>
+              <small>${evt.fecha}</small>
+            `;
+            L.marker([evt.latitud, evt.longitud])
+              .addTo(map)
+              .bindPopup(popupContent);
+          });
+        }).fail(function () {
+          console.error("No se pudieron cargar los eventos desde el servidor.");
+        });
+    }
+
+});
+    
 
 function pintarBarra(tarjeta, nivel, progreso, meta) {
   const barra = tarjeta.querySelector(".progreso");
