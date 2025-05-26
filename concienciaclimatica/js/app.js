@@ -595,8 +595,12 @@ $(document).on('click', '.completar-btn', function () {
 $('#formHuella').submit(function(e){
     e.preventDefault();
 
-    const respuestas = [];
+    const $form = $(this);
+    const $btn = $form.find('button[type="submit"]');
+    const btnOriginalText = $btn.text();
+    $btn.prop('disabled', true).text('Calculando...');
 
+    const respuestas = [];
     $("select[name^='respuesta_']").each(function(index) {
       const selectedOption = $(this).find(":selected");
       respuestas.push({
@@ -612,13 +616,30 @@ $('#formHuella').submit(function(e){
       contentType: "application/json",
       success: function(response) {
         if(response.status === "success") {
-          alert("¡Tu huella de carbono ha sido registrada!");
+          mostrarResultadoPersonal(response.resultado);
         } else {
           alert("Error: " + response.message);
         }
       }
     });
   });
+
+  });
+  function mostrarResultadoPersonal(resultado) {
+    $('#formulario').hide();
+    // 3. Mostrar los datos
+    $('#huella-categoria').text(resultado.categoria)
+      .css('color', resultado.color);
+    $('#huella-valor').text(resultado.huella)
+      .css('color', resultado.color);
+    $('#huella-mensaje').html(`
+        <p>${resultado.mensaje_positivo}</p>
+    `);
+    $('#resultado-huella').fadeIn();
+    $('html, body').animate({
+        scrollTop: $('#resultado-huella').offset().top
+    }, 500);
+}
 
   //Cambio de contraseña
   $("#form-pass").submit(function (e) {
@@ -705,10 +726,7 @@ $('#formHuella').submit(function(e){
   }).fail(function () {
     console.error("No se pudieron cargar los eventos desde el servidor.");
   });
-}
-
-  
-});
+} 
 
 function pintarBarra(tarjeta, nivel, progreso, meta) {
   const barra = tarjeta.querySelector(".progreso");
