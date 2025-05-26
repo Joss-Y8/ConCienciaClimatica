@@ -94,13 +94,22 @@ header {
 }
 
 /* CONTENIDO */
-.contenedor-pge {
+/*.contenedor-pge {
   background-color: #ffffff;
   padding: 8rem;
-  border: 10px solid #b8e0ce; /* borde verdecito */
+  border: 10px solid #b8e0ce; /* borde verdecito 
   border-radius: 10px;
   max-width: 1100px;
-  margin: 0 auto; /* Esto centra todo el bloque */
+  margin: 0 auto; /* Esto centra todo el bloque 
+}*/
+
+.contenedor-pge {
+  background-color: #ffffff;
+  padding: 6rem; /* Puedes ajustar esto si se ve muy amplio por dentro */
+  border: 4px solid #b8e0ce; /* Más delgado el borde verde */
+  border-radius: 10px;
+  max-width: 1300px; /* Más ancho para ocupar más espacio horizontal */
+  margin: 0 auto;
 }
 
 .limon-container {

@@ -42,7 +42,7 @@ $app->addRoutingMiddleware();
 // VARIABLES DE CONEXIÓN
 $BD_NAME = 'concienciaclimatica'; 
 $BD_USER = 'root'; 
-$BD_PASS = '12345678a'; 
+$BD_PASS = 'jojoyrl8'; 
 
 // RUTAS
 
