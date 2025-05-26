@@ -180,14 +180,14 @@ public function pasarAlSiguienteNivel($idUsuario, $idActividad) {
                         error_log("Insignia encontrada: $idInsignia");
 
                         // Verificar si el usuario ya tiene esta insignia
-                        $checkSql = "SELECT 1 FROM usuarios_insignias WHERE id_usuario = ? AND id_insignia = ?";
+                        $checkSql = "SELECT * FROM usuarios_insignias WHERE id_usuario = ? AND id_insignia = ?";
                         $stmtCheck = $this->conexion->prepare($checkSql);
                         $stmtCheck->bind_param("ii", $idUsuario, $idInsignia);
                         $stmtCheck->execute();
                         $checkRes = $stmtCheck->get_result();
 
                         if ($checkRes->num_rows === 0) {
-                            $insertSql = "INSERT INTO usuarios_insignias (id_usuario, id_insignia, fecha_logro) VALUES (?, ?, NOW())";
+                            $insertSql = "INSERT INTO usuarios_insignias (id_usuario, id_insignia, fecha_obtenida) VALUES (?, ?, NOW())";
                             $stmtInsert = $this->conexion->prepare($insertSql);
                             $stmtInsert->bind_param("ii", $idUsuario, $idInsignia);
                             if (!$stmtInsert->execute()) {

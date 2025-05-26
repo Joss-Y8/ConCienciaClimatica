@@ -7,6 +7,7 @@ use CLIMATICA\API\ENCUESTA\Encuesta;
 use CLIMATICA\API\ACTIVIDAD\Actividad; 
 use CLIMATICA\API\PROPUESTA\Propuesta;
 use CLIMATICA\API\MAPA\Mapa; 
+use CLIMATICA\API\DASHBOARD\Dashboard;
 
 // Autoload de Composer
 require_once __DIR__ . '/vendor/autoload.php';
@@ -41,7 +42,7 @@ $app->addRoutingMiddleware();
 // VARIABLES DE CONEXIÓN
 $BD_NAME = 'concienciaclimatica'; 
 $BD_USER = 'root'; 
-$BD_PASS = 'Fernanda465'; 
+$BD_PASS = '12345678a'; 
 
 // RUTAS
 
@@ -349,5 +350,16 @@ $app->delete('/eventos/limpiar', function($request, $response) use ($BD_NAME, $B
     $response->getBody()->write(json_encode($res));
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+//grafico
+$app->get('/encuesta/{pregunta}', function ($request, $response, array $args) {
+    $pregunta = $args['pregunta'];
+    $grafico = new Dashboard('concienciaclimatica');
+    $datos = $grafico->obtenerDatos($pregunta);
+
+    $response->getBody()->write(json_encode($datos));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->run();
 ?>
