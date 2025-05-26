@@ -673,6 +673,40 @@ $('#formHuella').submit(function(e){
       strengthMsg.text("Contraseña segura").removeClass("weak medium").addClass("strong");
     }
   });
+
+  //cargar eventos en el mapa
+  if (window.location.pathname.includes("mapa.html")) {
+  const map = L.map("map", {
+  maxBounds: [
+    [17.7, -99.3],  // Latitud mínima, Longitud mínima
+    [20.4, -96.5]   // Latitud máxima, Longitud máxima
+  ],
+  maxBoundsViscosity: 1.0
+}).setView([19.0413, -98.2062], 8);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+
+  // Llamada AJAX para cargar eventos
+  $.get(`${API_URL}/eventos`, function (eventos) {
+    eventos.forEach(function (evt) {
+      const popupContent = `
+        <strong>${evt.nombre}</strong><br>
+        ${evt.descripcion}<br>
+        <em>${evt.ubicacion}</em><br>
+        <small>${evt.fecha}</small>
+      `;
+      L.marker([evt.latitud, evt.longitud])
+        .addTo(map)
+        .bindPopup(popupContent);
+    });
+  }).fail(function () {
+    console.error("No se pudieron cargar los eventos desde el servidor.");
+  });
+}
+
   
 });
 
